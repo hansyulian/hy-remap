@@ -1,0 +1,43 @@
+{
+  "actions": [
+    {
+      "id": "20241228-copy",
+      "name": "Copy",
+      "type": "simple",
+      "key": "c",
+      "ctrl": true,
+      "alt": false,
+      "shift": false,
+      "win": false
+    },
+    {
+      "id": "20241228-paste",
+      "name": "Paste",
+      "type": "simple",
+      "key": "v",
+      "ctrl": true,
+      "alt": false,
+      "shift": false,
+      "win": false
+    }
+  ],
+  "profiles": [
+    {
+      "name": "Default"
+    },
+    {
+      "name": "Test With Notepad",
+      "programNames": ["Notepad"],
+      "mapping": [
+        {
+          "key": "f1",
+          "actionId": "20241228-copy"
+        },
+        {
+          "key": "f2",
+          "actionId": "20241228-paste"
+        }
+      ]
+    }
+  ]
+}

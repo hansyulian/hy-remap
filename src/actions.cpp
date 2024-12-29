@@ -2,7 +2,7 @@
 #include "iostream"
 
 void performAction(const Action& action) {
-    std::cout << "Action: " << action.id << std::endl;
+    cout << "Action: " << action.id << endl;
     // if (action.type == "simple") {
     //     if (action["ctrl"].get<bool>()) {
     //         keybd_event(VK_CONTROL, 0, 0, 0);  // Ctrl key down
@@ -17,7 +17,7 @@ void performAction(const Action& action) {
     //         keybd_event(VK_LWIN, 0, 0, 0);  // Win key down
     //     }
 
-    //     UINT key = VkKeyScan(action["key"].get<std::string>()[0]);
+    //     UINT key = VkKeyScan(action["key"].get<string>()[0]);
     //     keybd_event(key, 0, 0, 0);  // Key down
     //     keybd_event(key, 0, KEYEVENTF_KEYUP, 0);  // Key up
 

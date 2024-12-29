@@ -13,9 +13,12 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 set(SOURCES
     src/main.cpp
     src/configuration.cpp
-    src/key_hook.cpp
+    src/keyboar_hook.cpp
+    src/mouse_hook.cpp
     src/serialize_config.cpp
     src/actions.cpp
+    src/hook_manager.cpp
+    src/profile_management.cpp
 )
 
 # Add the executable

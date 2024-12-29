@@ -1,11 +1,19 @@
 #include "key_remapper.h"
 
+vector<Profile> profiles;
+vector<Trigger> triggers;
+vector<Action> actions;
+
+// Define the keyboardHook variable here
+HHOOK keyboardHook = NULL;  // Define the keyboardHook variable (this is where memory is allocated)
+HHOOK mouseHook = NULL;     // Define the mouseHook variable
+
 int main() {
     // Load configuration from a JSON file
-    std::cout << "Loading Config" << std::endl;
+    cout << "Loading Config" << endl;
     Config config = loadConfig();
 
-    std::cout << "Key remapper is running..." << std::endl;
+    cout << "Key remapper is running..." << endl;
 
     // Start listening for keyboard input
     startKeyboardAndMouseHook(config);  // Pass the config here

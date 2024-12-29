@@ -17,12 +17,19 @@ string loadConfigString() {
     return buffer.str();  // Return the file content as a string
 }
 
-Config loadConfig(){
+void loadConfig(){
   string configString = loadConfigString();
   json configJson = json::parse(configString);
 
   // Deserialize into Config struct
-  Config config = configJson.get<Config>();
+  config = configJson.get<Config>();
+  config.print();
 
-  return config;
+  for (const auto& profile: config.profiles){
+    if (profile.id == config.defaultProfileId){
+      *defaultProfile = profile;
+      break;
+    }
+  }
+
 }

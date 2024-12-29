@@ -1,10 +1,6 @@
 #include "key_remapper.h"
 
-void startKeyboardAndMouseHook(const Config& config) {
-    // Store the loaded config data globally or pass it around as needed
-    profiles = config.profiles;
-    triggers = config.triggers;
-    actions = config.actions;
+void startKeyboardAndMouseHook() {
 
     // Set up the low-level keyboard hook
     keyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, keyboardProc, NULL, 0);

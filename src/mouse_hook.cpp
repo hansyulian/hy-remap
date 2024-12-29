@@ -4,62 +4,65 @@ LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
     if (nCode >= 0) {
         MSLLHOOKSTRUCT* mouse = (MSLLHOOKSTRUCT*)lParam;
 
-        KeyCode mouseButton = static_cast<KeyCode>(0);
+        int mouseButton = -1; // Default to invalid value
         bool isKeyUp = false;
 
         // Determine the mouse button and whether it's an "up" or "down" event
         switch (wParam) {
             case WM_LBUTTONDOWN:
-                mouseButton = KeyCode::LEFT_CLICK;
+                mouseButton = getKeyCodeFromString("LEFT_CLICK");
                 isKeyUp = false;
                 break;
             case WM_LBUTTONUP:
-                mouseButton = KeyCode::LEFT_CLICK;
+                mouseButton = getKeyCodeFromString("LEFT_CLICK");
                 isKeyUp = true;
                 break;
             case WM_RBUTTONDOWN:
-                mouseButton = KeyCode::RIGHT_CLICK;
+                mouseButton = getKeyCodeFromString("RIGHT_CLICK");
                 isKeyUp = false;
                 break;
             case WM_RBUTTONUP:
-                mouseButton = KeyCode::RIGHT_CLICK;
+                mouseButton = getKeyCodeFromString("RIGHT_CLICK");
                 isKeyUp = true;
                 break;
             case WM_MBUTTONDOWN:
-                mouseButton = KeyCode::MIDDLE_CLICK;
+                mouseButton = getKeyCodeFromString("MIDDLE_CLICK");
                 isKeyUp = false;
                 break;
             case WM_MBUTTONUP:
-                mouseButton = KeyCode::MIDDLE_CLICK;
+                mouseButton = getKeyCodeFromString("MIDDLE_CLICK");
                 isKeyUp = true;
                 break;
             case WM_XBUTTONDOWN:
-                mouseButton = (GET_XBUTTON_WPARAM(mouse->mouseData) == XBUTTON1) ? KeyCode::MFORWARD : KeyCode::MBACK;
+                mouseButton = (GET_XBUTTON_WPARAM(mouse->mouseData) == XBUTTON1) ? getKeyCodeFromString("MFORWARD") : getKeyCodeFromString("MBACK");
                 isKeyUp = false;
                 break;
             case WM_XBUTTONUP:
-                mouseButton = (GET_XBUTTON_WPARAM(mouse->mouseData) == XBUTTON1) ? KeyCode::MFORWARD : KeyCode::MBACK;
+                mouseButton = (GET_XBUTTON_WPARAM(mouse->mouseData) == XBUTTON1) ? getKeyCodeFromString("MFORWARD") : getKeyCodeFromString("MBACK");
                 isKeyUp = true;
                 break;
             case WM_MOUSEWHEEL: {
                 int delta = GET_WHEEL_DELTA_WPARAM(mouse->mouseData);
-                mouseButton = (delta > 0) ? KeyCode::WHEEL_UP : KeyCode::WHEEL_DOWN;
+                mouseButton = (delta > 0) ? getKeyCodeFromString("WHEEL_UP") : getKeyCodeFromString("WHEEL_DOWN");
                 isKeyUp = false;  // Scrolling is a "press-like" event
                 break;
             }
             default:
                 // No relevant mouse action detected
-                mouseButton = static_cast<KeyCode>(0);
+                mouseButton = -1;  // Invalid key
                 isKeyUp = false;
                 break;
         }
 
-        // Output for debugging
-        if (mouseButton != static_cast<KeyCode>(0)) {
-            std::cout << "Mouse Button: " << mouseButton
-                      << (isKeyUp ? " Released" : " Pressed") 
-                      << " at (" << mouse->pt.x << ", " << mouse->pt.y << ")" << std::endl;
+        InputTrigger inputTrigger;
+        inputTrigger.isUp = isKeyUp;
+        inputTrigger.keyCode = mouseButton;
+        if (inputTrigger.keyCode != -1){
+            if (handleInput(inputTrigger)){
+                return 1;
+            }
         }
+        // You can process the inputTrigger here or pass it to other parts of your code.
     }
 
     return CallNextHookEx(mouseHook, nCode, wParam, lParam);

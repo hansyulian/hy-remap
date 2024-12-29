@@ -6,8 +6,9 @@ bool isActiveWindowMatchingProfile(const vector<string>& programNames) {
 
     char windowTitle[256];
     GetWindowText(hwnd, windowTitle, sizeof(windowTitle));
-
+    cout << "window title: " << windowTitle << endl;
     for (const auto& programName : programNames) {
+        cout << "checking: " << programName << endl;
         if (string(windowTitle).find(programName) != string::npos) {
             return true;
         }
@@ -15,11 +16,13 @@ bool isActiveWindowMatchingProfile(const vector<string>& programNames) {
     return false;
 }
 
-Profile getProfile() {
-    for (const auto& profile : profiles) {
-        if (isActiveWindowMatchingProfile(profile.programNames)) {
-            return profile;  // Return the first matching profile
+Profile* getProfile() {
+    cout << config.profiles.size() << endl;
+    for (int i = 0; i < config.profiles.size(); i++){
+        Profile* profile = &config.profiles[i];
+        if (isActiveWindowMatchingProfile(profile->programNames)) {
+            return profile;  // Return a pointer to the first matching profile
         }
     }
-    return Profile();  // Return a default empty profile if none matched
+    return defaultProfile;  // Return a pointer to the default profile
 }

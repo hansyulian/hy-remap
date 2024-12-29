@@ -23,14 +23,21 @@ void from_json(const json& j, Mapping& m) {
 
 // Define how to deserialize the JSON into the Profile struct
 void from_json(const json& j, Profile& p) {
+    j.at("id").get_to(p.id);
     j.at("name").get_to(p.name);
-    
+
+    // Set programNames to an empty vector if not defined
     if (j.contains("programNames")) {
         j.at("programNames").get_to(p.programNames);
+    } else {
+        p.programNames = {}; // Assign an empty vector
     }
 
+    // Set mapping to an empty vector if not defined
     if (j.contains("mapping")) {
         j.at("mapping").get_to(p.mapping);
+    } else {
+        p.mapping = {}; // Assign an empty vector
     }
 }
 
@@ -39,4 +46,5 @@ void from_json(const json& j, Config& c) {
     j.at("triggers").get_to(c.triggers);
     j.at("actions").get_to(c.actions);
     j.at("profiles").get_to(c.profiles);
+    j.at("defaultProfileId").get_to(c.defaultProfileId);
 }

@@ -2,6 +2,7 @@
 
 Config config;
 Profile* defaultProfile = new Profile();
+int ongoingActionIds[256];
 
 // Define the keyboardHook variable here
 HHOOK keyboardHook = NULL;  // Define the keyboardHook variable (this is where memory is allocated)

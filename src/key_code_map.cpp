@@ -137,8 +137,8 @@ map<string, int> keyCodeMap = {
     // Extra mouse buttons
     {"MFORWARD", 0x05},   // VK_XBUTTON1
     {"MBACK", 0x06},      // VK_XBUTTON2
-    {"WHEEL_UP", 0x1000},  // Custom code for wheel up
-    {"WHEEL_DOWN", 0x1001},// Custom code for wheel down
+    {"WHEEL_UP", HR_WHEEL_UP },  // Custom code for wheel up
+    {"WHEEL_DOWN", HR_WHEEL_DOWN},// Custom code for wheel down
 };
 
 // Function to get key code by string

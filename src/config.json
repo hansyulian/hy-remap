@@ -1,24 +1,26 @@
 {
-  "actions": [
+  "triggers": [
     {
-      "id": "20241228-copy",
-      "name": "Copy",
-      "type": "simple",
-      "key": "c",
-      "ctrl": true,
-      "alt": false,
-      "shift": false,
-      "win": false
+      "id": "f1",
+      "name": "F1"
     },
     {
-      "id": "20241228-paste",
+      "id": "f2",
+      "name": "F2"
+    }
+  ],
+  "actions": [
+    {
+      "id": "copy",
+      "name": "Copy",
+      "type": "simple",
+      "keys": ["ctr", "v"]
+    },
+    {
+      "id": "paste",
       "name": "Paste",
       "type": "simple",
-      "key": "v",
-      "ctrl": true,
-      "alt": false,
-      "shift": false,
-      "win": false
+      "keys": ["ctrl", "v"]
     }
   ],
   "profiles": [
@@ -30,12 +32,12 @@
       "programNames": ["Notepad"],
       "mapping": [
         {
-          "key": "f1",
-          "actionId": "20241228-copy"
+          "triggerId": "f1",
+          "actionId": "copy"
         },
         {
-          "key": "f2",
-          "actionId": "20241228-paste"
+          "triggerId": "f2",
+          "actionId": "paste"
         }
       ]
     }

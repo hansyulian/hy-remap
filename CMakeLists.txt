@@ -14,6 +14,7 @@ set(SOURCES
     src/main.cpp
     src/configuration.cpp
     src/key_hook.cpp
+    src/serialize_config.cpp
     src/actions.cpp
 )
 

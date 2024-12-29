@@ -1,9 +1,10 @@
-#include "serialize_config.h"
+#include "key_remapper.h"
 
 // Define how to deserialize the JSON into the Trigger struct
 void from_json(const json& j, Trigger& t) {
     j.at("id").get_to(t.id);
     j.at("name").get_to(t.name);
+    j.at("key").get_to(t.key);
 }
 
 // Define how to deserialize the JSON into the Action struct

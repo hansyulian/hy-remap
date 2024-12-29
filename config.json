@@ -1,12 +1,14 @@
 {
   "triggers": [
     {
-      "id": "f1",
-      "name": "F1"
+      "id": "keyboard-g1",
+      "name": "Keyboard G1",
+      "key": "F1"
     },
     {
-      "id": "f2",
-      "name": "F2"
+      "id": "keyboard-g2",
+      "name": "Keyboard G2",
+      "key": "F2"
     }
   ],
   "actions": [
@@ -14,13 +16,13 @@
       "id": "copy",
       "name": "Copy",
       "type": "simple",
-      "keys": ["ctr", "v"]
+      "keys": ["CTRL", "C"]
     },
     {
       "id": "paste",
       "name": "Paste",
       "type": "simple",
-      "keys": ["ctrl", "v"]
+      "keys": ["CTRL", "V"]
     }
   ],
   "profiles": [
@@ -32,11 +34,11 @@
       "programNames": ["Notepad"],
       "mapping": [
         {
-          "triggerId": "f1",
+          "triggerId": "keyboard-g1",
           "actionId": "copy"
         },
         {
-          "triggerId": "f2",
+          "triggerId": "keyboard-g2",
           "actionId": "paste"
         }
       ]

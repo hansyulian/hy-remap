@@ -1,4 +1,4 @@
-#include "key_remapper.h"
+#include "main.h"
 
 Config config;
 Profile* defaultProfile = new Profile();
@@ -10,6 +10,7 @@ HHOOK mouseHook = NULL;     // Define the mouseHook variable
 
 int main() {
     // Load configuration from a JSON file
+    
     cout << "Loading Config" << endl;
     loadConfig();
 

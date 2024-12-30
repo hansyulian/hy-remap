@@ -1,4 +1,4 @@
-#include "key_remapper.h"
+#include "main.h"
 
 // Define how to deserialize the JSON into the Trigger struct
 void from_json(const json& j, Trigger& t) {
@@ -11,8 +11,13 @@ void from_json(const json& j, Trigger& t) {
 void from_json(const json& j, Action& a) {
     j.at("id").get_to(a.id);
     j.at("name").get_to(a.name);
-    j.at("type").get_to(a.type);
     j.at("keys").get_to(a.keys);  // Assuming 'keys' is a list of strings
+    
+    a.type = ActionType::SIMPLE;
+    string typeValue = j.at("type").get<string>();
+    if (typeValue == "simple"){        
+        a.type = ActionType::SIMPLE;
+    }
 }
 
 // Define how to deserialize the JSON into the Mapping struct

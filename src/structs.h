@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include <windows.h>
-#include <spdlog/spdlog.h>  // Include spdlog
+#include <iostream>  // Don't forget to include the header for cout
 #include "enums.h"
 using namespace std;
 
@@ -18,9 +18,10 @@ struct Trigger {
         : id(id), name(name), key(key) {}
 
     void print() const {
-        spdlog::info("\t\tid: {}", id);
-        spdlog::info("\t\tname: {}", name);
-        spdlog::info("\t\tkey: {}", key);
+        cout << "\t\tid: " << id
+             << "\n\t\tname: " << name
+             << "\n\t\tkey: " << key
+             << "\n" << endl;
     }
 };
 
@@ -35,19 +36,15 @@ struct Action {
         : id(id), name(name), type(type), keys(keys) {}
 
     void print() const {
-        spdlog::info("\t\tid: {}", id);
-        spdlog::info("\t\tname: {}", name);
-        spdlog::info("\t\ttype: {}", type);
-        std::string keysPrint;
-        for (size_t i = 0; i < keys.size(); ++i) {
-            keysPrint += keys[i];
-            if (i < keys.size() - 1) {
-                keysPrint += " "; // Add a space between elements
-            }
+        cout << "\t\tid: " << id
+             << "\n\t\tname: " << name
+             << "\n\t\ttype: " << type
+             << "\n\t\tkeys: ";
+        for (const auto& key : keys) {
+            cout << key << " ";
         }
-        spdlog::info("\t\tkeys: {}", keysPrint);
+        cout << "\n\n";
     }
-
 };
 
 struct Mapping {
@@ -59,7 +56,8 @@ struct Mapping {
         : triggerId(triggerId), actionId(actionId) {}
 
     void print() const {
-        spdlog::info("\t\t\ttriggerId: {}\tactionId: {}", triggerId, actionId);
+        cout << "\t\t\ttriggerId: " << triggerId
+             << "\tactionId: " << actionId << endl;
     }
 };
 
@@ -74,16 +72,17 @@ struct Profile {
         : id(id), name(name), programNames(programNames), mapping(mapping) {}
 
     void print() const {
-        spdlog::info("\t\tid: {}", id);
-        spdlog::info("\t\tname: {}", name);
-        spdlog::info("\t\tprogramNames: ");
+        cout << "\t\tid: " << id
+             << "\n\t\tname: " << name
+             << "\n\t\tprogramNames: ";
         for (const auto& prog : programNames) {
-            spdlog::info("\t\t\t{}", prog);
+            cout << "\n\t\t\t" << prog;
         }
-        spdlog::info("\t\tmapping:");
+        cout << "\n\t\tmapping:\n";
         for (const auto& m : mapping) {
             m.print();
         }
+        cout << "\n" << endl;
     }
 };
 
@@ -98,20 +97,20 @@ struct Config {
         : triggers(triggers), actions(actions), profiles(profiles), defaultProfileId(defaultProfileId) {}
 
     void print() const {
-        spdlog::info("Config");
-        spdlog::info("\tdefaultProfileId: {}", defaultProfileId);
-        spdlog::info("\ttriggers:");
+        cout << "Config\n\tdefaultProfileId: " << defaultProfileId
+             << "\n\ttriggers:\n";
         for (const auto& trigger : triggers) {
             trigger.print();
         }
-        spdlog::info("\tactions:");
+        cout << "\tactions:\n";
         for (const auto& action : actions) {
             action.print();
         }
-        spdlog::info("\tprofiles:");
+        cout << "\tprofiles:\n";
         for (const auto& profile : profiles) {
             profile.print();
         }
+        cout << "\n" << endl;
     }
 };
 

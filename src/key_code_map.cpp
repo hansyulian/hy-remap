@@ -1,31 +1,19 @@
-#include "key_remapper.h"
+#include "main.h"
 // Define a map to hold the string-to-keycode mappings
 map<string, int> keyCodeMap = {
     // Function keys
-    {"F1", 0x70},  // VK_F1
-    {"F2", 0x71},  // VK_F2
-    {"F3", 0x72},  // VK_F3
-    {"F4", 0x73},  // VK_F4
-    {"F5", 0x74},  // VK_F5
-    {"F6", 0x75},  // VK_F6
-    {"F7", 0x76},  // VK_F7
-    {"F8", 0x77},  // VK_F8
-    {"F9", 0x78},  // VK_F9
-    {"F10", 0x79}, // VK_F10
-    {"F11", 0x7A}, // VK_F11
-    {"F12", 0x7B}, // VK_F12
-    {"F13", 0x7C}, // VK_F13
-    {"F14", 0x7D}, // VK_F14
-    {"F15", 0x7E}, // VK_F15
-    {"F16", 0x7F}, // VK_F16
-    {"F17", 0x80}, // VK_F17
-    {"F18", 0x81}, // VK_F18
-    {"F19", 0x82}, // VK_F19
-    {"F20", 0x83}, // VK_F20
-    {"F21", 0x84}, // VK_F21
-    {"F22", 0x85}, // VK_F22
-    {"F23", 0x86}, // VK_F23
-    {"F24", 0x87}, // VK_F24
+    {"F1", VK_F1},
+    {"F2", VK_F2},
+    {"F3", VK_F3},
+    {"F4", VK_F4},
+    {"F5", VK_F5},
+    {"F6", VK_F6},
+    {"F7", VK_F7},
+    {"F8", VK_F8},
+    {"F9", VK_F9},
+    {"F10", VK_F10},
+    {"F11", VK_F11},
+    {"F12", VK_F12},
     
     // Number keys
     {"0", '0'},    // N0
@@ -40,38 +28,38 @@ map<string, int> keyCodeMap = {
     {"9", '9'},    // N9
 
     // Numpad keys
-    {"Numpad0", 0x60}, // VK_NUMPAD0
-    {"Numpad1", 0x61}, // VK_NUMPAD1
-    {"Numpad2", 0x62}, // VK_NUMPAD2
-    {"Numpad3", 0x63}, // VK_NUMPAD3
-    {"Numpad4", 0x64}, // VK_NUMPAD4
-    {"Numpad5", 0x65}, // VK_NUMPAD5
-    {"Numpad6", 0x66}, // VK_NUMPAD6
-    {"Numpad7", 0x67}, // VK_NUMPAD7
-    {"Numpad8", 0x68}, // VK_NUMPAD8
-    {"Numpad9", 0x69}, // VK_NUMPAD9
-    {"NumpadAdd", 0x6B}, // VK_ADD
-    {"NumpadSubtract", 0x6D}, // VK_SUBTRACT
-    {"NumpadMultiply", 0x6A}, // VK_MULTIPLY
-    {"NumpadDivide", 0x6F}, // VK_DIVIDE
-    {"NumpadDecimal", 0x6E}, // VK_DECIMAL
+    {"NUMPAD_0", VK_NUMPAD0},
+    {"NUMPAD_1", VK_NUMPAD1},
+    {"NUMPAD_2", VK_NUMPAD2},
+    {"NUMPAD_3", VK_NUMPAD3},
+    {"NUMPAD_4", VK_NUMPAD4},
+    {"NUMPAD_5", VK_NUMPAD5},
+    {"NUMPAD_6", VK_NUMPAD6},
+    {"NUMPAD_7", VK_NUMPAD7},
+    {"NUMPAD_8", VK_NUMPAD8},
+    {"NUMPAD_9", VK_NUMPAD9},
+    {"NUMPAD_ADD", VK_ADD},
+    {"NUMPAD_SUBTRACT", VK_SUBTRACT},
+    {"NUMPAD_MULTIPLY", VK_MULTIPLY},
+    {"NUMPAD_DIVIDE", VK_DIVIDE},
+    {"NUMPAD_DECIMAL", VK_DECIMAL},
     
     // Arrow keys
-    {"Up", 0x26},   // VK_UP
-    {"Down", 0x28}, // VK_DOWN
-    {"Left", 0x25}, // VK_LEFT
-    {"Right", 0x27},// VK_RIGHT
+    {"Up", VK_UP},   // VK_UP
+    {"Down", VK_DOWN}, // VK_DOWN
+    {"Left", VK_LEFT}, // VK_LEFT
+    {"Right", VK_RIGHT},// VK_RIGHT
 
     // Modifier keys
-    {"CTRL", 0x11},  // VK_CONTROL
-    {"SHIFT", 0x10}, // VK_SHIFT
-    {"ALT", 0x12},   // VK_MENU
-    {"CAPSLOCK", 0x14},  // VK_CAPITAL
-    {"ESC", 0x1B},   // VK_ESCAPE
-    {"TAB", 0x09},   // VK_TAB
-    {"SPACE", 0x20}, // VK_SPACE
-    {"ENTER", 0x0D}, // VK_RETURN
-    {"BACKSPACE", 0x08}, // VK_BACK
+    {"CTRL", VK_CONTROL},        // 0x11
+    {"SHIFT", VK_SHIFT},         // 0x10
+    {"ALT", VK_MENU},            // 0x12
+    {"CAPSLOCK", VK_CAPITAL},    // 0x14
+    {"ESC", VK_ESCAPE},          // 0x1B
+    {"TAB", VK_TAB},             // 0x09
+    {"SPACE", VK_SPACE},         // 0x20
+    {"ENTER", VK_RETURN},        // 0x0D
+    {"BACKSPACE", VK_BACK},      // 0x08
 
     // Letter keys (A-Z)
     {"A", 'A'},
@@ -102,43 +90,52 @@ map<string, int> keyCodeMap = {
     {"Z", 'Z'},
 
     // Punctuation and other keys
-    {"COMMA", 0xBC},    // VK_OEM_COMMA
-    {"PERIOD", 0xBE},   // VK_OEM_PERIOD
-    {"SLASH", 0xBF},    // VK_OEM_2
-    {"SEMICOLON", 0xBA},// VK_OEM_1
-    {"QUOTE", 0xDE},    // VK_OEM_7
-    {"LEFTBRACKET", 0xDB}, // VK_OEM_4
-    {"RIGHTBRACKET", 0xDD}, // VK_OEM_6
-    {"BACKSLASH", 0xDC},   // VK_OEM_5
+    {"COMMA", VK_OEM_COMMA},       // 0xBC
+    {"PERIOD", VK_OEM_PERIOD},     // 0xBE
+    {"SLASH", VK_OEM_2},           // 0xBF
+    {"SEMICOLON", VK_OEM_1},       // 0xBA
+    {"QUOTE", VK_OEM_7},           // 0xDE
+    {"LEFTBRACKET", VK_OEM_4},     // 0xDB
+    {"RIGHTBRACKET", VK_OEM_6},    // 0xDD
+    {"BACKSLASH", VK_OEM_5},       // 0xDC
 
     // Other common keys
-    {"NUMLOCK", 0x90},   // VK_NUMLOCK
-    {"SCROLLLOCK", 0x91},// VK_SCROLL
-    {"PRINTSCREEN", 0x2C}, // VK_SNAPSHOT
-    {"PAUSE", 0x13},     // VK_PAUSE
-    {"INSERT", 0x2D},    // VK_INSERT
-    {"HOME", 0x24},      // VK_HOME
-    {"PAGEUP", 0x21},    // VK_PRIOR
-    {"PAGEDOWN", 0x22},  // VK_NEXT
-    {"DEL", 0x2E},       // VK_DELETE
-    {"END", 0x23},       // VK_END
-    {"SHIFTLEFT", 0xA0}, // VK_LSHIFT
-    {"SHIFTRIGHT", 0xA1},// VK_RSHIFT
-    {"CTRLLEFT", 0xA2},  // VK_LCONTROL
-    {"CTRLRIGHT", 0xA3}, // VK_RCONTROL
-    {"ALTLEFT", 0xA4},   // VK_LMENU
-    {"ALTRIGHT", 0xA5},  // VK_RMENU
+    {"NUMLOCK", VK_NUMLOCK},        // 0x90
+    {"SCROLLLOCK", VK_SCROLL},      // 0x91
+    {"PRINTSCREEN", VK_SNAPSHOT},   // 0x2C
+    {"PAUSE", VK_PAUSE},            // 0x13
+    {"INSERT", VK_INSERT},          // 0x2D
+    {"HOME", VK_HOME},              // 0x24
+    {"PAGEUP", VK_PRIOR},           // 0x21
+    {"PAGEDOWN", VK_NEXT},          // 0x22
+    {"DEL", VK_DELETE},             // 0x2E
+    {"END", VK_END},                // 0x23
+    {"LWIN",VK_LWIN},
+    {"RWIN",VK_RWIN},
+    {"LSHIFT", VK_LSHIFT},       // 0xA0
+    {"RSHIFT", VK_RSHIFT},      // 0xA1
+    {"LCTRL", VK_LCONTROL},      // 0xA2
+    {"RCTRL", VK_RCONTROL},     // 0xA3
+    {"LALT", VK_LMENU},          // 0xA4
+    {"RALT", VK_RMENU},         // 0xA5
 
     // Mouse buttons
-    {"LEFT_CLICK", 0x01},  // VK_LBUTTON
-    {"RIGHT_CLICK", 0x02}, // VK_RBUTTON
-    {"MIDDLE_CLICK", 0x04}, // VK_MBUTTON
-
-    // Extra mouse buttons
-    {"MFORWARD", 0x05},   // VK_XBUTTON1
-    {"MBACK", 0x06},      // VK_XBUTTON2
+    {"LEFT_CLICK", VK_LBUTTON},     // 0x01
+    {"RIGHT_CLICK", VK_RBUTTON},    // 0x02
+    {"MIDDLE_CLICK", VK_MBUTTON},   // 0x04
     {"WHEEL_UP", HR_WHEEL_UP },  // Custom code for wheel up
     {"WHEEL_DOWN", HR_WHEEL_DOWN},// Custom code for wheel down
+
+    // Extra mouse buttons
+    {"MFORWARD", VK_XBUTTON1},      // 0x05
+    {"MBACK", VK_XBUTTON2},          // 0x06
+    {"VOLUME_UP",VK_VOLUME_UP},
+    {"VOLUME_DOWN",VK_VOLUME_DOWN},
+    {"PLAY_PAUSE", VK_MEDIA_PLAY_PAUSE}, // 0xE0
+    {"STOP", VK_MEDIA_STOP}, // 0xE0
+    {"MUTE", VK_VOLUME_MUTE},
+    {"NEXT_TRACK", VK_MEDIA_NEXT_TRACK}, // 0xB0
+    {"PREV_TRACK", VK_MEDIA_PREV_TRACK}, // 0xB1
 };
 
 // Function to get key code by string

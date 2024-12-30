@@ -7,7 +7,6 @@
 #include <string>
 #include <vector>
 #include <nlohmann/json.hpp>
-#include <spdlog/spdlog.h>
 #include "structs.h"
 #include "enums.h"
 

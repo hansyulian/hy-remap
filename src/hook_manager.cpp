@@ -1,4 +1,4 @@
-#include "key_remapper.h"
+#include "main.h"
 
 void startKeyboardAndMouseHook() {
 

@@ -9,6 +9,26 @@
       "id": 1,
       "name": "Keyboard G2",
       "key": "F2"
+    },
+    {
+      "id": 2,
+      "name": "Mouse Scroll Up",
+      "key": "WHEEL_UP"
+    },
+    {
+      "id": 3,
+      "name": "Mouse Scroll Down",
+      "key": "WHEEL_DOWN"
+    },
+    {
+      "id": 4,
+      "name": "Mouse Forward",
+      "key": "MFORWARD"
+    },
+    {
+      "id": 5,
+      "name": "Mouse Back",
+      "key": "MBACK"
     }
   ],
   "actions": [
@@ -23,6 +43,24 @@
       "name": "Paste",
       "type": "simple",
       "keys": ["CTRL", "V"]
+    },
+    {
+      "id": 2,
+      "name": "Volume Up",
+      "type": "simple",
+      "keys": ["VOLUME_UP"]
+    },
+    {
+      "id": 3,
+      "name": "Volume Down",
+      "type": "simple",
+      "keys": ["VOLUME_DOWN"]
+    },
+    {
+      "id": 4,
+      "name": "Mouse Left Click",
+      "type": "simple",
+      "keys": ["LEFT_CLICK"]
     }
   ],
   "profiles": [
@@ -42,6 +80,22 @@
         {
           "triggerId": 1,
           "actionId": 1
+        },
+        {
+          "triggerId": 2,
+          "actionId": 2
+        },
+        {
+          "triggerId": 3,
+          "actionId": 3
+        },
+        {
+          "triggerId": 4,
+          "actionId": 4
+        },
+        {
+          "triggerId": 5,
+          "actionId": 3
         }
       ]
     }

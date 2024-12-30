@@ -1,4 +1,4 @@
-#include "key_remapper.h"
+#include "main.h"
 // New function to get the active profile
 bool isActiveWindowMatchingProfile(const vector<string>& programNames) {
     HWND hwnd = GetForegroundWindow();

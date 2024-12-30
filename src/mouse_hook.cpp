@@ -1,4 +1,4 @@
-#include "key_remapper.h"
+#include "main.h"
 
 LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
     if (nCode >= 0) {
@@ -34,11 +34,11 @@ LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
                 isKeyUp = true;
                 break;
             case WM_XBUTTONDOWN:
-                mouseButton = (GET_XBUTTON_WPARAM(mouse->mouseData) == XBUTTON1) ? getKeyCodeFromString("MFORWARD") : getKeyCodeFromString("MBACK");
+                mouseButton = (GET_XBUTTON_WPARAM(mouse->mouseData) == XBUTTON1) ? getKeyCodeFromString("MBACK") : getKeyCodeFromString("MFORWARD");
                 isKeyUp = false;
                 break;
             case WM_XBUTTONUP:
-                mouseButton = (GET_XBUTTON_WPARAM(mouse->mouseData) == XBUTTON1) ? getKeyCodeFromString("MFORWARD") : getKeyCodeFromString("MBACK");
+                mouseButton = (GET_XBUTTON_WPARAM(mouse->mouseData) == XBUTTON1) ? getKeyCodeFromString("MBACK") : getKeyCodeFromString("MFORWARD");
                 isKeyUp = true;
                 break;
             case WM_MOUSEWHEEL: {

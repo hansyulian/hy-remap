@@ -53,10 +53,20 @@ void from_json(const json& j, Mapping& m);
 void from_json(const json& j, Profile& p);
 void from_json(const json& j, Config& c);
 
+INPUT convertKeyCodeToInput(int keyCode, bool isKeyUp);
 OptimizedAction* getActionByName(const string& name);
 int getActionIndexByName(const string& name);
 OptimizedTrigger* getTriggerByName(const string& name);
 int getTriggerIndexByName(const string& name);
 OptimizedProfile* getProfileByName(const string& name);
 int getProfileIndexByName(const string& name);
+
+// actions
+// simple action
+void performSimpleAction(const OptimizedAction& action, const InputTrigger& inputTrigger);
+// profile shift action
+void performProfileShiftAction(const OptimizedAction& action, const InputTrigger& inputTrigger);
+void releaseProfileShiftAction(const OptimizedAction& action, const InputTrigger& inputTrigger);
+
 #endif  // KEY_REMAPPER_H
+

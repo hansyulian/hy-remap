@@ -2,7 +2,8 @@
 #define ENUMS
 
 enum ActionType {
-    SIMPLE
+    SIMPLE,
+    PROFILE_SHIFT,
 };
 
 #endif // ENUMS

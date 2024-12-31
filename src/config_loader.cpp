@@ -25,11 +25,56 @@ void loadConfig(){
   config = configJson.get<Config>();
   config.print();
 
-  for (const auto& profile: config.profiles){
-    if (profile.id == config.defaultProfileId){
-      *defaultProfile = profile;
-      break;
+}
+
+void calculateOptimizedConfig(){
+  for (auto& trigger: config.triggers){
+    OptimizedTrigger optimizedTrigger;
+    optimizedTrigger.key = trigger.key;
+    optimizedTrigger.keyCode = getKeyCodeFromString(trigger.key);
+    optimizedTrigger.name = trigger.name;
+    optimizedTrigger.index = optimizedTriggers.size();
+    optimizedTriggers.push_back(optimizedTrigger);
+  }
+  for (auto& action:config.actions){
+    OptimizedAction optimizedAction;
+    optimizedAction.name = action.name;
+    optimizedAction.keys = action.keys;
+    optimizedAction.profileName = action.profileName;
+    optimizedAction.type = action.type;
+    for (auto& key:action.keys){
+      auto keyCode = getKeyCodeFromString(key);
+      optimizedAction.keyCodes.push_back(keyCode);
+    }
+    optimizedAction.index = optimizedActions.size();
+    optimizedActions.push_back(optimizedAction);
+  }
+  for (auto& profile:config.profiles){
+    OptimizedProfile optimizedProfile;
+    optimizedProfile.name = profile.name;
+    optimizedProfile.mapping = profile.mapping;
+    optimizedProfile.programNames = profile.programNames;
+    for (int i = 0; i < 256; i++){
+      optimizedProfile.actionIdMap[i] = -1;
+    }
+    for (auto& mapping: profile.mapping){
+      OptimizedMapping optimizedMapping;
+      optimizedMapping.actionName = mapping.actionName;
+      optimizedMapping.triggerName = mapping.triggerName;
+      int triggerIndex = getTriggerIndexByName(mapping.triggerName);
+      optimizedMapping.triggerIndex = triggerIndex;
+      int actionIndex = getActionIndexByName(mapping.actionName);
+      optimizedMapping.actionIndex = actionIndex;
+      optimizedProfile.optimizedMapping.push_back(optimizedMapping);
+      optimizedProfile.actionIdMap[optimizedTriggers[triggerIndex].keyCode] = actionIndex;
+    }
+    optimizedProfile.index = optimizedProfiles.size();
+    optimizedProfiles.push_back(optimizedProfile);
+  }
+  for (auto& optimizedAction:optimizedActions){
+    if (!optimizedAction.profileName.empty()){
+      optimizedAction.profileIndex = getProfileIndexByName(optimizedAction.profileName);
     }
   }
-
+  defaultProfileIndex = getProfileIndexByName(config.defaultProfileName);
 }

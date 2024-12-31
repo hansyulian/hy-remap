@@ -1,50 +1,21 @@
 #include "main.h"
 
 bool handleInput(const InputTrigger& inputTrigger){
-    
+    releaseOngoingAction(inputTrigger);    
     auto keyCode = inputTrigger.keyCode;
     auto isUp = inputTrigger.isUp;
-    auto profile = getProfile(); // profile is guaranteed to exist, at least the default profile
-    
-
-    const Trigger* currentTrigger = nullptr;
-    for (const auto& trigger : config.triggers) {
-        if (getKeyCodeFromString(trigger.key) == keyCode) {
-            currentTrigger = &trigger;
-            break;
-        }
-    }
-
-    if (currentTrigger == nullptr) {
-        
+    auto profile = getActiveProfile(); // profile is guaranteed to exist, at least the default profile
+    if (profile == nullptr){
         return false;
     }
     
-
-    const Mapping* currentMapping = nullptr;
-    for (const auto& mapping : profile->mapping) {
-        if (mapping.triggerId == currentTrigger->id) {
-            currentMapping = &mapping;
-            break;
-        }
-    }
-
-    if (currentMapping == nullptr) {
-        
+    auto actionIndex = profile->actionIdMap[keyCode];
+    if (actionIndex == -1){
         return false;
     }
-
+    const OptimizedAction* currentAction = &optimizedActions[actionIndex];
     
-    
-    const Action* currentAction = nullptr;
-    for (const auto& action: config.actions){
-        if (action.id == currentMapping->actionId){
-            currentAction = &action;
-            break;
-        }
-    }
-    if (currentAction == nullptr){
-        
+    if (currentAction == nullptr){        
         return false;
     }
     performAction(*currentAction, inputTrigger);

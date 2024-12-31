@@ -19,23 +19,33 @@ using namespace std;
 // Global variables
 extern HHOOK keyboardHook;
 extern HHOOK mouseHook;
-extern Profile* overrideProfile;
 extern Config config;
 extern map<string,int> keyCodeMap;
-extern Profile* defaultProfile;
-extern int ongoingActionIds[256];
+
+extern int overrideProfileIndex;
+extern int defaultProfileIndex;
+extern string profileCacheWindowName;
+extern int profileCacheIndex;
+extern int triggerActionIndexMap[256];
+extern int keyDownActionIndex[256];
+
+extern vector<OptimizedAction> optimizedActions;
+extern vector<OptimizedTrigger> optimizedTriggers;
+extern vector<OptimizedProfile> optimizedProfiles;
+
 // Function declarations
-bool isActiveWindowMatchingProfile(const vector<string>& programNames);
-void performAction(const Action& action,const InputTrigger& inputTrigger);
+void performAction(const OptimizedAction& action,const InputTrigger& inputTrigger);
 int getKeyCodeFromString(const string& key);
 LRESULT CALLBACK keyboardProc(int nCode, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam);
 void startKeyboardAndMouseHook();
 void stopKeyboardAndMouseHook();
-Profile* getProfile();
+OptimizedProfile* getActiveProfile();
 string loadConfigString();
 void loadConfig();
+void calculateOptimizedConfig();
 bool handleInput(const InputTrigger& inputTrigger);
+void releaseOngoingAction(const InputTrigger& inputTrigger);
 
 void from_json(const json& j, Trigger& t);
 void from_json(const json& j, Action& a);
@@ -43,5 +53,10 @@ void from_json(const json& j, Mapping& m);
 void from_json(const json& j, Profile& p);
 void from_json(const json& j, Config& c);
 
-
+OptimizedAction* getActionByName(const string& name);
+int getActionIndexByName(const string& name);
+OptimizedTrigger* getTriggerByName(const string& name);
+int getTriggerIndexByName(const string& name);
+OptimizedProfile* getProfileByName(const string& name);
+int getProfileIndexByName(const string& name);
 #endif  // KEY_REMAPPER_H

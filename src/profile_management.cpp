@@ -1,25 +1,38 @@
 #include "main.h"
-// New function to get the active profile
-bool isActiveWindowMatchingProfile(const vector<string>& programNames) {
+
+
+OptimizedProfile* getActiveProfile() {
+    if (overrideProfileIndex != -1){
+        return &optimizedProfiles[overrideProfileIndex];
+    }
     HWND hwnd = GetForegroundWindow();
-    if (!hwnd) return false;
+    if (!hwnd){
+        // if no active window detected, return the default profile
+        return &optimizedProfiles[defaultProfileIndex];
+    }
+    // put the window title
+    wchar_t windowTitleW[256]; // Wide-character buffer
+    GetWindowTextW(hwnd, windowTitleW, sizeof(windowTitleW) / sizeof(wchar_t));
 
-    char windowTitle[256];
-    GetWindowText(hwnd, windowTitle, sizeof(windowTitle));
-    for (const auto& programName : programNames) {
-        if (string(windowTitle).find(programName) != string::npos) {
-            return true;
+    // Convert wide string to standard string
+    wstring wideTitle(windowTitleW);
+    string windowTitleString(wideTitle.begin(), wideTitle.end());
+
+    if (profileCacheIndex != -1 && windowTitleString == profileCacheWindowName){
+        return &optimizedProfiles[profileCacheIndex];
+    } else {
+        profileCacheIndex = -1;
+    }
+    for (int i = 0; i < optimizedProfiles.size(); i++){
+        OptimizedProfile* profile = &optimizedProfiles[i];
+        
+        for (const auto& programName : profile->programNames) {
+            if (windowTitleString.find(programName) != string::npos) {
+                profileCacheIndex = profile->index;
+                profileCacheWindowName = windowTitleString;
+                return profile;
+            }
         }
     }
-    return false;
-}
-
-Profile* getProfile() {
-    for (int i = 0; i < config.profiles.size(); i++){
-        Profile* profile = &config.profiles[i];
-        if (isActiveWindowMatchingProfile(profile->programNames)) {
-            return profile;  // Return a pointer to the first matching profile
-        }
-    }
-    return defaultProfile;  // Return a pointer to the default profile
+    return &optimizedProfiles[defaultProfileIndex];  // Return a pointer to the default profile
 }

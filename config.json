@@ -1,104 +1,97 @@
 {
   "triggers": [
     {
-      "id": 0,
       "name": "Keyboard G1",
       "key": "F1"
     },
     {
-      "id": 1,
       "name": "Keyboard G2",
       "key": "F2"
     },
     {
-      "id": 2,
       "name": "Mouse Scroll Up",
       "key": "WHEEL_UP"
     },
     {
-      "id": 3,
       "name": "Mouse Scroll Down",
       "key": "WHEEL_DOWN"
     },
     {
-      "id": 4,
       "name": "Mouse Forward",
       "key": "MFORWARD"
     },
     {
-      "id": 5,
       "name": "Mouse Back",
       "key": "MBACK"
     }
   ],
   "actions": [
     {
-      "id": 0,
       "name": "Copy",
       "type": "simple",
       "keys": ["CTRL", "C"]
     },
     {
-      "id": 1,
       "name": "Paste",
       "type": "simple",
       "keys": ["CTRL", "V"]
     },
     {
-      "id": 2,
       "name": "Volume Up",
       "type": "simple",
       "keys": ["VOLUME_UP"]
     },
     {
-      "id": 3,
       "name": "Volume Down",
       "type": "simple",
       "keys": ["VOLUME_DOWN"]
     },
     {
-      "id": 4,
       "name": "Mouse Left Click",
       "type": "simple",
       "keys": ["LEFT_CLICK"]
+    },
+    {
+      "name": "Profile Shift",
+      "type": "profileShift",
+      "profileName": "Test Shift"
     }
   ],
   "profiles": [
     {
-      "id": 0,
       "name": "Default"
     },
     {
-      "id": 1,
       "name": "Test With Notepad",
       "programNames": ["Notepad"],
       "mapping": [
         {
-          "triggerId": 0,
-          "actionId": 0
+          "triggerName": "Keyboard G1",
+          "actionName": "Copy"
         },
         {
-          "triggerId": 1,
-          "actionId": 1
+          "triggerName": "Keyboard G2",
+          "actionName": "Paste"
         },
         {
-          "triggerId": 2,
-          "actionId": 2
+          "triggerName": "Mouse Forward",
+          "actionName": "Profile Shift"
+        }
+      ]
+    },
+    {
+      "name": "Test Shift",
+      "mapping": [
+        {
+          "triggerName": "Mouse Scroll Up",
+          "actionName": "Volume Up"
         },
         {
-          "triggerId": 3,
-          "actionId": 3
-        },
-        {
-          "triggerId": 4,
-          "actionId": 4
-        },
-        {
-          "triggerId": 5,
-          "actionId": 3
+          "triggerName": "Mouse Scroll Down",
+          "actionName": "Volume Down"
         }
       ]
     }
   ],
-  "defaultProfileId": 0
+  "defaultProfileName": "Default"
 }

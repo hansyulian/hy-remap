@@ -28,7 +28,7 @@ INPUT convertKeyNameToInput(string keyName, bool isKeyUp){
     return input;
 }
 
-void performSimpleAction(const Action& action, const InputTrigger& inputTrigger){
+void performSimpleAction(const OptimizedAction& action, const InputTrigger& inputTrigger){
     vector<INPUT> inputs;
     auto keySize = action.keys.size();
     if (inputTrigger.isUp){
@@ -55,12 +55,23 @@ void performSimpleAction(const Action& action, const InputTrigger& inputTrigger)
     SendInput(static_cast<UINT>(inputs.size()), inputs.data(), sizeof(INPUT));
 }
 
-void performAction(const Action& action, const InputTrigger& inputTrigger) {
-    
+void performProfileShiftAction(const OptimizedAction& action, const InputTrigger& inputTrigger){
+    if (inputTrigger.isUp){
+        return;
+    }
+    keyDownActionIndex[inputTrigger.keyCode] = action.index;
+    overrideProfileIndex = action.profileIndex;
+    cout << "profile shift executed to" << action.profileName << endl;
+}
+
+void performAction(const OptimizedAction& action, const InputTrigger& inputTrigger) {    
     switch(action.type){
         case ActionType::SIMPLE:
-        performSimpleAction(action,inputTrigger);
-        break;
+            performSimpleAction(action,inputTrigger);
+            break;
+        case ActionType::PROFILE_SHIFT:
+            performProfileShiftAction(action, inputTrigger);
+            break;
     }
 }
 

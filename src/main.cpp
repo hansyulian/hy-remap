@@ -6,7 +6,7 @@ vector<OptimizedTrigger> optimizedTriggers;
 vector<OptimizedProfile> optimizedProfiles;
 vector<thread> macroActionThreads;
 vector<bool> isMacroActionThreadRunnings;
-string profileCacheWindowName = "";
+string profileCacheWindowTitle = "";
 int profileCacheIndex = -1;
 int overrideProfileIndex = -1;
 int defaultProfileIndex = -1;

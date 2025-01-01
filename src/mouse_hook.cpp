@@ -2,6 +2,7 @@
 #include <windows.h>
 
 LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
+    refreshProfileCache();
     if (nCode >= 0) {
         MSLLHOOKSTRUCT* mouse = (MSLLHOOKSTRUCT*)lParam;
 

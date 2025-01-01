@@ -28,7 +28,7 @@ extern map<string,int> keyCodeMap;
 
 extern int overrideProfileIndex;
 extern int defaultProfileIndex;
-extern string profileCacheWindowName;
+extern string profileCacheWindowTitle;
 extern int profileCacheIndex;
 extern int triggerActionIndexMap[256];
 extern int keyDownActionIndex[256];
@@ -51,8 +51,9 @@ string loadConfigString();
 void loadConfig();
 void calculateOptimizedConfig();
 bool handleInput(const InputTrigger& inputTrigger);
-void releaseOngoingAction(int keyCode);
+void releaseOngoingAction(int keyCode, bool force);
 string getCurrentWindowTitle();
+void refreshProfileCache();
 
 void from_json(const json& j, Trigger& t);
 void from_json(const json& j, Action& a);
@@ -78,7 +79,7 @@ void performProfileShiftAction(const OptimizedAction& action, const InputTrigger
 void releaseProfileShiftAction(const OptimizedAction& action);
 // macro action
 void performMacroAction(const OptimizedAction& action, const InputTrigger& inputTrigger);
-void releaseMacroAction(const OptimizedAction& action);
+void releaseMacroAction(const OptimizedAction& action, bool force);
 
 #endif  // KEY_REMAPPER_H
 

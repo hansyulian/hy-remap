@@ -3,7 +3,7 @@
 
 bool handleInput(const InputTrigger& inputTrigger){
     if (inputTrigger.up){
-        releaseOngoingAction(inputTrigger.keyCode);     
+        releaseOngoingAction(inputTrigger.keyCode, false);     
     }   
     auto keyCode = inputTrigger.keyCode;
     auto up = inputTrigger.up;

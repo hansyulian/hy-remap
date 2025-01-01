@@ -4,20 +4,22 @@
 bool isMacroActionThreadRunning(const OptimizedAction& action){
   return isMacroActionThreadRunnings[action.index];
 }
+bool isValidMacroExecutionCondition(const OptimizedAction& action, string& executionWindowTitle){
+  return isMacroActionThreadRunning(action) && executionWindowTitle == profileCacheWindowTitle;
+}
 
-
-void executeMacroItem(const OptimizedMacroItem& macroItem, const OptimizedAction& action){
-  if (isMacroActionThreadRunning(action) && macroItem.keyCode > -1){
-    // // cout << "macro keycode " << macroItem.keyCode << endl;
+void executeMacroItem(const OptimizedMacroItem& macroItem, const OptimizedAction& action, string& executionWindowTitle){
+  if (isValidMacroExecutionCondition(action, executionWindowTitle) && macroItem.keyCode > -1){
+    // cout << "macro keycode " << macroItem.keyCode << endl;
     vector<INPUT> inputs;
     inputs.push_back(convertKeyCodeToInput(macroItem.keyCode,macroItem.up));
     executeInputs(inputs);
   }
-  if (isMacroActionThreadRunning(action) && macroItem.delayMs > 0){
-    // // cout << "macro delay " << macroItem.delayMs << endl;
+  if (isValidMacroExecutionCondition(action, executionWindowTitle) && macroItem.delayMs > 0){
+    // cout << "macro delay " << macroItem.delayMs << endl;
     auto start = chrono::system_clock::now();
     auto duration = chrono::duration_cast<std::chrono::milliseconds>(chrono::system_clock::now() - start).count();
-    while (isMacroActionThreadRunning(action) && duration < macroItem.delayMs){
+    while (isValidMacroExecutionCondition(action, executionWindowTitle) && duration < macroItem.delayMs){
       int durationDifference = macroItem.delayMs - duration;
       if (durationDifference > THREAD_SLEEP_SEGMENTATION_MS){
         this_thread::sleep_for(chrono::milliseconds(THREAD_SLEEP_SEGMENTATION_MS));
@@ -32,11 +34,13 @@ void executeMacroItem(const OptimizedMacroItem& macroItem, const OptimizedAction
 void macroThreadExecution(const OptimizedAction& action){
   // cout << "executing macro thread " << action.index << endl;
   auto index = action.index;
+  auto executionWindowTitle = profileCacheWindowTitle; // use this to ensure later that if the window name change, then we cancel execution
   // cout << "macro repeat mode " << action.macroRepeatMode << endl;
   if (action.macroRepeatMode == MacroRepeatMode::NONE){
+
     // cout << "non repeating macro" << endl;
       for (const auto& macroItem: action.optimizedMacroItems){
-        executeMacroItem(macroItem, action);
+        executeMacroItem(macroItem, action, executionWindowTitle);
       }
       isMacroActionThreadRunnings[action.index] = false;
       return;
@@ -45,12 +49,13 @@ void macroThreadExecution(const OptimizedAction& action){
   int macroItemsLength = action.optimizedMacroItems.size();
   int macroItemIndex = 0;
   int localMacroKeyDownStateIndex[256];
-  while(isMacroActionThreadRunning(action)){
+  while(isValidMacroExecutionCondition(action,executionWindowTitle)){
     auto macroItem = &action.optimizedMacroItems[macroItemIndex];
     localMacroKeyDownStateIndex[macroItem->keyCode] = !macroItem->up;
-    executeMacroItem(*macroItem, action);
+    executeMacroItem(*macroItem, action, executionWindowTitle);
     macroItemIndex = (macroItemIndex + 1) % macroItemsLength;
   }
+  isMacroActionThreadRunnings[action.index] = false;
   vector<INPUT> inputClearance;
   for (int i = 0; i < 256; i++){
     if (localMacroKeyDownStateIndex[i]){
@@ -64,9 +69,9 @@ void macroThreadExecution(const OptimizedAction& action){
 void stopMacroThread(const OptimizedAction& action){
   // cout << "stopping macro thread " << action.index;
   isMacroActionThreadRunnings[action.index] = false;
-  if (macroActionThreads[action.index].joinable()) {
+  // if (macroActionThreads[action.index].joinable()) {
     // cout << "executing join macro thread " << action.index << endl;
-  }
+  // }
   // cout << "macro stopping done " << action.index << endl;
 }
 
@@ -77,9 +82,9 @@ void startMacroThread(const OptimizedAction& action){
     // cout << "stopping previous action thread " << action.index << endl;
     macroActionThreads[action.index].join();
   }
-  if (isMacroActionThreadRunnings[action.index]){
-    // cout << "still have previous action thread " << action.index << endl;
-  }
+  // if (isMacroActionThreadRunnings[action.index]){
+  //   cout << "still have previous action thread " << action.index << endl;
+  // }
   isMacroActionThreadRunnings[action.index] = true;
   macroActionThreads[action.index] = thread(macroThreadExecution,action);
   // cout << "macro thread started " << action.index << endl;
@@ -107,7 +112,7 @@ void performMacroAction(const OptimizedAction& action, const InputTrigger& input
         keyDownActionIndex[inputTrigger.keyCode] = -1;
         stopMacroThread(action);
       } else {        
-      // cout << "Stopping Toggle macro" << endl;      
+        // cout << "Stopping Toggle macro" << endl;      
         keyDownActionIndex[inputTrigger.keyCode] = action.index;
         startMacroThread(action);
       }
@@ -115,8 +120,8 @@ void performMacroAction(const OptimizedAction& action, const InputTrigger& input
   }
 }
 
-void releaseMacroAction(const OptimizedAction& action){
-  // cout << "release macro action " << action.index << " " << inputTrigger.keyCode << ":" << inputTrigger.up << endl;
+void releaseMacroAction(const OptimizedAction& action, bool force){
+  // cout << "release macro action " << action.index << " " << action.name << " " << force << endl;
   switch(action.macroRepeatMode){
     case MacroRepeatMode::NONE:
       return;
@@ -125,6 +130,9 @@ void releaseMacroAction(const OptimizedAction& action){
       stopMacroThread(action);
       return;
     case MacroRepeatMode::TOGGLE:
+      if (force){
+        stopMacroThread(action);
+      }
       return;
   }  
 }

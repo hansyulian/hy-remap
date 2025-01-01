@@ -4,6 +4,7 @@
 #include <string>
 
 LRESULT CALLBACK keyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
+    refreshProfileCache();
     if (nCode >= 0) {
         // Cast lParam to KBDLLHOOKSTRUCT to get keyboard event details
         KBDLLHOOKSTRUCT* kbd = (KBDLLHOOKSTRUCT*)lParam;

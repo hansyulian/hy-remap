@@ -6,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <optional>
 #include <nlohmann/json.hpp>
 #include "structs.h"
 #include "enums.h"
@@ -14,6 +15,7 @@
 #define HR_WHEEL_UP 0xF0
 #define HR_WHEEL_DOWN 0xF1
 #define THREAD_SLEEP_SEGMENTATION_MS 5 // this can handle without issue for 200 fps
+#define HY_BYPASS_EXECUTION_FLAG 0x01090904
 
 using json = nlohmann::json;
 using namespace std;
@@ -49,7 +51,8 @@ string loadConfigString();
 void loadConfig();
 void calculateOptimizedConfig();
 bool handleInput(const InputTrigger& inputTrigger);
-void releaseOngoingAction(const InputTrigger& inputTrigger);
+void releaseOngoingAction(int keyCode);
+string getCurrentWindowTitle();
 
 void from_json(const json& j, Trigger& t);
 void from_json(const json& j, Action& a);
@@ -72,10 +75,10 @@ int getProfileIndexByName(const string& name);
 void performSimpleAction(const OptimizedAction& action, const InputTrigger& inputTrigger);
 // profile shift action
 void performProfileShiftAction(const OptimizedAction& action, const InputTrigger& inputTrigger);
-void releaseProfileShiftAction(const OptimizedAction& action, const InputTrigger& inputTrigger);
+void releaseProfileShiftAction(const OptimizedAction& action);
 // macro action
 void performMacroAction(const OptimizedAction& action, const InputTrigger& inputTrigger);
-void releaseMacroAction(const OptimizedAction& action, const InputTrigger& inputTrigger);
+void releaseMacroAction(const OptimizedAction& action);
 
 #endif  // KEY_REMAPPER_H
 

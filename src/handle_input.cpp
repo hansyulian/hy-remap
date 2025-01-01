@@ -2,7 +2,9 @@
 #include <chrono>
 
 bool handleInput(const InputTrigger& inputTrigger){
-    releaseOngoingAction(inputTrigger);    
+    if (inputTrigger.up){
+        releaseOngoingAction(inputTrigger.keyCode);     
+    }   
     auto keyCode = inputTrigger.keyCode;
     auto up = inputTrigger.up;
     auto profileIndex = getActiveProfileIndex(); // profile is guaranteed to exist, at least the default profile

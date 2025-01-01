@@ -1,23 +1,21 @@
 #include "main.h"
 
-void releaseOngoingAction(const InputTrigger& inputTrigger){
-  if (!inputTrigger.up){
-    return;
-  }
-  auto actionIndex = keyDownActionIndex[inputTrigger.keyCode];
+void releaseOngoingAction(int keyCode){
+  auto actionIndex = keyDownActionIndex[keyCode];
   if (actionIndex == -1){
     return;
   }
   auto action = &optimizedActions[actionIndex];
-  // cout << "Releasing action " << action->index  << endl;
+  keyDownActionIndex[keyCode] = -1;
+  cout << "Releasing action " << action->index  << endl;
   switch(action->type){
     case ActionType::PROFILE_SHIFT:
-      // cout << "Releasing profile shift" << endl;
-      releaseProfileShiftAction(*action,inputTrigger);
+      cout << "Releasing profile shift" << endl;
+      releaseProfileShiftAction(*action);
       return;
     case ActionType::MACRO:
-      // cout << "Releasing macro" << endl;
-      releaseMacroAction(*action,inputTrigger);
+      cout << "Releasing macro" << endl;
+      releaseMacroAction(*action);
       return;
     default:
       return;

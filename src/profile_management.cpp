@@ -1,31 +1,23 @@
 #include "main.h"
+
 int getActiveProfileIndex() {
+    cout << "get active profile index" << endl;
     if (overrideProfileIndex != -1) {
         return overrideProfileIndex; // Return override if set
     }
-
-    HWND hwnd = GetForegroundWindow();
-    if (!hwnd) {
-        // If no active window detected, return the default profile
+    auto windowTitleString = getCurrentWindowTitle();
+    if (windowTitleString == ""){
         return defaultProfileIndex;
     }
-
-    // Get the window title
-    wchar_t windowTitleW[256]; // Wide-character buffer
-    if (GetWindowTextW(hwnd, windowTitleW, sizeof(windowTitleW) / sizeof(wchar_t)) == 0) {
-        // If unable to retrieve the window title, return the default profile
-        return defaultProfileIndex;
-    }
-
-    // Convert wide string to standard string
-    std::wstring wideTitle(windowTitleW);
-    std::string windowTitleString(wideTitle.begin(), wideTitle.end());
-
+    cout << "window title " << windowTitleString << endl;
     // Check cache for a match
     if (profileCacheIndex != -1 && windowTitleString == profileCacheWindowName) {
         return profileCacheIndex;
     }
 
+    for (int i = 0; i < 256; i++){
+        releaseOngoingAction(i);
+    }
     // Reset cache if no match
     profileCacheIndex = -1;
 

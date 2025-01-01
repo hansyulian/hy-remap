@@ -1,4 +1,5 @@
 #include "main.h"
+#include <windows.h>
 
 LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
     if (nCode >= 0) {
@@ -34,6 +35,7 @@ LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
                 isKeyUp = true;
                 break;
             case WM_XBUTTONDOWN:
+                // Handle extra buttons like "Back" and "Forward" buttons on mice
                 mouseButton = (GET_XBUTTON_WPARAM(mouse->mouseData) == XBUTTON1) ? getKeyCodeFromString("MBACK") : getKeyCodeFromString("MFORWARD");
                 isKeyUp = false;
                 break;
@@ -42,9 +44,10 @@ LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
                 isKeyUp = true;
                 break;
             case WM_MOUSEWHEEL: {
+                // Handle mouse wheel scrolling
                 int delta = GET_WHEEL_DELTA_WPARAM(mouse->mouseData);
                 mouseButton = (delta > 0) ? getKeyCodeFromString("WHEEL_UP") : getKeyCodeFromString("WHEEL_DOWN");
-                isKeyUp = false;  // Scrolling is a "press-like" event
+                isKeyUp = false;  // Treat scrolling as a "press-like" event
                 break;
             }
             default:
@@ -54,16 +57,17 @@ LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
                 break;
         }
 
+        // Create an InputTrigger object to hold the current event
         InputTrigger inputTrigger;
         inputTrigger.up = isKeyUp;
         inputTrigger.keyCode = mouseButton;
-        if (inputTrigger.keyCode != -1){
-            if (handleInput(inputTrigger)){
-                return 1;
-            }
+
+        // Check if the dwExtraInfo doesn't contain the flag and the key code is valid
+        if (mouse->dwExtraInfo != HY_BYPASS_EXECUTION_FLAG && inputTrigger.keyCode != -1 && handleInput(inputTrigger)) {
+            return 1; // Return 1 to prevent further processing of the event
         }
-        // You can process the inputTrigger here or pass it to other parts of your code.
     }
 
+    // Pass the event to the next hook in the chain
     return CallNextHookEx(mouseHook, nCode, wParam, lParam);
 }

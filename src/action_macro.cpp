@@ -115,10 +115,8 @@ void performMacroAction(const OptimizedAction& action, const InputTrigger& input
   }
 }
 
-void releaseMacroAction(const OptimizedAction& action, const InputTrigger& inputTrigger){
+void releaseMacroAction(const OptimizedAction& action){
   // cout << "release macro action " << action.index << " " << inputTrigger.keyCode << ":" << inputTrigger.up << endl;
-  auto up = inputTrigger.up;
-  auto keyCode = inputTrigger.keyCode;
   switch(action.macroRepeatMode){
     case MacroRepeatMode::NONE:
       return;

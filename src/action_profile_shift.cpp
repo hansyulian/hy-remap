@@ -8,7 +8,7 @@ void performProfileShiftAction(const OptimizedAction& action, const InputTrigger
     overrideProfileIndex = action.profileIndex;
 }
 
-void releaseProfileShiftAction(const OptimizedAction& action, const InputTrigger& inputTrigger){
+void releaseProfileShiftAction(const OptimizedAction& action){
   overrideProfileIndex = -1;
-  keyDownActionIndex[inputTrigger.keyCode] = -1;
+  
 }

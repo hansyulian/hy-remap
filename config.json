@@ -55,6 +55,72 @@
       "name": "Profile Shift",
       "type": "profileShift",
       "profileName": "Test Shift"
+    },
+    {
+      "name": "Single Ctrl V",
+      "type": "macro",
+      "macroRepeatDelayMs": 1000,
+      "macroRepeatMode": "none",
+      "macroItems": [
+        {
+          "key": "CTRL"
+        },
+        {
+          "key": "V"
+        },
+        {
+          "key": "V",
+          "up": true
+        },
+        {
+          "key": "CTRL",
+          "up": true
+        }
+      ]
+    },
+    {
+      "name": "Hold Ctrl V",
+      "type": "macro",
+      "macroRepeatDelayMs": 1000,
+      "macroRepeatMode": "hold",
+      "macroItems": [
+        {
+          "key": "CTRL"
+        },
+        {
+          "key": "V"
+        },
+        {
+          "key": "V",
+          "up": true
+        },
+        {
+          "key": "CTRL",
+          "up": true
+        }
+      ]
+    },
+    {
+      "name": "Toggle Ctrl V",
+      "type": "macro",
+      "macroRepeatDelayMs": 1000,
+      "macroRepeatMode": "toggle",
+      "macroItems": [
+        {
+          "key": "CTRL"
+        },
+        {
+          "key": "V"
+        },
+        {
+          "key": "V",
+          "up": true
+        },
+        {
+          "key": "CTRL",
+          "up": true
+        }
+      ]
     }
   ],
   "profiles": [
@@ -63,7 +129,7 @@
     },
     {
       "name": "Test With Notepad",
-      "programNames": ["Notepad"],
+      "programNames": ["Notepad", "Visual Studio Code"],
       "mapping": [
         {
           "triggerName": "Keyboard G1",
@@ -76,6 +142,10 @@
         {
           "triggerName": "Mouse Forward",
           "actionName": "Profile Shift"
+        },
+        {
+          "triggerName": "Mouse Back",
+          "actionName": "Toggle Ctrl V"
         }
       ]
     },

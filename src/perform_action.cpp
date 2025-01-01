@@ -9,6 +9,9 @@ void performAction(const OptimizedAction& action, const InputTrigger& inputTrigg
         case ActionType::PROFILE_SHIFT:
             performProfileShiftAction(action, inputTrigger);
             break;
+        case ActionType::MACRO:
+            performMacroAction(action,inputTrigger);
+            break;
     }
 }
 

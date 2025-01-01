@@ -39,21 +39,47 @@ void calculateOptimizedConfig(){
   for (auto& action:config.actions){
     OptimizedAction optimizedAction;
     optimizedAction.name = action.name;
-    optimizedAction.keys = action.keys;
+    optimizedAction.keys = &action.keys;
     optimizedAction.profileName = action.profileName;
     optimizedAction.type = action.type;
-    for (auto& key:action.keys){
-      auto keyCode = getKeyCodeFromString(key);
-      optimizedAction.keyCodes.push_back(keyCode);
-    }
     optimizedAction.index = optimizedActions.size();
+    switch (optimizedAction.type){
+      case ActionType::SIMPLE:
+        for (auto& key:action.keys){
+          auto keyCode = getKeyCodeFromString(key);
+          optimizedAction.keyCodes.push_back(keyCode);
+        }
+        break;
+      case ActionType::PROFILE_SHIFT:
+        break;
+      case ActionType::MACRO:
+        optimizedAction.macroRepeatDelayMs = action.macroRepeatDelayMs;
+        optimizedAction.macroRepeatMode = action.macroRepeatMode;
+        
+        for (auto& macroItem:action.macroItems){
+          OptimizedMacroItem optimizedMacroItem = {};
+          optimizedMacroItem.key = macroItem.key;
+          optimizedMacroItem.up = macroItem.up;
+          optimizedMacroItem.delayMs = macroItem.delayMs;
+          optimizedMacroItem.keyCode = getKeyCodeFromString(macroItem.key);
+          optimizedAction.optimizedMacroItems.push_back(optimizedMacroItem);
+        }
+        if (optimizedAction.macroRepeatMode != MacroRepeatMode::NONE && optimizedAction.macroRepeatDelayMs > 0){
+          OptimizedMacroItem optimizedMacroItem = {};
+          optimizedMacroItem.delayMs = optimizedAction.macroRepeatDelayMs;
+          optimizedAction.optimizedMacroItems.push_back(optimizedMacroItem);
+        }
+        break;
+    }
     optimizedActions.push_back(optimizedAction);
   }
+  macroActionThreads.resize(optimizedActions.size());
+  isMacroActionThreadRunnings.resize(optimizedActions.size());
   for (auto& profile:config.profiles){
     OptimizedProfile optimizedProfile;
     optimizedProfile.name = profile.name;
-    optimizedProfile.mapping = profile.mapping;
-    optimizedProfile.programNames = profile.programNames;
+    optimizedProfile.mapping = &profile.mapping;
+    optimizedProfile.programNames = &profile.programNames;
     for (int i = 0; i < 256; i++){
       optimizedProfile.actionIdMap[i] = -1;
     }

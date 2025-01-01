@@ -8,13 +8,25 @@
 #include "enums.h"
 using namespace std;
 
+struct MacroItem{
+    string key;
+    int delayMs;
+    bool up;
+};
+
+struct OptimizedMacroItem{
+    int keyCode;
+    string key;
+    int delayMs;
+    bool up;
+    // Default constructor
+    OptimizedMacroItem() 
+        : keyCode(-1), key(""), delayMs(-1), up(false) {}
+};
+
 struct Trigger {
     string name;
     string key;
-
-    // Constructor
-    Trigger(const string& name = "", const string& key = "")
-        : name(name), key(key) {}
 
     void print() const {
         cout << "\t\tname: " << name
@@ -33,21 +45,37 @@ struct OptimizedTrigger{
 struct Action {
     string name;
     ActionType type;
+    // for simple
     vector<string> keys;
+
+    // for profile shift
     string profileName;
 
-    // Constructor
-    Action(const string& name = "", const ActionType& type = ActionType::SIMPLE, const vector<string>& keys = {}, const string& profileName = "")
-        : name(name), type(type), keys(keys), profileName(profileName) {}
+    // for macro
+    vector<MacroItem> macroItems;
+    MacroRepeatMode macroRepeatMode;
+    int macroRepeatDelayMs;
 
     void print() const {
         cout << "\t\tname: " << name
-             << "\n\t\ttype: " << type
-             << "\n\t\tprofileName: " << profileName
-             << "\n\t\tkeys: ";
-        for (const auto& key : keys) {
-            cout << key << " ";
+             << "\n\t\ttype: " << type;
+        switch (type){
+            case ActionType::SIMPLE:
+                cout << "\n\t\tprofileName: " << profileName;
+                break;
+            case ActionType::PROFILE_SHIFT:
+                cout << "\n\t\tkeys: ";
+                for (const auto& key : keys) {
+                    cout << key << " ";
+                }
+                break;
+            case ActionType::MACRO:
+                cout << "\n\t\tmacros:";
+                for (const auto& macro:macroItems){
+                    cout << "\n\t\t\t" << macro.key << " " << macro.up << " " << macro.delayMs;
+                }
         }
+             
         cout << "\n\n";
     }
 };
@@ -56,19 +84,27 @@ struct OptimizedAction{
     int index;
     string name;
     ActionType type;
-    vector<string> keys;
+    
+    // for simple
+    vector<string> *keys;
     vector<int> keyCodes;
+
+    // for profile shift
     string profileName;
     int profileIndex;
+
+    // for macro
+    // for macro
+    vector<MacroItem> *macroItems;
+    vector<OptimizedMacroItem> optimizedMacroItems;
+    MacroRepeatMode macroRepeatMode;
+    int macroRepeatDelayMs;
+
 };
 
 struct Mapping {
     string triggerName;
     string actionName;
-
-    // Constructor
-    Mapping(const string& triggerName = "", const string& actionName = "")
-        : triggerName(triggerName), actionName(actionName) {}
 
     void print() const {
         cout << "\t\t\ttriggerName: " << triggerName
@@ -90,10 +126,6 @@ struct Profile {
     vector<string> programNames;
     vector<Mapping> mapping;
 
-    // Constructor
-    Profile(const string& name = "", const vector<string>& programNames = {}, const vector<Mapping>& mapping = {})
-        : name(name), programNames(programNames), mapping(mapping) {}
-
     void print() const {
         cout << "\t\tname: " << name
              << "\n\t\tprogramNames: ";
@@ -111,8 +143,8 @@ struct Profile {
 struct OptimizedProfile {
     int index;
     string name;
-    vector<string> programNames;
-    vector<Mapping> mapping;
+    vector<string> *programNames;
+    vector<Mapping> *mapping;
     vector<OptimizedMapping> optimizedMapping;
     int actionIdMap[256];
 };
@@ -122,10 +154,6 @@ struct Config {
     vector<Action> actions;
     vector<Profile> profiles;
     string defaultProfileName;
-
-    // Constructor
-    Config(const vector<Trigger>& triggers = {}, const vector<Action>& actions = {}, const vector<Profile>& profiles = {}, const string& defaultProfileName = "")
-        : triggers(triggers), actions(actions), profiles(profiles), defaultProfileName(defaultProfileName) {}
 
     void print() const {
         cout << "Config\n\tdefaultProfileName: " << defaultProfileName
@@ -147,11 +175,11 @@ struct Config {
 
 struct InputTrigger {
     int keyCode;
-    bool isUp;
+    bool up;
 
     // Constructor
-    InputTrigger(int keyCode = 0, bool isUp = false)
-        : keyCode(keyCode), isUp(isUp) {}
+    InputTrigger(int keyCode = 0, bool up = false)
+        : keyCode(keyCode), up(up) {}
 };
 
 #endif // STRUCTS

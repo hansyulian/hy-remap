@@ -7,24 +7,46 @@ void from_json(const json& j, Trigger& t) {
     j.at("key").get_to(t.key);
 }
 
+void from_json(const json& j, MacroItem& m){
+    if (j.contains("key")){
+        j.at("key").get_to(m.key);
+    }
+    if (j.contains("up")){
+        j.at("up").get_to(m.up);
+    }
+    if (j.contains("delayMs")){
+        j.at("delayMs").get_to(m.delayMs);
+    }
+}
 // Define how to deserialize the JSON into the Action struct
 void from_json(const json& j, Action& a) {
     
     j.at("name").get_to(a.name);
-    if (j.contains("keys")){
-        j.at("keys").get_to(a.keys);  // Assuming 'keys' is a list of strings
-    }
-    if (j.contains("profileName")){
-        j.at("profileName").get_to(a.profileName);
-    }
     
     a.type = ActionType::SIMPLE;
     string typeValue = j.at("type").get<string>();
     if (typeValue == "simple"){        
         a.type = ActionType::SIMPLE;
+        j.at("keys").get_to(a.keys);  // Assuming 'keys' is a list of strings
     }
     if (typeValue == "profileShift"){
         a.type = ActionType::PROFILE_SHIFT;
+        j.at("profileName").get_to(a.profileName);
+    }
+    if (typeValue == "macro"){
+        a.type = ActionType::MACRO;
+        j.at("macroItems").get_to(a.macroItems);
+        j.at("macroRepeatDelayMs").get_to(a.macroRepeatDelayMs);
+        string repeatMode = j.at("macroRepeatMode").get<string>();
+        if (repeatMode == "none"){
+            a.macroRepeatMode = MacroRepeatMode::NONE;
+        }
+        if (repeatMode == "hold"){
+            a.macroRepeatMode = MacroRepeatMode::HOLD;
+        }
+        if (repeatMode == "toggle"){
+            a.macroRepeatMode = MacroRepeatMode::TOGGLE;
+        }
     }
 }
 

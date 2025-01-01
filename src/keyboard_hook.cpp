@@ -17,7 +17,7 @@ LRESULT CALLBACK keyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
         }
 
         InputTrigger inputTrigger;
-        inputTrigger.isUp = isKeyUp;
+        inputTrigger.up = isKeyUp;
         inputTrigger.keyCode = keyCode;
         // Get the active profile
         if (handleInput(inputTrigger)){

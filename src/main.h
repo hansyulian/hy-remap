@@ -9,9 +9,11 @@
 #include <nlohmann/json.hpp>
 #include "structs.h"
 #include "enums.h"
+#include "thread"
 
 #define HR_WHEEL_UP 0xF0
 #define HR_WHEEL_DOWN 0xF1
+#define THREAD_SLEEP_SEGMENTATION_MS 5 // this can handle without issue for 200 fps
 
 using json = nlohmann::json;
 using namespace std;
@@ -32,6 +34,8 @@ extern int keyDownActionIndex[256];
 extern vector<OptimizedAction> optimizedActions;
 extern vector<OptimizedTrigger> optimizedTriggers;
 extern vector<OptimizedProfile> optimizedProfiles;
+extern vector<thread> macroActionThreads;
+extern vector<bool> isMacroActionThreadRunnings;
 
 // Function declarations
 void performAction(const OptimizedAction& action,const InputTrigger& inputTrigger);
@@ -40,7 +44,7 @@ LRESULT CALLBACK keyboardProc(int nCode, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam);
 void startKeyboardAndMouseHook();
 void stopKeyboardAndMouseHook();
-OptimizedProfile* getActiveProfile();
+int getActiveProfileIndex();
 string loadConfigString();
 void loadConfig();
 void calculateOptimizedConfig();
@@ -54,6 +58,7 @@ void from_json(const json& j, Profile& p);
 void from_json(const json& j, Config& c);
 
 INPUT convertKeyCodeToInput(int keyCode, bool isKeyUp);
+void executeInputs(const vector<INPUT>& inputs);
 OptimizedAction* getActionByName(const string& name);
 int getActionIndexByName(const string& name);
 OptimizedTrigger* getTriggerByName(const string& name);
@@ -61,12 +66,16 @@ int getTriggerIndexByName(const string& name);
 OptimizedProfile* getProfileByName(const string& name);
 int getProfileIndexByName(const string& name);
 
+
 // actions
 // simple action
 void performSimpleAction(const OptimizedAction& action, const InputTrigger& inputTrigger);
 // profile shift action
 void performProfileShiftAction(const OptimizedAction& action, const InputTrigger& inputTrigger);
 void releaseProfileShiftAction(const OptimizedAction& action, const InputTrigger& inputTrigger);
+// macro action
+void performMacroAction(const OptimizedAction& action, const InputTrigger& inputTrigger);
+void releaseMacroAction(const OptimizedAction& action, const InputTrigger& inputTrigger);
 
 #endif  // KEY_REMAPPER_H
 

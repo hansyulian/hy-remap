@@ -4,6 +4,13 @@
 enum ActionType {
     SIMPLE,
     PROFILE_SHIFT,
+    MACRO,
 };
 
-#endif // ENUMS
+enum MacroRepeatMode{
+    NONE,
+    HOLD,
+    TOGGLE,
+};
+
+#endif // ENUMS_H

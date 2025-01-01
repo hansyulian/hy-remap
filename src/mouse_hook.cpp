@@ -55,7 +55,7 @@ LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
         }
 
         InputTrigger inputTrigger;
-        inputTrigger.isUp = isKeyUp;
+        inputTrigger.up = isKeyUp;
         inputTrigger.keyCode = mouseButton;
         if (inputTrigger.keyCode != -1){
             if (handleInput(inputTrigger)){

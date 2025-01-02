@@ -17,7 +17,7 @@ int getActiveProfileIndex() {
 
 void refreshProfileCache(){
   auto currentWindowInfo = getCurrentWindowInfo();
-  if (profileCacheIndex != -1 && currentWindowInfo.processId == currentWindowInfo.processId){
+  if (profileCacheIndex != -1 && windowInfoCache.processId == currentWindowInfo.processId){
     return;
   }
   for (int i = 0; i < 256; i++){
@@ -33,13 +33,16 @@ void refreshProfileCache(){
       }
       auto programNames = profile.programNames;
       for (const auto& programName : *programNames) {
+            // cout << "debug profile: "<< programName << " | " << currentWindowInfo.executable << " | " << currentWindowInfo.name << endl;
           if (programName == currentWindowInfo.executable
             || currentWindowInfo.name.find(programName) != std::string::npos) {
               // Cache the matching profile index and window title
               profileCacheIndex = profile.index;
-              cout << "Profile Change " << profile.name << " for window title: '" << windowInfoCache.name << "'" << endl;
+              windowInfoCache.gamingMode = profile.gamingMode;
+            //   cout << "Profile Change " << profile.name << " for window title: '" << windowInfoCache.name << "' gaming mode:" <<  profile.gamingMode << endl;
               return;
           }
       }
   }
+//   cout << "Profile Default " << endl;
 }

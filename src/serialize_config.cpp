@@ -67,6 +67,11 @@ void from_json(const json& j, Profile& p) {
     } else {
         p.programNames = {}; // Assign an empty vector
     }
+    if (j.contains("gamingMode")){
+        j.at("gamingMode").get_to(p.gamingMode);
+    } else {
+        p.gamingMode = false;
+    }
 
     // Set mapping to an empty vector if not defined
     if (j.contains("mapping")) {

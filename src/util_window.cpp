@@ -5,7 +5,8 @@
 WindowInfo getCurrentWindowInfo() {  
     HWND hwnd = GetForegroundWindow();
     WindowInfo info = {};  // Initialize the struct with empty/default values
-
+    info.hwnd = hwnd;
+    
     if (!hwnd) {
         // If no active window detected, return default (empty) struct
         return info;

@@ -1,7 +1,7 @@
 #include "main.h"
 #include <chrono>
 
-bool handleInput(const InputTrigger& inputTrigger){
+bool handleInput(const KeyAction& inputTrigger){
     if (inputTrigger.up){
         releaseOngoingAction(inputTrigger.keyCode, false);     
     }   

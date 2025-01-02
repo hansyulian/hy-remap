@@ -91,7 +91,7 @@ void startMacroThread(const OptimizedAction& action){
   // cout << "macro thread started " << action.index << endl;
 }
 
-void performMacroAction(const OptimizedAction& action, const InputTrigger& inputTrigger){
+void performMacroAction(const OptimizedAction& action, const KeyAction& inputTrigger){
   auto up = inputTrigger.up;
   if (up){
     return;

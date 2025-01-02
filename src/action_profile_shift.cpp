@@ -1,6 +1,6 @@
 #include "main.h"
 
-void performProfileShiftAction(const OptimizedAction& action, const InputTrigger& inputTrigger){
+void performProfileShiftAction(const OptimizedAction& action, const KeyAction& inputTrigger){
   if (inputTrigger.up){
       return;
   }

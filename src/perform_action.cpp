@@ -1,7 +1,7 @@
 #include "main.h"
 #include "iostream"
 
-void performAction(const OptimizedAction& action, const InputTrigger& inputTrigger) {    
+void performAction(const OptimizedAction& action, const KeyAction& inputTrigger) {    
     switch(action.type){
         case ActionType::SIMPLE:
             performSimpleAction(action,inputTrigger);

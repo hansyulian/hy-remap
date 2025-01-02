@@ -58,8 +58,8 @@ LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
                 break;
         }
 
-        // Create an InputTrigger object to hold the current event
-        InputTrigger inputTrigger;
+        // Create an KeyAction object to hold the current event
+        KeyAction inputTrigger;
         inputTrigger.up = isKeyUp;
         inputTrigger.keyCode = mouseButton;
 

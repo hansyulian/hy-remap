@@ -41,7 +41,7 @@ extern vector<thread> macroActionThreads;
 extern vector<bool> isMacroActionThreadRunnings;
 
 // Function declarations
-void performAction(const OptimizedAction& action,const InputTrigger& inputTrigger);
+void performAction(const OptimizedAction& action,const KeyAction& inputTrigger);
 int getKeyCodeFromString(const string& key);
 LRESULT CALLBACK keyboardProc(int nCode, WPARAM wParam, LPARAM lParam);
 LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam);
@@ -51,7 +51,7 @@ int getActiveProfileIndex();
 string loadConfigString();
 void loadConfig();
 void calculateOptimizedConfig();
-bool handleInput(const InputTrigger& inputTrigger);
+bool handleInput(const KeyAction& inputTrigger);
 void releaseOngoingAction(int keyCode, bool force);
 
 WindowInfo getCurrentWindowInfo();
@@ -75,13 +75,13 @@ int getProfileIndexByName(const string& name);
 
 // actions
 // simple action
-void performSimpleAction(const OptimizedAction& action, const InputTrigger& inputTrigger);
+void performSimpleAction(const OptimizedAction& action, const KeyAction& inputTrigger);
 void releaseSimpleAction(const OptimizedAction& action);
 // profile shift action
-void performProfileShiftAction(const OptimizedAction& action, const InputTrigger& inputTrigger);
+void performProfileShiftAction(const OptimizedAction& action, const KeyAction& inputTrigger);
 void releaseProfileShiftAction(const OptimizedAction& action);
 // macro action
-void performMacroAction(const OptimizedAction& action, const InputTrigger& inputTrigger);
+void performMacroAction(const OptimizedAction& action, const KeyAction& inputTrigger);
 void releaseMacroAction(const OptimizedAction& action, bool force);
 
 #endif  // KEY_REMAPPER_H

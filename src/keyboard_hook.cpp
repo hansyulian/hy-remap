@@ -18,8 +18,8 @@ LRESULT CALLBACK keyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
             isKeyUp = true;  // Key is being released
         }
 
-        // Create an InputTrigger to represent the key event
-        InputTrigger inputTrigger;
+        // Create an KeyAction to represent the key event
+        KeyAction inputTrigger;
         inputTrigger.up = isKeyUp;
         inputTrigger.keyCode = keyCode;
 

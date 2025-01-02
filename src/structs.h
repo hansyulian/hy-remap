@@ -113,12 +113,12 @@ struct Config {
 
 };
 
-struct InputTrigger {
+struct KeyAction {
     int keyCode;
     bool up;
 
     // Constructor
-    InputTrigger(int keyCode = 0, bool up = false)
+    KeyAction(int keyCode = 0, bool up = false)
         : keyCode(keyCode), up(up) {}
 };
 

@@ -1,6 +1,6 @@
 #include "main.h"
 
-void performSimpleAction(const OptimizedAction& action, const InputTrigger& inputTrigger){
+void performSimpleAction(const OptimizedAction& action, const KeyAction& inputTrigger){
     keyDownActionIndex[inputTrigger.keyCode] = action.index;
     vector<INPUT> inputs;
     auto keyCodes = action.keyCodes;

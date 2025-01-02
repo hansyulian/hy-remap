@@ -24,6 +24,9 @@ void performSimpleAction(const OptimizedAction& action, const InputTrigger& inpu
             inputs.push_back(convertKeyCodeToInput(key, true));
         }
     }
+    if (!inputTrigger.up){
+        cout << "Simple Action " << action.name << endl;
+    }
     // Send all inputs
     executeInputs(inputs);
 }

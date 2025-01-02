@@ -1,0 +1,430 @@
+{
+  "triggers": [
+    {
+      "name": "Keyboard G1",
+      "key": "F14"
+    },
+    {
+      "name": "Keyboard G2",
+      "key": "F15"
+    },
+    {
+      "name": "Keyboard G3",
+      "key": "F16"
+    },
+    {
+      "name": "Keyboard G4",
+      "key": "F17"
+    },
+    {
+      "name": "Keyboard G5",
+      "key": "F18"
+    },
+    {
+      "name": "Keyboard G6",
+      "key": "F19"
+    },
+    {
+      "name": "Mouse Shift",
+      "key": "F20"
+    },
+    {
+      "name": "Mouse DPI Up",
+      "key": "F21"
+    },
+    {
+      "name": "Mouse DPI Down",
+      "key": "F22"
+    },
+    {
+      "name": "Mouse Tilt Left",
+      "key": "F23"
+    },
+    {
+      "name": "Mouse Tilt Right",
+      "key": "F24"
+    },
+    {
+      "name": "Mouse Scroll Up",
+      "key": "WHEEL_UP"
+    },
+    {
+      "name": "Mouse Scroll Down",
+      "key": "WHEEL_DOWN"
+    },
+    {
+      "name": "Mouse Forward",
+      "key": "MFORWARD"
+    },
+    {
+      "name": "Mouse Back",
+      "key": "MBACK"
+    },
+    {
+      "name": "Mouse Left",
+      "key": "LEFT_CLICK"
+    },
+    {
+      "name": "Mouse Right",
+      "key": "RIGHT_CLICK"
+    }
+  ],
+  "actions": [
+    {
+      "name": "Window Snap Right",
+      "type": "simple",
+      "keys": ["LWIN", "RIGHT"]
+    },
+    {
+      "name": "Window Snap Left",
+      "type": "simple",
+      "keys": ["LWIN", "LEFT"]
+    },
+    {
+      "name": "F5",
+      "type": "simple",
+      "keys": ["F5"]
+    },
+    {
+      "name": "F12",
+      "type": "simple",
+      "keys": ["F12"]
+    },
+    {
+      "name": "Close Tab",
+      "type": "simple",
+      "keys": ["LCTRL", "F4"]
+    },
+    {
+      "name": "Next Tab",
+      "type": "simple",
+      "keys": ["LCTRL", "TAB"]
+    },
+    {
+      "name": "Previous Tab",
+      "type": "simple",
+      "keys": ["LCTRL", "LSHIFT", "TAB"]
+    },
+    {
+      "name": "Next Track",
+      "type": "simple",
+      "keys": ["NEXT_TRACK"]
+    },
+    {
+      "name": "Previous Track",
+      "type": "simple",
+      "keys": ["NEXT_TRACK"]
+    },
+    {
+      "name": "Play/Pause",
+      "type": "simple",
+      "keys": ["PLAY_PAUSE"]
+    },
+    {
+      "name": "Volume Up",
+      "type": "simple",
+      "keys": ["VOLUME_UP"]
+    },
+    {
+      "name": "Volume Down",
+      "type": "simple",
+      "keys": ["VOLUME_DOWN"]
+    },
+    {
+      "name": "]",
+      "type": "simple",
+      "keys": ["RIGHTBRACKET"]
+    },
+    {
+      "name": "[",
+      "type": "simple",
+      "keys": ["LEFTBRACKET"]
+    },
+    {
+      "name": ";",
+      "type": "simple",
+      "keys": ["SEMICOLON"]
+    },
+    {
+      "name": ".",
+      "type": "simple",
+      "keys": ["PERIOD"]
+    },
+    {
+      "name": "M",
+      "type": "simple",
+      "keys": ["M"]
+    },
+    {
+      "name": "/",
+      "type": "simple",
+      "keys": ["SEMICOLON"]
+    },
+    {
+      "name": "MMORPG Shift",
+      "type": "profileShift",
+      "profileName": "MMORPG Shift"
+    },
+    {
+      "name": "Default Shift",
+      "type": "profileShift",
+      "profileName": "Default Shift"
+    },
+    {
+      "name": "Hold Left Click",
+      "type": "macro",
+      "macroRepeatDelayMs": 250,
+      "macroRepeatMode": "hold",
+      "macroItems": [
+        {
+          "key": "LEFT_CLICK",
+          "delayMs": 5
+        },
+        {
+          "key": "LEFT_CLICK",
+          "up": true
+        }
+      ]
+    },
+    {
+      "name": "Hold 1",
+      "type": "macro",
+      "macroRepeatDelayMs": 250,
+      "macroRepeatMode": "hold",
+      "macroItems": [
+        {
+          "key": "1",
+          "delayMs": 5
+        },
+        {
+          "key": "1",
+          "up": true
+        }
+      ]
+    },
+    {
+      "name": "Hold 2",
+      "type": "macro",
+      "macroRepeatDelayMs": 250,
+      "macroRepeatMode": "hold",
+      "macroItems": [
+        {
+          "key": "2",
+          "delayMs": 5
+        },
+        {
+          "key": "2",
+          "up": true
+        }
+      ]
+    },
+    {
+      "name": "Hold 3",
+      "type": "macro",
+      "macroRepeatDelayMs": 250,
+      "macroRepeatMode": "hold",
+      "macroItems": [
+        {
+          "key": "3",
+          "delayMs": 5
+        },
+        {
+          "key": "3",
+          "up": true
+        }
+      ]
+    },
+    {
+      "name": "Hold 4",
+      "type": "macro",
+      "macroRepeatDelayMs": 250,
+      "macroRepeatMode": "hold",
+      "macroItems": [
+        {
+          "key": "4",
+          "delayMs": 5
+        },
+        {
+          "key": "4",
+          "up": true
+        }
+      ]
+    },
+    {
+      "name": "Hold 5",
+      "type": "macro",
+      "macroRepeatDelayMs": 250,
+      "macroRepeatMode": "hold",
+      "macroItems": [
+        {
+          "key": "5",
+          "delayMs": 5
+        },
+        {
+          "key": "5",
+          "up": true
+        }
+      ]
+    },
+    {
+      "name": "Hold 6",
+      "type": "macro",
+      "macroRepeatDelayMs": 250,
+      "macroRepeatMode": "hold",
+      "macroItems": [
+        {
+          "key": "6",
+          "delayMs": 5
+        },
+        {
+          "key": "6",
+          "up": true
+        }
+      ]
+    }
+  ],
+  "profiles": [
+    {
+      "name": "Default",
+      "mapping": [
+        {
+          "triggerName": "Mouse DPI Up",
+          "actionName": "F12"
+        },
+        {
+          "triggerName": "Mouse DPI Down",
+          "actionName": "F5"
+        },
+        {
+          "triggerName": "Mouse Shift",
+          "actionName": "Default Shift"
+        },
+        {
+          "triggerName": "Mouse Tilt Left",
+          "actionName": "Previous Tab"
+        },
+        {
+          "triggerName": "Mouse Tilt Right",
+          "actionName": "Next Tab"
+        }
+      ]
+    },
+    {
+      "name": "Default Shift",
+      "mapping": [
+        {
+          "triggerName": "Mouse Left",
+          "actionName": "Close Tab"
+        },
+        {
+          "triggerName": "Mouse DPI Up",
+          "actionName": "Next Track"
+        },
+        {
+          "triggerName": "Mouse DPI Down",
+          "actionName": "Previous Track"
+        },
+        {
+          "triggerName": "Mouse Forward",
+          "actionName": "Play/Pause"
+        },
+        {
+          "triggerName": "Mouse Tilt Left",
+          "actionName": "Window Snap Left"
+        },
+        {
+          "triggerName": "Mouse Tilt Right",
+          "actionName": "Window Snap Right"
+        },
+        {
+          "triggerName": "Mouse Scroll Up",
+          "actionName": "Volume Up"
+        },
+        {
+          "triggerName": "Mouse Scroll Down",
+          "actionName": "Volume Down"
+        }
+      ]
+    },
+    {
+      "name": "MMORPG",
+      "programNames": ["Guild Wars 2"],
+      "mapping": [
+        {
+          "triggerName": "Mouse DPI Up",
+          "actionName": "Hold 1"
+        },
+        {
+          "triggerName": "Mouse DPI Down",
+          "actionName": "Hold 2"
+        },
+        {
+          "triggerName": "Mouse Forward",
+          "actionName": "Hold 3"
+        },
+        {
+          "triggerName": "Mouse Back",
+          "actionName": "Hold 4"
+        },
+        {
+          "triggerName": "Mouse Shift",
+          "actionName": "MMORPG Shift"
+        },
+        {
+          "triggerName": "Mouse Tilt Left",
+          "actionName": "["
+        },
+        {
+          "triggerName": "Mouse Tilt Right",
+          "actionName": "]"
+        }
+      ]
+    },
+    {
+      "name": "MMORPG Shift",
+      "mapping": [
+        {
+          "triggerName": "Mouse DPI Up",
+          "actionName": ";"
+        },
+        {
+          "triggerName": "Mouse DPI Down",
+          "actionName": "Hold Left Click"
+        },
+        {
+          "triggerName": "Mouse Forward",
+          "actionName": "M"
+        },
+        {
+          "triggerName": "Mouse Back",
+          "actionName": "Hold 4"
+        },
+        {
+          "triggerName": "Mouse Tilt Left",
+          "actionName": "["
+        },
+        {
+          "triggerName": "Mouse Tilt Right",
+          "actionName": "]"
+        },
+        {
+          "triggerName": "Mouse Left",
+          "actionName": "Hold 5"
+        },
+        {
+          "triggerName": "Mouse Right",
+          "actionName": "Hold 6"
+        },
+        {
+          "triggerName": "Mouse Scroll Up",
+          "actionName": "Volume Up"
+        },
+        {
+          "triggerName": "Mouse Scroll Down",
+          "actionName": "Volume Down"
+        }
+      ]
+    }
+  ],
+  "defaultProfileName": "Default"
+}

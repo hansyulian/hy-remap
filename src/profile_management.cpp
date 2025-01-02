@@ -25,7 +25,8 @@ void refreshProfileCache(){
   }
   
   // Iterate over profiles to find a match
-  profileCacheIndex = -1;
+    profileCacheIndex = defaultProfileIndex;
+    profileCacheWindowTitle = currentWindowTitle;
   for (const auto& profile : optimizedProfiles) {
       if (!profile.programNames) {
           continue; // Skip profiles with null programNames
@@ -36,6 +37,7 @@ void refreshProfileCache(){
               // Cache the matching profile index and window title
               profileCacheIndex = profile.index;
               profileCacheWindowTitle = currentWindowTitle;
+              cout << "Profile Change " << profile.name << " for window title: '" << currentWindowTitle << "'" << endl;
               return;
           }
       }

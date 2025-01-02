@@ -77,14 +77,15 @@ void stopMacroThread(const OptimizedAction& action){
 
 
 void startMacroThread(const OptimizedAction& action){
+  if (isMacroActionThreadRunnings[action.index]){
+  //   cout << "still have previous action thread " << action.index << endl;
+    return;
+  }
   // cout << "start macro thread " << action.index << endl;
   if (macroActionThreads[action.index].joinable()){
     // cout << "stopping previous action thread " << action.index << endl;
     macroActionThreads[action.index].join();
   }
-  // if (isMacroActionThreadRunnings[action.index]){
-  //   cout << "still have previous action thread " << action.index << endl;
-  // }
   isMacroActionThreadRunnings[action.index] = true;
   macroActionThreads[action.index] = thread(macroThreadExecution,action);
   // cout << "macro thread started " << action.index << endl;

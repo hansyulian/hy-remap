@@ -28,11 +28,6 @@ struct Trigger {
     string name;
     string key;
 
-    void print() const {
-        cout << "\t\tname: " << name
-             << "\n\t\tkey: " << key
-             << "\n" << endl;
-    }
 };
 
 struct OptimizedTrigger{
@@ -56,28 +51,6 @@ struct Action {
     MacroRepeatMode macroRepeatMode;
     int macroRepeatDelayMs;
 
-    void print() const {
-        cout << "\t\tname: " << name
-             << "\n\t\ttype: " << type;
-        switch (type){
-            case ActionType::SIMPLE:
-                cout << "\n\t\tprofileName: " << profileName;
-                break;
-            case ActionType::PROFILE_SHIFT:
-                cout << "\n\t\tkeys: ";
-                for (const auto& key : keys) {
-                    cout << key << " ";
-                }
-                break;
-            case ActionType::MACRO:
-                cout << "\n\t\tmacros:";
-                for (const auto& macro:macroItems){
-                    cout << "\n\t\t\t" << macro.key << " " << macro.up << " " << macro.delayMs;
-                }
-        }
-             
-        cout << "\n\n";
-    }
 };
 
 struct OptimizedAction{
@@ -105,11 +78,6 @@ struct OptimizedAction{
 struct Mapping {
     string triggerName;
     string actionName;
-
-    void print() const {
-        cout << "\t\t\ttriggerName: " << triggerName
-             << "\tactionName: " << actionName << endl;
-    }
 };
 
 
@@ -126,18 +94,6 @@ struct Profile {
     vector<string> programNames;
     vector<Mapping> mapping;
 
-    void print() const {
-        cout << "\t\tname: " << name
-             << "\n\t\tprogramNames: ";
-        for (const auto& prog : programNames) {
-            cout << "\n\t\t\t" << prog;
-        }
-        cout << "\n\t\tmapping:\n";
-        for (const auto& m : mapping) {
-            m.print();
-        }
-        cout << "\n" << endl;
-    }
 };
 
 struct OptimizedProfile {
@@ -155,22 +111,6 @@ struct Config {
     vector<Profile> profiles;
     string defaultProfileName;
 
-    void print() const {
-        cout << "Config\n\tdefaultProfileName: " << defaultProfileName
-             << "\n\ttriggers:\n";
-        for (const auto& trigger : triggers) {
-            trigger.print();
-        }
-        cout << "\tactions:\n";
-        for (const auto& action : actions) {
-            action.print();
-        }
-        cout << "\tprofiles:\n";
-        for (const auto& profile : profiles) {
-            profile.print();
-        }
-        cout << "\n" << endl;
-    }
 };
 
 struct InputTrigger {

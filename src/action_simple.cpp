@@ -1,9 +1,11 @@
 #include "main.h"
 
 void performSimpleAction(const OptimizedAction& action, const InputTrigger& inputTrigger){
+    keyDownActionIndex[inputTrigger.keyCode] = action.index;
     vector<INPUT> inputs;
     auto keyCodes = action.keyCodes;
     auto keyCodeSize = keyCodes.size();
+    
     if (inputTrigger.up){
         for (int i = keyCodeSize-1; i >=0; i--) {
             // Simulate key press (KEYUP) for each key in sequence in reverse
@@ -28,5 +30,17 @@ void performSimpleAction(const OptimizedAction& action, const InputTrigger& inpu
         cout << "Simple Action " << action.name << endl;
     }
     // Send all inputs
+    executeInputs(inputs);
+}
+
+void releaseSimpleAction(const OptimizedAction& action){
+    auto keyCodes = action.keyCodes;
+    auto keyCodeSize = keyCodes.size();
+    vector<INPUT> inputs;
+    for (int i = keyCodeSize-1; i >=0; i--) {
+        // Simulate key press (KEYUP) for each key in sequence in reverse
+        auto key = keyCodes[i];
+        inputs.push_back(convertKeyCodeToInput(key, true));
+    }
     executeInputs(inputs);
 }

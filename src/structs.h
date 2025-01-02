@@ -122,4 +122,10 @@ struct InputTrigger {
         : keyCode(keyCode), up(up) {}
 };
 
+struct WindowInfo {
+    string name;
+    string executable;
+    DWORD processId;
+};
+
 #endif // STRUCTS

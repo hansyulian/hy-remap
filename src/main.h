@@ -8,9 +8,9 @@
 #include <vector>
 #include <optional>
 #include <nlohmann/json.hpp>
+#include <thread>
 #include "structs.h"
 #include "enums.h"
-#include "thread"
 
 #define HR_WHEEL_UP 0xF0
 #define HR_WHEEL_DOWN 0xF1
@@ -29,7 +29,7 @@ extern map<string,int> keyCodeMap;
 
 extern int overrideProfileIndex;
 extern int defaultProfileIndex;
-extern string profileCacheWindowTitle;
+extern WindowInfo windowInfoCache;
 extern int profileCacheIndex;
 extern int triggerActionIndexMap[256];
 extern int keyDownActionIndex[256];
@@ -53,7 +53,8 @@ void loadConfig();
 void calculateOptimizedConfig();
 bool handleInput(const InputTrigger& inputTrigger);
 void releaseOngoingAction(int keyCode, bool force);
-string getCurrentWindowTitle();
+
+WindowInfo getCurrentWindowInfo();
 void refreshProfileCache();
 
 void from_json(const json& j, Trigger& t);
@@ -75,6 +76,7 @@ int getProfileIndexByName(const string& name);
 // actions
 // simple action
 void performSimpleAction(const OptimizedAction& action, const InputTrigger& inputTrigger);
+void releaseSimpleAction(const OptimizedAction& action);
 // profile shift action
 void performProfileShiftAction(const OptimizedAction& action, const InputTrigger& inputTrigger);
 void releaseProfileShiftAction(const OptimizedAction& action);

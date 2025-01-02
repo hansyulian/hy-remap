@@ -11,6 +11,8 @@ void releaseOngoingAction(int keyCode, bool force){
   keyDownActionIndex[keyCode] = -1;
   // cout << "Releasing action " << actionIndex <<  " " << action->name << " " << force << endl;
   switch(action->type){
+    case ActionType::SIMPLE:
+      releaseSimpleAction(*action);
     case ActionType::PROFILE_SHIFT:
       // cout << "Releasing profile shift" << endl;
       releaseProfileShiftAction(*action);

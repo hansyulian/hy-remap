@@ -73,92 +73,141 @@
     {
       "name": "Window Snap Right",
       "type": "simple",
-      "keys": ["LWIN", "RIGHT"]
+      "keys": [
+        "LWIN",
+        "RIGHT"
+      ]
     },
     {
       "name": "Window Snap Left",
       "type": "simple",
-      "keys": ["LWIN", "LEFT"]
+      "keys": [
+        "LWIN",
+        "LEFT"
+      ]
     },
     {
       "name": "F5",
       "type": "simple",
-      "keys": ["F5"]
+      "keys": [
+        "F5"
+      ]
+    },
+    {
+      "name": "F7",
+      "type": "simple",
+      "keys": [
+        "F7"
+      ]
     },
     {
       "name": "F12",
       "type": "simple",
-      "keys": ["F12"]
+      "keys": [
+        "F12"
+      ]
     },
     {
       "name": "Close Tab",
       "type": "simple",
-      "keys": ["LCTRL", "F4"]
+      "keys": [
+        "LCTRL",
+        "F4"
+      ]
     },
     {
       "name": "Next Tab",
       "type": "simple",
-      "keys": ["LCTRL", "TAB"]
+      "keys": [
+        "LCTRL",
+        "TAB"
+      ]
     },
     {
       "name": "Previous Tab",
       "type": "simple",
-      "keys": ["LCTRL", "LSHIFT", "TAB"]
+      "keys": [
+        "LCTRL",
+        "LSHIFT",
+        "TAB"
+      ]
     },
     {
       "name": "Next Track",
       "type": "simple",
-      "keys": ["NEXT_TRACK"]
+      "keys": [
+        "NEXT_TRACK"
+      ]
     },
     {
       "name": "Previous Track",
       "type": "simple",
-      "keys": ["NEXT_TRACK"]
+      "keys": [
+        "NEXT_TRACK"
+      ]
     },
     {
       "name": "Play/Pause",
       "type": "simple",
-      "keys": ["PLAY_PAUSE"]
+      "keys": [
+        "PLAY_PAUSE"
+      ]
     },
     {
       "name": "Volume Up",
       "type": "simple",
-      "keys": ["VOLUME_UP"]
+      "keys": [
+        "VOLUME_UP"
+      ]
     },
     {
       "name": "Volume Down",
       "type": "simple",
-      "keys": ["VOLUME_DOWN"]
+      "keys": [
+        "VOLUME_DOWN"
+      ]
     },
     {
       "name": "]",
       "type": "simple",
-      "keys": ["RIGHTBRACKET"]
+      "keys": [
+        "RIGHTBRACKET"
+      ]
     },
     {
       "name": "[",
       "type": "simple",
-      "keys": ["LEFTBRACKET"]
+      "keys": [
+        "LEFTBRACKET"
+      ]
     },
     {
       "name": ";",
       "type": "simple",
-      "keys": ["SEMICOLON"]
+      "keys": [
+        "SEMICOLON"
+      ]
     },
     {
       "name": ".",
       "type": "simple",
-      "keys": ["PERIOD"]
+      "keys": [
+        "PERIOD"
+      ]
     },
     {
       "name": "M",
       "type": "simple",
-      "keys": ["M"]
+      "keys": [
+        "M"
+      ]
     },
     {
       "name": "/",
       "type": "simple",
-      "keys": ["SEMICOLON"]
+      "keys": [
+        "SEMICOLON"
+      ]
     },
     {
       "name": "MMORPG Shift",
@@ -317,6 +366,10 @@
           "actionName": "Close Tab"
         },
         {
+          "triggerName": "Mouse Right",
+          "actionName": "F7"
+        },
+        {
           "triggerName": "Mouse DPI Up",
           "actionName": "Next Track"
         },
@@ -348,7 +401,9 @@
     },
     {
       "name": "MMORPG",
-      "programNames": ["Guild Wars 2"],
+      "programNames": [
+        "Guild Wars 2"
+      ],
       "mapping": [
         {
           "triggerName": "Mouse DPI Up",

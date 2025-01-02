@@ -16,11 +16,8 @@ bool handleInput(const InputTrigger& inputTrigger){
     if (actionIndex == -1){
         return false;
     }
-    const OptimizedAction* currentAction = &optimizedActions[actionIndex];
+    const OptimizedAction action = optimizedActions[actionIndex];
     
-    if (currentAction == nullptr){        
-        return false;
-    }
-    performAction(*currentAction, inputTrigger);
+    performAction(action, inputTrigger);
     return true;
 }

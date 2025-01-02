@@ -6,7 +6,7 @@ vector<OptimizedTrigger> optimizedTriggers;
 vector<OptimizedProfile> optimizedProfiles;
 vector<thread> macroActionThreads;
 vector<bool> isMacroActionThreadRunnings;
-string profileCacheWindowTitle = "";
+WindowInfo windowInfoCache;
 int profileCacheIndex = -1;
 int overrideProfileIndex = -1;
 int defaultProfileIndex = -1;
@@ -26,6 +26,8 @@ int main() {
     calculateOptimizedConfig();
 
     cout << "Key remapper is running..." << endl;
+    cout << "Build Date: " << __DATE__ << endl;
+    cout << "Build Time: " << __TIME__ << endl;
     for (int i = 0; i < 256; i++) {
         keyDownActionIndex[i] = -1;
     }

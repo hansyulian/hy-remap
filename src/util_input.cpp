@@ -5,6 +5,20 @@ void executeInputs(const std::vector<INPUT>& inputs) {
         return; // Avoid calling SendInput with no inputs
     }
     SendInput(static_cast<UINT>(inputs.size()), const_cast<INPUT*>(inputs.data()), sizeof(INPUT));
+    
+    // Debugging: Iterate through the inputs to log key events
+    for (const INPUT& input : inputs) {
+        if (input.type == INPUT_KEYBOARD) {
+            // Get the virtual key code and the key event (KEYDOWN/KEYUP)
+            unsigned short vkCode = input.ki.wVk;
+            bool isKeyUp = (input.ki.dwFlags & KEYEVENTF_KEYUP) != 0;
+            
+            // std::cout << "Key Code: " << vkCode 
+            //           << " (" << static_cast<char>(vkCode) << ")"
+            //           << " - " << (isKeyUp ? "Key UP" : "Key DOWN")
+            //           << std::endl;
+        }
+    }
 }
 
 

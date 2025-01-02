@@ -16,8 +16,8 @@ int getActiveProfileIndex() {
 }
 
 void refreshProfileCache(){
-  auto currentWindowTitle = getCurrentWindowTitle();
-  if (profileCacheIndex != -1 && profileCacheWindowTitle == currentWindowTitle){
+  auto currentWindowInfo = getCurrentWindowInfo();
+  if (profileCacheIndex != -1 && currentWindowInfo.processId == currentWindowInfo.processId){
     return;
   }
   for (int i = 0; i < 256; i++){
@@ -25,19 +25,19 @@ void refreshProfileCache(){
   }
   
   // Iterate over profiles to find a match
-    profileCacheIndex = defaultProfileIndex;
-    profileCacheWindowTitle = currentWindowTitle;
+  profileCacheIndex = defaultProfileIndex;
+  windowInfoCache = currentWindowInfo;
   for (const auto& profile : optimizedProfiles) {
       if (!profile.programNames) {
           continue; // Skip profiles with null programNames
       }
       auto programNames = profile.programNames;
       for (const auto& programName : *programNames) {
-          if (currentWindowTitle.find(programName) != std::string::npos) {
+          if (programName == currentWindowInfo.executable
+            || currentWindowInfo.name.find(programName) != std::string::npos) {
               // Cache the matching profile index and window title
               profileCacheIndex = profile.index;
-              profileCacheWindowTitle = currentWindowTitle;
-              cout << "Profile Change " << profile.name << " for window title: '" << currentWindowTitle << "'" << endl;
+              cout << "Profile Change " << profile.name << " for window title: '" << windowInfoCache.name << "'" << endl;
               return;
           }
       }

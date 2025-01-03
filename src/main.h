@@ -76,6 +76,7 @@ int getTriggerIndexByName(const string& name);
 OptimizedProfile* getProfileByName(const string& name);
 int getProfileIndexByName(const string& name);
 
+string lowerCaseString(const string& value);
 
 // actions
 // simple action

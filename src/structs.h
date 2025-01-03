@@ -100,6 +100,7 @@ struct OptimizedProfile {
     int index;
     string name;
     vector<string> *programNames;
+    vector<string> lowerCaseProgramNames;
     vector<Mapping> *mapping;
     vector<OptimizedMapping> optimizedMapping;
     bool gamingMode;

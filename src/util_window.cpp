@@ -19,7 +19,7 @@ WindowInfo getCurrentWindowInfo() {
         return info;
     }
     wstring wideTitle(windowTitleW);
-    info.name = string(wideTitle.begin(), wideTitle.end());
+    info.name = lowerCaseString(string(wideTitle.begin(), wideTitle.end()));
 
     // Get process ID
     GetWindowThreadProcessId(hwnd, &info.processId);
@@ -43,7 +43,7 @@ WindowInfo getCurrentWindowInfo() {
     CloseHandle(hProcess);
 
     // Set executable path in struct
-    info.executable = exePath;
+    info.executable = lowerCaseString(exePath);
 
     // Return the populated struct
     return info;

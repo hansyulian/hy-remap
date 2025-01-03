@@ -31,10 +31,10 @@ void refreshProfileCache(){
       if (!profile.programNames) {
           continue; // Skip profiles with null programNames
       }
-      auto programNames = profile.programNames;
-      for (const auto& programName : *programNames) {
+      auto programNames = profile.lowerCaseProgramNames;
+      for (const auto& programName : programNames) {
             // cout << "debug profile: "<< programName << " | " << currentWindowInfo.executable << " | " << currentWindowInfo.name << endl;
-          if (programName == currentWindowInfo.executable
+          if (currentWindowInfo.executable.find(programName) != std::string::npos
             || currentWindowInfo.name.find(programName) != std::string::npos) {
               // Cache the matching profile index and window title
               profileCacheIndex = profile.index;

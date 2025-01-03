@@ -257,6 +257,9 @@ void calculateOptimizedConfig(){
     optimizedProfile.name = profile.name;
     optimizedProfile.mapping = &profile.mapping;
     optimizedProfile.programNames = &profile.programNames;
+    for (const auto& programName :profile.programNames){
+      optimizedProfile.lowerCaseProgramNames.push_back(lowerCaseString(programName));
+    }
     optimizedProfile.gamingMode = profile.gamingMode;
     for (int i = 0; i < 256; i++){
       optimizedProfile.actionIdMap[i] = -1;

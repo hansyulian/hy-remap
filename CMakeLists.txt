@@ -33,6 +33,7 @@ set(SOURCES
     src/util_profile.cpp
     src/util_trigger.cpp
     src/util_window.cpp
+    src/util_string.cpp
 )
 
 # Add the executable

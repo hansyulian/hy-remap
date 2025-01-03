@@ -63,6 +63,7 @@ void executeInputs(const std::vector<INPUT>& inputs) {
 INPUT convertKeyCodeToInput(int keyCode, bool up){
     INPUT input = {};
     input.ki.dwExtraInfo = HY_BYPASS_EXECUTION_FLAG;
+    input.mi.dwExtraInfo = HY_BYPASS_EXECUTION_FLAG;
     switch (keyCode){
         case VK_LBUTTON:
             input.type = INPUT_MOUSE;
@@ -97,6 +98,9 @@ void handleMappedInput(HWND hwnd, bool gamingMode, int keyCode, bool up){
         case VK_VOLUME_MUTE:
         case VK_MEDIA_NEXT_TRACK:
         case VK_MEDIA_PREV_TRACK:
+        case VK_LBUTTON:
+        case VK_RBUTTON:
+        case VK_MBUTTON:
             calculatedGamingMode = false;
             break;
     }

@@ -12,6 +12,7 @@ int overrideProfileIndex = -1;
 int defaultProfileIndex = -1;
 int triggerActionIndexMap[256];
 int keyDownActionIndex[256];
+bool profileShiftButtonHold[256];
 
 // Define the keyboardHook variable here
 HHOOK keyboardHook = NULL;  // Define the keyboardHook variable (this is where memory is allocated)

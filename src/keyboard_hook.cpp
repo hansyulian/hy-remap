@@ -23,6 +23,11 @@ LRESULT CALLBACK keyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
         inputTrigger.up = isKeyUp;
         inputTrigger.keyCode = keyCode;
 
+        // cout << "dwExtraInfo kbd " << inputTrigger.keyCode << " " << kbd->dwExtraInfo << endl;
+        // skip macro shift spamming state
+        if (keyCode > -1 && profileShiftButtonHold[keyCode] && !isKeyUp){
+            return 1;
+        }
         // Check if the dwExtraInfo does not match the bypass flag
         if (kbd->dwExtraInfo != HY_BYPASS_EXECUTION_FLAG && handleInput(inputTrigger)) {
             // If remapping is prevented, return 1 to stop further processing

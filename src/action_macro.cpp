@@ -51,10 +51,13 @@ void macroThreadExecution(const OptimizedAction& action){
   // cout << "executing repeating macro" << endl;
   int macroItemsLength = action.optimizedMacroItems.size();
   int macroItemIndex = 0;
-  int localMacroKeyDownStateIndex[256];
+  bool localMacroKeyDownStateIndex[256];
   while(isValidMacroExecutionCondition(action,processId)){
-    auto macroItem = &action.optimizedMacroItems[macroItemIndex];
-    localMacroKeyDownStateIndex[macroItem->keyCode] = !macroItem->up;
+    auto macroItem = &(action.optimizedMacroItems)[macroItemIndex];
+    if (macroItem -> keyCode > 0){
+      localMacroKeyDownStateIndex[macroItem->keyCode] = !macroItem->up;
+      // cout << "local macro key down state index "<< macroItem->keyCode << " : " << localMacroKeyDownStateIndex[macroItem->keyCode] << endl;
+    }
     executeMacroItem(hwnd, gamingMode, *macroItem, action, processId);
     macroItemIndex = (macroItemIndex + 1) % macroItemsLength;
   }
@@ -62,6 +65,7 @@ void macroThreadExecution(const OptimizedAction& action){
   vector<INPUT> inputClearance;
   for (int i = 0; i < 256; i++){
     if (localMacroKeyDownStateIndex[i]){
+      // cout << "        key release by macro " << i << endl;
       handleMappedInput(hwnd, gamingMode, i, true);
     }
   }

@@ -33,6 +33,7 @@ extern WindowInfo windowInfoCache;
 extern int profileCacheIndex;
 extern int triggerActionIndexMap[256];
 extern int keyDownActionIndex[256];
+extern bool profileShiftButtonHold[256];
 
 extern vector<OptimizedAction> optimizedActions;
 extern vector<OptimizedTrigger> optimizedTriggers;
@@ -82,7 +83,7 @@ void performSimpleAction(const OptimizedAction& action, const KeyAction& inputTr
 void releaseSimpleAction(const OptimizedAction& action);
 // profile shift action
 void performProfileShiftAction(const OptimizedAction& action, const KeyAction& inputTrigger);
-void releaseProfileShiftAction(const OptimizedAction& action);
+void releaseProfileShiftAction(const OptimizedAction& action, int keyCode);
 // macro action
 void performMacroAction(const OptimizedAction& action, const KeyAction& inputTrigger);
 void releaseMacroAction(const OptimizedAction& action, bool force);

@@ -16,7 +16,7 @@ void releaseOngoingAction(int keyCode, bool force){
       return;
     case ActionType::PROFILE_SHIFT:
       // cout << "Releasing profile shift" << endl;
-      releaseProfileShiftAction(*action);
+      releaseProfileShiftAction(*action, keyCode);
       return;
     case ActionType::MACRO:
       // cout << "Releasing macro" << endl;

@@ -39,10 +39,10 @@ void refreshProfileCache(){
               // Cache the matching profile index and window title
               profileCacheIndex = profile.index;
               windowInfoCache.gamingMode = profile.gamingMode;
-            //   cout << "Profile Change " << profile.name << " for window title: '" << windowInfoCache.name << "' gaming mode:" <<  profile.gamingMode << endl;
+              cout << "Profile Change " << profile.name << " for window title: '" << windowInfoCache.name << "' matching: " << programName << " | gaming mode: " <<  profile.gamingMode << endl;
               return;
           }
       }
   }
-//   cout << "Profile Default " << endl;
+  cout << "Profile Default " << endl;
 }

@@ -38,8 +38,7 @@ void refreshProfileCache(){
             || currentWindowInfo.name.find(programName) != std::string::npos) {
               // Cache the matching profile index and window title
               profileCacheIndex = profile.index;
-              windowInfoCache.gamingMode = profile.gamingMode;
-              cout << "Profile Change " << profile.name << " for window title: '" << windowInfoCache.name << "' matching: " << programName << " | gaming mode: " <<  profile.gamingMode << endl;
+              cout << "Profile Change " << profile.name << " for window title: '" << windowInfoCache.name << "' matching: " << programName <<  endl;
               return;
           }
       }

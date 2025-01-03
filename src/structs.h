@@ -93,7 +93,6 @@ struct Profile {
     string name;
     vector<string> programNames;
     vector<Mapping> mapping;
-    bool gamingMode;
 };
 
 struct OptimizedProfile {
@@ -103,7 +102,6 @@ struct OptimizedProfile {
     vector<string> lowerCaseProgramNames;
     vector<Mapping> *mapping;
     vector<OptimizedMapping> optimizedMapping;
-    bool gamingMode;
     int actionIdMap[256];
 };
 
@@ -129,7 +127,6 @@ struct WindowInfo {
     string executable;
     HWND hwnd;
     DWORD processId;
-    bool gamingMode;
 };
 
 #endif // STRUCTS

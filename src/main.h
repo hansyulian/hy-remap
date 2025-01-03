@@ -64,10 +64,8 @@ void from_json(const json& j, Mapping& m);
 void from_json(const json& j, Profile& p);
 void from_json(const json& j, Config& c);
 
-INPUT convertKeyCodeToInput(int keyCode, bool isKeyUp);
-void executeInputs(const vector<INPUT>& inputs);
-void handleMappedInput(HWND hwnd, bool gamingMode, int keyCode, bool up);
-void postInputMessage(HWND hwnd, int keyCode, bool up);
+void handleMappedInput(int keyCode, bool up);
+
 
 OptimizedAction* getActionByName(const string& name);
 int getActionIndexByName(const string& name);

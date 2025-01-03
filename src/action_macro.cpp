@@ -8,13 +8,9 @@ bool isValidMacroExecutionCondition(const OptimizedAction& action, DWORD process
   return isMacroActionThreadRunning(action) && processId == windowInfoCache.processId;
 }
 
-void executeMacroItem(HWND hwnd, bool gamingMode, const OptimizedMacroItem& macroItem, const OptimizedAction& action, DWORD processId){
+void executeMacroItem(const OptimizedMacroItem& macroItem, const OptimizedAction& action, DWORD processId){
   if (isValidMacroExecutionCondition(action, processId) && macroItem.keyCode > -1){
-    // cout << "macro keycode " << macroItem.keyCode << endl;
-    // vector<INPUT> inputs;
-    // inputs.push_back(convertKeyCodeToInput(macroItem.keyCode,macroItem.up));
-    // executeInputs(inputs);
-    handleMappedInput(hwnd, gamingMode, macroItem.keyCode, macroItem.up);
+    handleMappedInput( macroItem.keyCode, macroItem.up);
   }
   if (isValidMacroExecutionCondition(action, processId) && macroItem.delayMs > 0){
     // cout << "macro delay " << macroItem.delayMs << endl;
@@ -37,13 +33,12 @@ void macroThreadExecution(const OptimizedAction& action){
   auto index = action.index;
   auto processId = windowInfoCache.processId; // use this to ensure later that if the window name change, then we cancel execution
   auto hwnd = windowInfoCache.hwnd;
-  auto gamingMode = windowInfoCache.gamingMode;
   // cout << "macro repeat mode " << action.macroRepeatMode << endl;
   if (action.macroRepeatMode == MacroRepeatMode::NONE){
 
     // cout << "non repeating macro" << endl;
       for (const auto& macroItem: action.optimizedMacroItems){
-        executeMacroItem(hwnd, gamingMode,macroItem, action, processId);
+        executeMacroItem(macroItem, action, processId);
       }
       isMacroActionThreadRunnings[action.index] = false;
       return;
@@ -58,7 +53,7 @@ void macroThreadExecution(const OptimizedAction& action){
       localMacroKeyDownStateIndex[macroItem->keyCode] = !macroItem->up;
       // cout << "local macro key down state index "<< macroItem->keyCode << " : " << localMacroKeyDownStateIndex[macroItem->keyCode] << endl;
     }
-    executeMacroItem(hwnd, gamingMode, *macroItem, action, processId);
+    executeMacroItem(*macroItem, action, processId);
     macroItemIndex = (macroItemIndex + 1) % macroItemsLength;
   }
   isMacroActionThreadRunnings[action.index] = false;
@@ -66,11 +61,10 @@ void macroThreadExecution(const OptimizedAction& action){
   for (int i = 0; i < 256; i++){
     if (localMacroKeyDownStateIndex[i]){
       // cout << "        key release by macro " << i << endl;
-      handleMappedInput(hwnd, gamingMode, i, true);
+      handleMappedInput(i, true);
     }
   }
   
-  // executeInputs(inputClearance);
 }
 
 

@@ -60,10 +60,8 @@ void debugMapping(const Mapping& mapping) {
 void debugProfile(const Profile& profile) {
   auto name = profile.name;
   auto programNames = profile.programNames;
-  auto gamingMode = profile.gamingMode ? "true" : "false";
   auto mapping = profile.mapping;
   cout << "\t\tname: " << name
-        << "\tgaming mode: " << gamingMode
         << "\n\t\tprogramNames: ";
   for (const auto& prog : programNames) {
       cout << "\n\t\t\t" << prog;
@@ -115,9 +113,7 @@ void debugOptimizedProfile(const OptimizedProfile& profile){
   auto mapping = profile.mapping;
   auto optimizedMapping = profile.optimizedMapping;
   auto actionIdMap = profile.actionIdMap;
-  auto gamingMode = profile.gamingMode ? "true" : "false";
   cout << "\t\tname: " << name
-        << "\tgaming mode: " << gamingMode
         << "\n\t\tprogramNames: ";
   for (const auto& prog : *programNames) {
       cout << "\n\t\t\t" << prog;
@@ -260,7 +256,6 @@ void calculateOptimizedConfig(){
     for (const auto& programName :profile.programNames){
       optimizedProfile.lowerCaseProgramNames.push_back(lowerCaseString(programName));
     }
-    optimizedProfile.gamingMode = profile.gamingMode;
     for (int i = 0; i < 256; i++){
       optimizedProfile.actionIdMap[i] = -1;
     }

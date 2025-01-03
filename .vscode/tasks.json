@@ -2,27 +2,16 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "type": "cppbuild",
-      "label": "C/C++: g++.exe build project",
-      "command": "D:\\Development\\mingw64\\bin\\g++.exe",
-      "args": [
-        "-fdiagnostics-color=always",
-        "-g",
-        "${workspaceFolder}/src/*.cpp", // This will include all cpp files in the 'src' directory
-        "-I",
-        "${workspaceFolder}/include",
-        "-o",
-        "${workspaceFolder}/build/HRemap.exe" // Specify the output location for the compiled executable
-      ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "problemMatcher": ["$gcc"],
+      "label": "build",
+      "type": "shell",
+      "command": "mingw32-make",
+      "args": [],
       "group": {
         "kind": "build",
         "isDefault": true
       },
-      "detail": "Task to build the entire project using g++"
+      "problemMatcher": ["$gcc"],
+      "detail": "Generated task for MinGW build"
     }
   ]
 }

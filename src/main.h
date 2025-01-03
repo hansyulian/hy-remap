@@ -73,7 +73,7 @@ OptimizedTrigger* getTriggerByName(const string& name);
 int getTriggerIndexByName(const string& name);
 OptimizedProfile* getProfileByName(const string& name);
 int getProfileIndexByName(const string& name);
-
+void runProgram(const string& path);
 string lowerCaseString(const string& value);
 
 // actions
@@ -86,6 +86,8 @@ void releaseProfileShiftAction(const OptimizedAction& action, int keyCode);
 // macro action
 void performMacroAction(const OptimizedAction& action, const KeyAction& inputTrigger);
 void releaseMacroAction(const OptimizedAction& action, bool force);
+// macro run program
+void performRunProgram(const OptimizedAction& action, const KeyAction& inputTrigger);
 
 #endif  // KEY_REMAPPER_H
 

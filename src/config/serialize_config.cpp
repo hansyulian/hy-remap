@@ -48,6 +48,10 @@ void from_json(const json& j, Action& a) {
             a.macroRepeatMode = MacroRepeatMode::TOGGLE;
         }
     }
+    if (typeValue == "runProgram"){
+        a.type = ActionType::RUN_PROGRAM;
+        j.at("programPath").get_to(a.programPath);
+    }
 }
 
 // Define how to deserialize the JSON into the Mapping struct

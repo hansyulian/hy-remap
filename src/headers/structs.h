@@ -50,7 +50,9 @@ struct Action {
     vector<MacroItem> macroItems;
     MacroRepeatMode macroRepeatMode;
     int macroRepeatDelayMs;
-
+    
+    // for run program
+    string programPath;
 };
 
 struct OptimizedAction{
@@ -67,12 +69,12 @@ struct OptimizedAction{
     int profileIndex;
 
     // for macro
-    // for macro
     vector<MacroItem> *macroItems;
     vector<OptimizedMacroItem> optimizedMacroItems;
     MacroRepeatMode macroRepeatMode;
     int macroRepeatDelayMs;
-
+    // for run program
+    string programPath;
 };
 
 struct Mapping {

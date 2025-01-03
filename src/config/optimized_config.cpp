@@ -17,6 +17,7 @@ void calculateOptimizedConfig(){
     optimizedAction.name = action.name;
     optimizedAction.keys = &action.keys;
     optimizedAction.profileName = action.profileName;
+    optimizedAction.programPath = action.programPath;
     optimizedAction.type = action.type;
     optimizedAction.index = optimizedActions.size();
     switch (optimizedAction.type){

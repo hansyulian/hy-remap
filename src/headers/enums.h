@@ -5,6 +5,7 @@ enum ActionType {
     SIMPLE,
     PROFILE_SHIFT,
     MACRO,
+    RUN_PROGRAM,
 };
 
 enum MacroRepeatMode{

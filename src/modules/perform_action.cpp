@@ -10,7 +10,10 @@ void performAction(const OptimizedAction& action, const KeyAction& inputTrigger)
             performProfileShiftAction(action, inputTrigger);
             break;
         case ActionType::MACRO:
-            performMacroAction(action,inputTrigger);
+            performMacroAction(action, inputTrigger);
+            break;
+        case ActionType::RUN_PROGRAM:
+            performRunProgram(action, inputTrigger);
             break;
     }
 }

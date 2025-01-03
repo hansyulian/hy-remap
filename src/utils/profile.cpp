@@ -1,4 +1,4 @@
-#include "main.h"
+#include "utils.h"
 
 OptimizedProfile* getProfileByName(const string& name) {
     int index = getProfileIndexByName(name);  // Get the index of the Profile by name

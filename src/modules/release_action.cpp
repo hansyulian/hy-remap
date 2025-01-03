@@ -1,4 +1,4 @@
-#include "main.h"
+#include "modules.h"
 
 void releaseOngoingAction(int keyCode, bool force){
   // cout << "Release action force" << force << endl;

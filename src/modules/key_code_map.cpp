@@ -1,4 +1,4 @@
-#include "main.h"
+#include "modules.h"
 // Define a map to hold the string-to-keycode mappings
 map<string, int> keyCodeMap = {
     // Function keys

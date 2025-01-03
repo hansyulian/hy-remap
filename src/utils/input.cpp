@@ -1,4 +1,4 @@
-#include "main.h"
+#include "utils.h"
 
 INPUT convertKeyCodeToInput(int keyCode, bool up){
     INPUT input = {};

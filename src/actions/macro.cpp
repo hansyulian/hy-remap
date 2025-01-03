@@ -1,4 +1,4 @@
-  #include "main.h"
+#include "actions.h"
 #include "chrono"
 
 bool isMacroActionThreadRunning(const OptimizedAction& action){

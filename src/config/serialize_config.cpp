@@ -1,4 +1,4 @@
-#include "main.h"
+#include "config.h"
 
 // Define how to deserialize the JSON into the Trigger struct
 void from_json(const json& j, Trigger& t) {

@@ -1,4 +1,4 @@
-#include "main.h"
+#include "utils.h"
 
 OptimizedAction* getActionByName(const string& name) {
     int index = getActionIndexByName(name);  // Get the index of the action by name

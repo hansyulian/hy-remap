@@ -1,4 +1,4 @@
-#include "main.h"
+#include "utils.h"
 
 OptimizedTrigger* getTriggerByName(const string& name) {
     int index = getTriggerIndexByName(name);  // Get the index of the Trigger by name

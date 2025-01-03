@@ -1,4 +1,4 @@
-#include "main.h"
+#include "actions.h"
 
 void performSimpleAction(const OptimizedAction& action, const KeyAction& inputTrigger){
     // cout << "simple action checking " << keyDownActionIndex[inputTrigger.keyCode] << " -- " << action.index << endl;

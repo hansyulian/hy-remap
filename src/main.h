@@ -9,8 +9,8 @@
 #include <optional>
 #include <nlohmann/json.hpp>
 #include <thread>
-#include "structs.h"
-#include "enums.h"
+#include "headers/structs.h"
+#include "headers/enums.h"
 
 #define HR_WHEEL_UP 0xF0
 #define HR_WHEEL_DOWN 0xF1

@@ -1,5 +1,5 @@
-#include "main.h"
-#include "main.h"
+#include "utils.h"
+#include "utils.h"
 #include <psapi.h>
 
 WindowInfo getCurrentWindowInfo() {  

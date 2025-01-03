@@ -14,26 +14,28 @@ include_directories(${CMAKE_SOURCE_DIR}/include/nlohmann)
 
 # Source files
 set(SOURCES
-    src/action_macro.cpp
-    src/action_profile_shift.cpp
-    src/action_simple.cpp
-    src/config_loader.cpp
-    src/handle_input.cpp
-    src/hook_manager.cpp
-    src/key_code_map.cpp
-    src/keyboard_hook.cpp
     src/main.cpp
-    src/mouse_hook.cpp
-    src/perform_action.cpp
-    src/profile_management.cpp
-    src/release_action.cpp
-    src/serialize_config.cpp
-    src/util_action.cpp
-    src/util_input.cpp
-    src/util_profile.cpp
-    src/util_trigger.cpp
-    src/util_window.cpp
-    src/util_string.cpp
+    src/config/config_loader.cpp
+    src/config/debug_config.cpp
+    src/config/optimized_config.cpp
+    src/config/serialize_config.cpp
+    src/actions/macro.cpp
+    src/actions/profile_shift.cpp
+    src/actions/simple.cpp
+    src/modules/handle_input.cpp
+    src/modules/hook_manager.cpp
+    src/modules/key_code_map.cpp
+    src/modules/keyboard_hook.cpp
+    src/modules/mouse_hook.cpp
+    src/modules/perform_action.cpp
+    src/modules/profile_management.cpp
+    src/modules/release_action.cpp
+    src/utils/action.cpp
+    src/utils/input.cpp
+    src/utils/profile.cpp
+    src/utils/trigger.cpp
+    src/utils/window.cpp
+    src/utils/string.cpp
 )
 
 # Add the executable

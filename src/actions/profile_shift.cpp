@@ -1,4 +1,4 @@
-#include "main.h"
+#include "actions.h"
 
 void performProfileShiftAction(const OptimizedAction& action, const KeyAction& inputTrigger){
   if (inputTrigger.up){

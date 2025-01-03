@@ -1,4 +1,4 @@
-#include "main.h"
+#include "modules.h"
 #include <windows.h>
 
 LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam) {

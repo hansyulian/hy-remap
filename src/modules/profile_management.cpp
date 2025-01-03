@@ -1,4 +1,4 @@
-#include "main.h"
+#include "modules.h"
 
 int getActiveProfileIndex() {
     // cout << "get active profile index" << endl;

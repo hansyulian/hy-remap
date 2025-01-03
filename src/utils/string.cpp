@@ -1,5 +1,5 @@
 #include <cctype> 
-#include "main.h"
+#include "utils.h"
 
 string lowerCaseString(const string& value) {
     string result;

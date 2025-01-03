@@ -1,4 +1,4 @@
-#include "main.h"
+#include "modules.h"
 #include "iostream"
 
 void performAction(const OptimizedAction& action, const KeyAction& inputTrigger) {    

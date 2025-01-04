@@ -4,13 +4,13 @@
 void releaseOngoingAction(int keyCode, bool force){
   // cout << "Release action force" << force << endl;
   auto actionIndex = keyDownActionIndex[keyCode];
-  if (actionIndex == -1){
+  if (actionIndex < 0){
     return;
   }
   // cout << "Action index " << keyCode <<" | keyCode" <<actionIndex << endl;
   auto action = &optimizedActions[actionIndex];
   // cout << "negating key down index "<< keyCode << ":"<<keyDownActionIndex[keyCode] << endl;
-  keyDownActionIndex[keyCode] = -1;
+  keyDownActionIndex[keyCode] = NO_ACTION_FLAG;
   // cout << "releasing " << keyCode << " " <<keyDownActionIndex[keyCode] << endl;
   // cout << "Releasing action " << actionIndex <<  " " << action->name << " " << force << endl;
   switch(action->type){

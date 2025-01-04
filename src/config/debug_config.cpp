@@ -44,7 +44,9 @@ void debugProfile(const Profile& profile) {
   auto name = profile.name;
   auto programNames = profile.programNames;
   auto optimizedMapping = profile.mapping;
+  auto parentName = profile.parentName;
   cout << "\t\tname: " << name
+        << "\n\tparentName" << parentName
         << "\n\t\tprogramNames: ";
   for (const auto& prog : programNames) {
       cout << "\n\t\t\t" << prog;
@@ -85,10 +87,13 @@ void debugOptimizedMapping(const OptimizedMapping& optimizedMapping) {
 }
 void debugOptimizedProfile(const OptimizedProfile& optimizedProfile){
   auto name = optimizedProfile.profile->name;
+  auto parentName = optimizedProfile.profile->parentName;
+  auto parentIndex = optimizedProfile.parentIndex;
   auto programNames = optimizedProfile.profile->programNames;
   auto optimizedMapping = optimizedProfile.optimizedMapping;
   auto actionIdMap = optimizedProfile.actionIdMap;
   cout << "\t\tname: " << name
+        << "\n\tparent name "<< parentName << " (" << parentIndex << ")"
         << "\n\t\tprogramNames: ";
   for (const auto& prog : programNames) {
       cout << "\n\t\t\t" << prog;
@@ -99,7 +104,7 @@ void debugOptimizedProfile(const OptimizedProfile& optimizedProfile){
   }
   cout << "\n\t\taction code map:\n";
   for (int i = 0; i < 256; i++){
-    if (actionIdMap[i] != -1){
+    if (actionIdMap[i] != NO_ACTION_FLAG){
       cout << "\t\t\t" <<i << "\t-> " << actionIdMap[i] << endl;
     }
   }

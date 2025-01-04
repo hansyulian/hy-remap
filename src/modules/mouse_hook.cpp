@@ -6,7 +6,7 @@ LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
     if (nCode >= 0) {
         MSLLHOOKSTRUCT* mouse = (MSLLHOOKSTRUCT*)lParam;
 
-        int keyCode = -1; // Default to invalid value
+        int keyCode = NO_KEYCODE_FLAG; // Default to invalid value
         bool isKeyUp = false;
 
         // Determine the mouse button and whether it's an "up" or "down" event
@@ -53,7 +53,7 @@ LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
             }
             default:
                 // No relevant mouse action detected
-                keyCode = -1;  // Invalid key
+                keyCode = NO_KEYCODE_FLAG;  // Invalid key
                 isKeyUp = false;
                 break;
         }
@@ -62,15 +62,14 @@ LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
         KeyAction inputTrigger;
         inputTrigger.up = isKeyUp;
         inputTrigger.keyCode = keyCode;
-        
-        if (keyCode > -1 && profileShiftButtonHold[keyCode] && !isKeyUp){
+        if (keyCode > NO_KEYCODE_FLAG && profileShiftButtonHold[keyCode] && !isKeyUp){
             return 1;
         }
-        // if (keyCode > -1){
+        // if (keyCode > NO_KEYCODE_FLAG){
         // cout << "dwExtraInfo mouse " << inputTrigger.keyCode << " " << mouse->dwExtraInfo << endl;
         // }
         // Check if the dwExtraInfo doesn't contain the flag and the key code is valid
-        if (mouse->dwExtraInfo != HY_BYPASS_EXECUTION_FLAG && inputTrigger.keyCode != -1 && processInputRemapping(inputTrigger)) {
+        if (mouse->dwExtraInfo != HY_BYPASS_EXECUTION_FLAG && inputTrigger.keyCode != NO_KEYCODE_FLAG && processInputRemapping(inputTrigger)) {
             return 1; // Return 1 to prevent further processing of the event
         }
     }

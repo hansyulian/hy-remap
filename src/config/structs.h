@@ -6,6 +6,7 @@
 #include <windows.h>
 #include <iostream>  // Don't forget to include the header for cout
 #include "enums.h"
+#include "const.h"
 using namespace std;
 
 struct MacroItem{
@@ -21,7 +22,7 @@ struct OptimizedMacroItem{
     bool up;
     // Default constructor
     OptimizedMacroItem() 
-        : keyCode(-1), key(""), delayMs(-1), up(false) {}
+        : keyCode(NO_KEYCODE_FLAG), key(""), delayMs(NO_DELAY_FLAG), up(false) {}
 };
 
 struct Trigger {
@@ -34,6 +35,8 @@ struct OptimizedTrigger{
     int index;
     int keyCode;
     Trigger* trigger;
+    OptimizedTrigger() 
+        : keyCode(NO_KEYCODE_FLAG), index(NO_TRIGGER_FLAG){}
 };
 
 struct SimpleAction{
@@ -80,6 +83,8 @@ struct OptimizedAction{
     int macroRepeatDelayMs;
     // for run program
     string* runProgramPath;
+
+    OptimizedAction(): profileIndex(NO_PROFILE_FLAG), macroRepeatDelayMs(NO_DELAY_FLAG) {};
 };
 
 struct Mapping {
@@ -93,20 +98,28 @@ struct OptimizedMapping{
     int triggerIndex;
     int actionIndex;
     Mapping* mapping;
+
+    OptimizedMapping(): index(-1), triggerIndex(NO_TRIGGER_FLAG), actionIndex(NO_ACTION_FLAG) {};
 };
 
 struct Profile {
     string name;
+    string parentName;
     vector<string> programNames;
     vector<Mapping> mapping;
 };
 
 struct OptimizedProfile {
     int index;
+    int parentIndex;
     vector<string> lowerCaseProgramNames;
     vector<OptimizedMapping> optimizedMapping;
     int actionIdMap[256];
     Profile* profile;
+
+    OptimizedProfile(): parentIndex(NO_PROFILE_FLAG){
+        fill(begin(actionIdMap), end(actionIdMap), NO_ACTION_FLAG);
+    };
 };
 
 struct Config {
@@ -114,7 +127,7 @@ struct Config {
     vector<Action> actions;
     vector<Profile> profiles;
     string defaultProfileName;
-
+    string rootProfileName;
 };
 
 struct KeyAction {

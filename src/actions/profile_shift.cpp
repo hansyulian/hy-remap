@@ -11,7 +11,7 @@ void performProfileShiftAction(const OptimizedAction& action, const KeyAction& i
 }
 
 void releaseProfileShiftAction(const OptimizedAction& action, int keyCode){
-  overrideProfileIndex = -1;
+  overrideProfileIndex = NO_PROFILE_FLAG;
   profileShiftButtonHold[keyCode] = false;
   cout << "Profile Shift release back to " << optimizedProfiles[profileCacheIndex].profile->name << endl;  
 }

@@ -1,0 +1,14 @@
+
+#define VK_HR_WHEEL_UP 0xF0
+#define VK_HR_WHEEL_DOWN 0xF1
+#define VK_HR_TERMINATE_ACTION 0xF2
+#define VK_HR_DEFAULT_ACTION 0xF3
+
+#define THREAD_SLEEP_SEGMENTATION_MS 5 // this can handle without issue for 200 fps
+#define HY_BYPASS_EXECUTION_FLAG 0x01090904
+#define NO_ACTION_FLAG -1
+#define NO_PROFILE_FLAG -1
+#define NO_TRIGGER_FLAG -1
+#define NO_KEYCODE_FLAG -1
+#define NO_DELAY_FLAG -1
+#define TERMINATE_ACTION_FLAG -2

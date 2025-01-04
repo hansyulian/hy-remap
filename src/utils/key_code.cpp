@@ -10,6 +10,6 @@ int getKeyCodeFromString(const string &key)
   }
   else
   {
-    return -1;
+    return NO_KEYCODE_FLAG;
   }
 }

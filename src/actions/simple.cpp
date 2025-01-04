@@ -26,7 +26,7 @@ void performSimpleAction(const OptimizedAction& optimizedAction, const KeyAction
             // inputs.push_back(convertKeyCodeToInput(keyCode, inputTrigger.up));
             handleMappedInput(keyCode,inputTrigger.up);
         }
-        if (inputTrigger.keyCode == HR_WHEEL_UP || inputTrigger.keyCode == HR_WHEEL_DOWN){        
+        if (inputTrigger.keyCode == VK_HR_WHEEL_UP || inputTrigger.keyCode == VK_HR_WHEEL_DOWN){        
             for (int i = keyCodeSize-1; i >=0; i--) {
                 // Simulate key press (KEYUP) for each key in sequence in reverse
                 auto keyCode = keyCodes[i];
@@ -34,7 +34,7 @@ void performSimpleAction(const OptimizedAction& optimizedAction, const KeyAction
                 // inputs.push_back(convertKeyCodeToInput(keyCode, true));
             
             }
-            keyDownActionIndex[inputTrigger.keyCode] = -1;
+            keyDownActionIndex[inputTrigger.keyCode] = NO_ACTION_FLAG;
         }
         cout << "Simple Action " << optimizedAction.action->name << endl;
     }

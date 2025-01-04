@@ -2,7 +2,7 @@
 
 OptimizedAction* getActionByName(const string& name) {
     int index = getActionIndexByName(name);  // Get the index of the action by name
-    if (index != -1) {
+    if (index > NO_ACTION_FLAG) {
         return &optimizedActions[index];  // Return the action if found
     }
     return nullptr;  // Return nullptr if the action is not found
@@ -14,5 +14,5 @@ int getActionIndexByName(const string& name){
       return i;
     }
   }
-  return -1;
+  return NO_ACTION_FLAG;
 }

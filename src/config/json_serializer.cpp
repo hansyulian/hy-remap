@@ -79,6 +79,9 @@ void from_json(const json& j, Mapping& var) {
 void from_json(const json& j, Profile& var) {
     
     j.at("name").get_to(var.name);
+    if (j.contains("parentName")){
+        j.at("parentName").get_to(var.parentName);
+    }
 
     // Set programNames to an empty vector if not defined
     if (j.contains("programNames")) {
@@ -100,5 +103,10 @@ void from_json(const json& j, Config& var) {
     j.at("triggers").get_to(var.triggers);
     j.at("actions").get_to(var.actions);
     j.at("profiles").get_to(var.profiles);
-    j.at("defaultProfileName").get_to(var.defaultProfileName);
+    if (j.contains("defaultProfileName")){
+        j.at("defaultProfileName").get_to(var.defaultProfileName);
+    }
+    if (j.contains("rootProfileName")){
+        j.at("rootProfileName").get_to(var.rootProfileName);
+    }
 }

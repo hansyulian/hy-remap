@@ -25,7 +25,7 @@ LRESULT CALLBACK keyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
 
         // cout << "dwExtraInfo kbd " << inputTrigger.keyCode << " " << kbd->dwExtraInfo << endl;
         // skip macro shift spamming state
-        if (keyCode > -1 && profileShiftButtonHold[keyCode] && !isKeyUp){
+        if (keyCode > NO_KEYCODE_FLAG && profileShiftButtonHold[keyCode] && !isKeyUp){
             return 1;
         }
         // Check if the dwExtraInfo does not match the bypass flag

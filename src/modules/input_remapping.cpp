@@ -1,7 +1,7 @@
 #include "modules.h"
 #include <chrono>
 
-bool handleInput(const KeyAction& inputTrigger){
+bool processInputRemapping(const KeyAction& inputTrigger){
     if (inputTrigger.up){
         releaseOngoingAction(inputTrigger.keyCode, false);     
     }   

@@ -9,8 +9,8 @@
 #include <optional>
 #include <nlohmann/json.hpp>
 #include <thread>
-#include "headers/structs.h"
-#include "headers/enums.h"
+#include "config/structs.h"
+#include "config/enums.h"
 
 #define HR_WHEEL_UP 0xF0
 #define HR_WHEEL_DOWN 0xF1
@@ -41,53 +41,7 @@ extern vector<OptimizedProfile> optimizedProfiles;
 extern vector<thread> macroActionThreads;
 extern vector<bool> isMacroActionThreadRunnings;
 
-// Function declarations
-void performAction(const OptimizedAction& action,const KeyAction& inputTrigger);
-int getKeyCodeFromString(const string& key);
-LRESULT CALLBACK keyboardProc(int nCode, WPARAM wParam, LPARAM lParam);
-LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam);
-void startKeyboardAndMouseHook();
-void stopKeyboardAndMouseHook();
-int getActiveProfileIndex();
-string loadConfigString();
-void loadConfig();
-void calculateOptimizedConfig();
-bool handleInput(const KeyAction& inputTrigger);
-void releaseOngoingAction(int keyCode, bool force);
 
-WindowInfo getCurrentWindowInfo();
-void refreshProfileCache();
-
-void from_json(const json& j, Trigger& t);
-void from_json(const json& j, Action& a);
-void from_json(const json& j, Mapping& m);
-void from_json(const json& j, Profile& p);
-void from_json(const json& j, Config& c);
-
-void handleMappedInput(int keyCode, bool up);
-
-
-OptimizedAction* getActionByName(const string& name);
-int getActionIndexByName(const string& name);
-OptimizedTrigger* getTriggerByName(const string& name);
-int getTriggerIndexByName(const string& name);
-OptimizedProfile* getProfileByName(const string& name);
-int getProfileIndexByName(const string& name);
-void runProgram(const string& path);
-string lowerCaseString(const string& value);
-
-// actions
-// simple action
-void performSimpleAction(const OptimizedAction& action, const KeyAction& inputTrigger);
-void releaseSimpleAction(const OptimizedAction& action);
-// profile shift action
-void performProfileShiftAction(const OptimizedAction& action, const KeyAction& inputTrigger);
-void releaseProfileShiftAction(const OptimizedAction& action, int keyCode);
-// macro action
-void performMacroAction(const OptimizedAction& action, const KeyAction& inputTrigger);
-void releaseMacroAction(const OptimizedAction& action, bool force);
-// macro run program
-void performRunProgram(const OptimizedAction& action, const KeyAction& inputTrigger);
 
 #endif  // KEY_REMAPPER_H
 

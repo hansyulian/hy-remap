@@ -1,4 +1,4 @@
-#include "modules.h"
+#include "config.h"
 // Define a map to hold the string-to-keycode mappings
 map<string, int> keyCodeMap = {
     // Function keys
@@ -152,13 +152,3 @@ map<string, int> keyCodeMap = {
     {"WHEEL_DOWN", HR_WHEEL_DOWN},// Custom code for wheel down
     {"TERMINATE_ACTION",HR_TERMINATE_ACTION}
 };
-
-// Function to get key code by string
-int getKeyCodeFromString(const std::string& key) {
-    auto it = keyCodeMap.find(key);
-    if (it != keyCodeMap.end()) {
-        return it->second;
-    } else {
-        throw std::invalid_argument("Invalid key name");
-    }
-}

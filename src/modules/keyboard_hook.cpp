@@ -29,7 +29,7 @@ LRESULT CALLBACK keyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
             return 1;
         }
         // Check if the dwExtraInfo does not match the bypass flag
-        if (kbd->dwExtraInfo != HY_BYPASS_EXECUTION_FLAG && handleInput(inputTrigger)) {
+        if (kbd->dwExtraInfo != HY_BYPASS_EXECUTION_FLAG && processInputRemapping(inputTrigger)) {
             // If remapping is prevented, return 1 to stop further processing
             return 1;
         }

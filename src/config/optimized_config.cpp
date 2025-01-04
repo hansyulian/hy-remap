@@ -1,4 +1,5 @@
 #include "config.h"
+#include "../utils/utils.h"
 
 void calculateOptimizedConfig(){
   cout << "Optimizing Triggers" << endl;

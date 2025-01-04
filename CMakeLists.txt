@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 # Project name and version
-project(HRemap VERSION 1.0)
+project(HyRemap VERSION 1.0)
 set(CMAKE_CXX_COMPILER "g++.exe")
 set(CMAKE_C_COMPILER "gcc.exe")
 # Set the C++ standard
@@ -29,13 +29,14 @@ set(SOURCES
     src/config/config_loader.cpp
     src/config/debug_config.cpp
     src/config/optimized_config.cpp
-    src/config/serialize_config.cpp
+    src/config/json_serializer.cpp
+    src/config/key_code_map.cpp
     src/actions/macro.cpp
     src/actions/profile_shift.cpp
     src/actions/simple.cpp
-    src/modules/handle_input.cpp
+    src/actions/run_program.cpp
+    src/modules/input_remapping.cpp
     src/modules/hook_manager.cpp
-    src/modules/key_code_map.cpp
     src/modules/keyboard_hook.cpp
     src/modules/mouse_hook.cpp
     src/modules/perform_action.cpp
@@ -47,6 +48,8 @@ set(SOURCES
     src/utils/trigger.cpp
     src/utils/window.cpp
     src/utils/string.cpp
+    src/utils/run_program.cpp
+    src/utils/key_code.cpp
 )
 
 # Add include directories (if any)
@@ -55,7 +58,7 @@ include_directories(
 )
 
 # Add the executable
-add_executable(HRemap ${SOURCES})
+add_executable(HyRemap ${SOURCES})
 
 # Set platform-specific configurations if necessary
 if(MINGW)
@@ -67,4 +70,4 @@ elseif(WIN32)
 endif()
 
 # Optionally, set up installation targets for cross-platform deployment (uncomment if needed)
-# install(TARGETS HRemap DESTINATION bin)
+# install(TARGETS HyRemap DESTINATION bin)

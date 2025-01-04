@@ -1,4 +1,6 @@
 #include "main.h"
+#include "config/config.h"
+#include "modules/modules.h"
 
 Config config;
 vector<OptimizedAction> optimizedActions;

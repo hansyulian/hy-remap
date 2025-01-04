@@ -1,5 +1,6 @@
 #include "modules.h"
 #include "iostream"
+#include "../actions/actions.h"
 
 void performAction(const OptimizedAction& action, const KeyAction& inputTrigger) {    
     switch(action.type){

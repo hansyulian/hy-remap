@@ -17,7 +17,7 @@ endif()
 # Set additional flags for different build types
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
     # Enable optimizations
-    set(CMAKE_CXX_FLAGS_RELEASE "-lole32 -loleaut32 -lpsapi -O3 -DNDEBUG")
+    set(CMAKE_CXX_FLAGS_RELEASE "-lole32 -loleaut32 -lpsapi -O3 -DNDEBUG  -mwindows")
 elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
     # Enable debugging symbols
     set(CMAKE_CXX_FLAGS_DEBUG "-lole32 -loleaut32 -lpsapi -g -O0")
@@ -72,3 +72,10 @@ endif()
 
 # Optionally, set up installation targets for cross-platform deployment (uncomment if needed)
 # install(TARGETS HyRemap DESTINATION bin)
+
+# Add preprocessor definitions after the target is created
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_compile_definitions(HyRemap PRIVATE DEBUG_BUILD=1)
+elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+    target_compile_definitions(HyRemap PRIVATE RELEASE_BUILD=1)
+endif()

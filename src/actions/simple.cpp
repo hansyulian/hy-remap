@@ -34,7 +34,7 @@ void performSimpleAction(const OptimizedAction& optimizedAction, const KeyAction
                 // inputs.push_back(convertKeyCodeToInput(keyCode, true));
             
             }
-            keyDownActionIndex[inputTrigger.keyCode] = -1;
+            keyDownActionIndex[inputTrigger.keyCode] = NO_ACTION_FLAG;
         }
         cout << "Simple Action " << optimizedAction.action->name << endl;
     }

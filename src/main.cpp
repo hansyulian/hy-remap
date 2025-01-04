@@ -9,9 +9,9 @@ vector<OptimizedProfile> optimizedProfiles;
 vector<thread> macroActionThreads;
 vector<bool> isMacroActionThreadRunnings;
 WindowInfo windowInfoCache;
-int profileCacheIndex = -1;
-int overrideProfileIndex = -1;
-int defaultProfileIndex = -1;
+int profileCacheIndex = NO_PROFILE_FLAG;
+int overrideProfileIndex = NO_PROFILE_FLAG;
+int defaultProfileIndex = NO_PROFILE_FLAG;
 int triggerActionIndexMap[256];
 int keyDownActionIndex[256];
 bool profileShiftButtonHold[256];
@@ -32,7 +32,7 @@ int main() {
     cout << "Build Date: " << __DATE__ << endl;
     cout << "Build Time: " << __TIME__ << endl;
     for (int i = 0; i < 256; i++) {
-        keyDownActionIndex[i] = -1;
+        keyDownActionIndex[i] = NO_ACTION_FLAG;
     }
     // Start listening for keyboard input
     startKeyboardAndMouseHook();  // Pass the config here

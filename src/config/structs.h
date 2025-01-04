@@ -6,6 +6,7 @@
 #include <windows.h>
 #include <iostream>  // Don't forget to include the header for cout
 #include "enums.h"
+#include "const.h"
 using namespace std;
 
 struct MacroItem{
@@ -21,7 +22,7 @@ struct OptimizedMacroItem{
     bool up;
     // Default constructor
     OptimizedMacroItem() 
-        : keyCode(-1), key(""), delayMs(-1), up(false) {}
+        : keyCode(NO_KEYCODE_FLAG), key(""), delayMs(NO_DELAY_FLAG), up(false) {}
 };
 
 struct Trigger {
@@ -97,6 +98,7 @@ struct OptimizedMapping{
 
 struct Profile {
     string name;
+    string parentName;
     vector<string> programNames;
     vector<Mapping> mapping;
 };

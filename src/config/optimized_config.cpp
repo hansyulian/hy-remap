@@ -68,7 +68,6 @@ void optimizeActions(){
 }
 
 void optimizeProfiles(){
-  
   cout << "Optimizing Profiles" << endl;
   for (auto& profile:config.profiles){
     auto optimizedProfile = new OptimizedProfile;
@@ -77,7 +76,7 @@ void optimizeProfiles(){
       optimizedProfile->lowerCaseProgramNames.push_back(lowerCaseString(programName));
     }
     for (int i = 0; i < 256; i++){
-      optimizedProfile->actionIdMap[i] = -1;
+      optimizedProfile->actionIdMap[i] = NO_ACTION_FLAG;
     }
     for (auto& mapping: profile.mapping){
       auto optimizedMapping = new OptimizedMapping;
@@ -111,9 +110,9 @@ void registerAutoTriggerAndActions(){
   for (auto& profile: config.profiles){
     for (auto& mapping: profile.mapping){
       auto triggerIndex = getTriggerIndexByName(mapping.triggerName);
-      if (triggerIndex == -1){
+      if (triggerIndex <= NO_TRIGGER_FLAG){
         auto autoKeyCode = getKeyCodeFromString(mapping.triggerName);
-        if (autoKeyCode != -1){
+        if (autoKeyCode > NO_KEYCODE_FLAG){
           auto trigger = new Trigger;
           trigger->key = mapping.triggerName;
           trigger->name = mapping.triggerName;
@@ -122,9 +121,9 @@ void registerAutoTriggerAndActions(){
         }
       }
       auto actionIndex = getActionIndexByName(mapping.actionName);
-      if (actionIndex == -1){
+      if (actionIndex <= NO_ACTION_FLAG){
         auto autoKeyCode = getKeyCodeFromString(mapping.actionName);
-        if (autoKeyCode != -1){
+        if (autoKeyCode > NO_KEYCODE_FLAG){
           auto action = new Action;
           action->type = ActionType::SIMPLE;
           action->simple.keys.push_back(mapping.actionName);
@@ -137,11 +136,14 @@ void registerAutoTriggerAndActions(){
   }
 }
 
+void optimizeProfileInheritance(){}
+
 void optimizeConfig(){
   optimizeTriggers();
   optimizeActions();
   registerAutoTriggerAndActions();
-  optimizeProfiles();  
+  optimizeProfiles();
+  optimizeProfileInheritance();
   for (auto& optimizedAction:optimizedActions){
     auto profileName = optimizedAction.action->profileShift.profileName;
     if (!profileName.empty()){

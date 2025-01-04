@@ -2,7 +2,7 @@
 
 OptimizedTrigger* getTriggerByName(const string& name) {
     int index = getTriggerIndexByName(name);  // Get the index of the Trigger by name
-    if (index != -1) {
+    if (index > NO_TRIGGER_FLAG) {
         return &optimizedTriggers[index];  // Return the Trigger if found
     }
     return nullptr;  // Return nullptr if the Trigger is not found
@@ -14,5 +14,5 @@ int getTriggerIndexByName(const string& name){
       return i;
     }
   }
-  return -1;
+  return NO_TRIGGER_FLAG;
 }

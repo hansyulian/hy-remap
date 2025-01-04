@@ -99,7 +99,7 @@ void debugOptimizedProfile(const OptimizedProfile& optimizedProfile){
   }
   cout << "\n\t\taction code map:\n";
   for (int i = 0; i < 256; i++){
-    if (actionIdMap[i] != -1){
+    if (actionIdMap[i] != NO_ACTION_FLAG){
       cout << "\t\t\t" <<i << "\t-> " << actionIdMap[i] << endl;
     }
   }

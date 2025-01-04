@@ -9,7 +9,7 @@ bool isValidMacroExecutionCondition(const OptimizedAction& action, DWORD process
 }
 
 void executeMacroItem(const OptimizedMacroItem& macroItem, const OptimizedAction& action, DWORD processId){
-  if (isValidMacroExecutionCondition(action, processId) && macroItem.keyCode > -1){
+  if (isValidMacroExecutionCondition(action, processId) && macroItem.keyCode > NO_KEYCODE_FLAG){
     handleMappedInput( macroItem.keyCode, macroItem.up);
   }
   if (isValidMacroExecutionCondition(action, processId) && macroItem.delayMs > 0){
@@ -112,7 +112,7 @@ void performMacroAction(const OptimizedAction& action, const KeyAction& inputTri
     case MacroRepeatMode::TOGGLE:
       if (isMacroActionThreadRunning(action)){
         // cout << "Executing Toggle macro" << endl;
-        keyDownActionIndex[inputTrigger.keyCode] = -1;
+        keyDownActionIndex[inputTrigger.keyCode] = NO_ACTION_FLAG;
         stopMacroThread(action);
       } else {        
         // cout << "Stopping Toggle macro" << endl;      

@@ -8,12 +8,12 @@ bool processInputRemapping(const KeyAction& inputTrigger){
     auto keyCode = inputTrigger.keyCode;
     auto up = inputTrigger.up;
     auto profileIndex = getActiveProfileIndex(); // profile is guaranteed to exist, at least the default profile
-    if (profileIndex == -1){
+    if (profileIndex <= NO_PROFILE_FLAG){
         return false;
     }
     
     auto actionIndex = optimizedProfiles[profileIndex].actionIdMap[keyCode];
-    if (actionIndex == -1){
+    if (actionIndex <= NO_ACTION_FLAG){
         return false;
     }
     const OptimizedAction action = optimizedActions[actionIndex];

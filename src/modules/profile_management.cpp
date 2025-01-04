@@ -2,12 +2,12 @@
 
 int getActiveProfileIndex() {
     // cout << "get active profile index" << endl;
-    if (overrideProfileIndex != -1) {
+    if (overrideProfileIndex > NO_PROFILE_FLAG) {
         return overrideProfileIndex; // Return override if set
     }
     // cout << "window title " << windowTitleString << endl;
     // Check cache for a match
-    if (profileCacheIndex != -1) {
+    if (profileCacheIndex > NO_PROFILE_FLAG) {
         return profileCacheIndex;
     }
 
@@ -17,7 +17,7 @@ int getActiveProfileIndex() {
 
 void refreshProfileCache(){
   auto currentWindowInfo = getCurrentWindowInfo();
-  if (profileCacheIndex != -1 && windowInfoCache.processId == currentWindowInfo.processId){
+  if (profileCacheIndex != NO_PROFILE_FLAG && windowInfoCache.processId == currentWindowInfo.processId){
     return;
   }
   for (int i = 0; i < 256; i++){

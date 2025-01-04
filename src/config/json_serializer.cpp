@@ -79,6 +79,9 @@ void from_json(const json& j, Mapping& var) {
 void from_json(const json& j, Profile& var) {
     
     j.at("name").get_to(var.name);
+    if (j.contains("parentName")){
+        j.at("parentName").get_to(var.parentName);
+    }
 
     // Set programNames to an empty vector if not defined
     if (j.contains("programNames")) {

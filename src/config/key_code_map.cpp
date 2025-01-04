@@ -148,7 +148,8 @@ map<string, int> keyCodeMap = {
     {"PREV_TRACK", VK_MEDIA_PREV_TRACK}, // {0xB1}   {177}  {PREV_TRACK}
 
     // extra bind namings
-    {"WHEEL_UP", HR_WHEEL_UP },  // Custom code for wheel up
-    {"WHEEL_DOWN", HR_WHEEL_DOWN},// Custom code for wheel down
-    {"TERMINATE_ACTION",HR_TERMINATE_ACTION}
+    {"WHEEL_UP", VK_HR_WHEEL_UP },  // Custom code for wheel up
+    {"WHEEL_DOWN", VK_HR_WHEEL_DOWN},// Custom code for wheel down
+    {"TERMINATE_ACTION",VK_HR_TERMINATE_ACTION},
+    {"DEFAULT_ACTION",VK_HR_DEFAULT_ACTION}
 };

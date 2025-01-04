@@ -13,6 +13,9 @@ bool processInputRemapping(const KeyAction& inputTrigger){
     }
     
     auto actionIndex = optimizedProfiles[profileIndex].actionIdMap[keyCode];
+    if (actionIndex == TERMINATE_ACTION_FLAG){
+        return true;
+    }
     if (actionIndex <= NO_ACTION_FLAG){
         return false;
     }

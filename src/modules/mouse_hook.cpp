@@ -62,7 +62,6 @@ LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam) {
         KeyAction inputTrigger;
         inputTrigger.up = isKeyUp;
         inputTrigger.keyCode = keyCode;
-        
         if (keyCode > NO_KEYCODE_FLAG && profileShiftButtonHold[keyCode] && !isKeyUp){
             return 1;
         }

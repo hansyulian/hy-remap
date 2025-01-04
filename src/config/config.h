@@ -10,11 +10,15 @@ void loadConfig();
 void optimizeConfig();
 
 
-void from_json(const json& j, Trigger& t);
-void from_json(const json& j, Action& a);
-void from_json(const json& j, Mapping& m);
-void from_json(const json& j, Profile& p);
-void from_json(const json& j, Config& c);
+void from_json(const json& j, Trigger& var);
+void from_json(const json& j, Action& var);
+void from_json(const json& j, Mapping& var);
+void from_json(const json& j, Profile& var);
+void from_json(const json& j, Config& var);
+void from_json(const json& j, SimpleAction& var);
+void from_json(const json& j, MacroAction& var);
+void from_json(const json& j, ProfileShiftAction& var);
+void from_json(const json& j, RunProgramAction& var);
 
 
 #endif

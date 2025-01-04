@@ -10,7 +10,7 @@ OptimizedTrigger* getTriggerByName(const string& name) {
 
 int getTriggerIndexByName(const string& name){
   for (int i = 0; i < optimizedTriggers.size(); i++){
-    if (optimizedTriggers[i].name == name){
+    if (optimizedTriggers[i].trigger->name == name){
       return i;
     }
   }

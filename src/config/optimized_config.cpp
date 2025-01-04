@@ -1,16 +1,59 @@
 #include "config.h"
 #include "../utils/utils.h"
 
+OptimizedTrigger registerOptimizedTrigger(Trigger *trigger){
+    OptimizedTrigger optimizedTrigger;
+    optimizedTrigger.trigger = trigger;
+    optimizedTrigger.keyCode = getKeyCodeFromString(trigger->key);
+    optimizedTrigger.index = optimizedTriggers.size();
+    optimizedTriggers.push_back(optimizedTrigger);
+    return optimizedTrigger;
+}
+
+OptimizedAction registerOptimizedAction(Action *action){  
+  OptimizedAction optimizedAction;
+  optimizedAction.action = action;
+  optimizedAction.runProgramPath = &action->runProgram.path;
+  optimizedAction.type = action->type;
+  optimizedAction.index = optimizedActions.size();
+  switch (optimizedAction.type){
+    case ActionType::SIMPLE:
+      for (auto& key:action->simple.keys){
+        auto keyCode = getKeyCodeFromString(key);
+        optimizedAction.keyCodes.push_back(keyCode);
+      }
+      break;
+    case ActionType::PROFILE_SHIFT:
+      break;
+    case ActionType::MACRO:
+      auto macro = action->macro;
+      optimizedAction.macroRepeatDelayMs = macro.repeatDelayMs;
+      optimizedAction.macroRepeatMode = macro.repeatMode;
+      
+      for (auto& macroItem:macro.items){
+        OptimizedMacroItem optimizedMacroItem = {};
+        optimizedMacroItem.key = macroItem.key;
+        optimizedMacroItem.up = macroItem.up;
+        optimizedMacroItem.delayMs = macroItem.delayMs;
+        optimizedMacroItem.keyCode = getKeyCodeFromString(macroItem.key);
+        optimizedAction.optimizedMacroItems.push_back(optimizedMacroItem);
+      }
+      if (optimizedAction.macroRepeatMode != MacroRepeatMode::NONE && optimizedAction.macroRepeatDelayMs > 0){
+        OptimizedMacroItem optimizedMacroItem = {};
+        optimizedMacroItem.delayMs = optimizedAction.macroRepeatDelayMs;
+        optimizedAction.optimizedMacroItems.push_back(optimizedMacroItem);
+      }
+      break;
+  }
+  optimizedActions.push_back(optimizedAction);
+  return optimizedAction;
+}
+
 void optimizeTriggers(){
   cout << "Optimizing Triggers" << endl;
   for (auto& trigger: config.triggers){
-    OptimizedTrigger optimizedTrigger;
-    optimizedTrigger.key = trigger.key;
-    optimizedTrigger.keyCode = getKeyCodeFromString(trigger.key);
-    optimizedTrigger.name = trigger.name;
-    optimizedTrigger.index = optimizedTriggers.size();
-    optimizedTriggers.push_back(optimizedTrigger);
-    cout << "Trigger: "<< optimizedTrigger.index << " " << optimizedTrigger.name << endl;
+    auto optimizedTrigger = registerOptimizedTrigger(&trigger);
+    cout << "Trigger: "<< optimizedTrigger.index << " " << optimizedTrigger.trigger->name << endl;
   }
 }
 
@@ -18,43 +61,8 @@ void optimizeActions(){
   
   cout << "Optimizing Actions" << endl;
   for (auto& action:config.actions){
-    OptimizedAction optimizedAction;
-    optimizedAction.name = action.name;
-    optimizedAction.keys = &action.keys;
-    optimizedAction.profileName = action.profileName;
-    optimizedAction.programPath = action.programPath;
-    optimizedAction.type = action.type;
-    optimizedAction.index = optimizedActions.size();
-    switch (optimizedAction.type){
-      case ActionType::SIMPLE:
-        for (auto& key:action.keys){
-          auto keyCode = getKeyCodeFromString(key);
-          optimizedAction.keyCodes.push_back(keyCode);
-        }
-        break;
-      case ActionType::PROFILE_SHIFT:
-        break;
-      case ActionType::MACRO:
-        optimizedAction.macroRepeatDelayMs = action.macroRepeatDelayMs;
-        optimizedAction.macroRepeatMode = action.macroRepeatMode;
-        
-        for (auto& macroItem:action.macroItems){
-          OptimizedMacroItem optimizedMacroItem = {};
-          optimizedMacroItem.key = macroItem.key;
-          optimizedMacroItem.up = macroItem.up;
-          optimizedMacroItem.delayMs = macroItem.delayMs;
-          optimizedMacroItem.keyCode = getKeyCodeFromString(macroItem.key);
-          optimizedAction.optimizedMacroItems.push_back(optimizedMacroItem);
-        }
-        if (optimizedAction.macroRepeatMode != MacroRepeatMode::NONE && optimizedAction.macroRepeatDelayMs > 0){
-          OptimizedMacroItem optimizedMacroItem = {};
-          optimizedMacroItem.delayMs = optimizedAction.macroRepeatDelayMs;
-          optimizedAction.optimizedMacroItems.push_back(optimizedMacroItem);
-        }
-        break;
-    }
-    optimizedActions.push_back(optimizedAction);
-    cout << "Trigger: "<< optimizedAction.index << " " << optimizedAction.name << endl;
+    auto optimizedAction = registerOptimizedAction(&action);
+    cout << "Trigger: "<< optimizedAction.index << " " << optimizedAction.action->name << endl;
   }
   macroActionThreads.resize(optimizedActions.size());
 }
@@ -64,9 +72,7 @@ void optimizeProfiles(){
   cout << "Optimizing Profiles" << endl;
   for (auto& profile:config.profiles){
     OptimizedProfile optimizedProfile;
-    optimizedProfile.name = profile.name;
-    optimizedProfile.mapping = &profile.mapping;
-    optimizedProfile.programNames = &profile.programNames;
+    optimizedProfile.profile = &profile;
     for (const auto& programName :profile.programNames){
       optimizedProfile.lowerCaseProgramNames.push_back(lowerCaseString(programName));
     }
@@ -75,8 +81,7 @@ void optimizeProfiles(){
     }
     for (auto& mapping: profile.mapping){
       OptimizedMapping optimizedMapping;
-      optimizedMapping.actionName = mapping.actionName;
-      optimizedMapping.triggerName = mapping.triggerName;
+      optimizedMapping.mapping = &mapping;
       int triggerIndex = getTriggerIndexByName(mapping.triggerName);
       optimizedMapping.triggerIndex = triggerIndex;
       int actionIndex = getActionIndexByName(mapping.actionName);
@@ -86,17 +91,36 @@ void optimizeProfiles(){
     }
     optimizedProfile.index = optimizedProfiles.size();
     optimizedProfiles.push_back(optimizedProfile);
-    cout << "Profile: "<< optimizedProfile.index << " " << optimizedProfile.name << endl;
+    cout << "Profile: "<< optimizedProfile.index << " " << optimizedProfile.profile->name << endl;
+  }
+}
+
+void optimizeTriggerAndActionShortcuts(){
+  for (auto& profile: config.profiles){
+    for (auto& mapping: profile.mapping){
+      auto triggerIndex = getTriggerIndexByName(mapping.triggerName);
+      if (triggerIndex == -1){
+        OptimizedTrigger optimizedTrigger;
+        
+        optimizedTriggers.push_back(optimizedTrigger);
+      }
+      auto actionIndex = getActionIndexByName(mapping.actionName);
+      if (actionIndex == -1){
+
+      }
+    }
   }
 }
 
 void optimizeConfig(){
   optimizeTriggers();
   optimizeActions();
+  optimizeTriggerAndActionShortcuts();
   optimizeProfiles();  
   for (auto& optimizedAction:optimizedActions){
-    if (!optimizedAction.profileName.empty()){
-      optimizedAction.profileIndex = getProfileIndexByName(optimizedAction.profileName);
+    auto profileName = optimizedAction.action->profileShift.profileName;
+    if (!profileName.empty()){
+      optimizedAction.profileIndex = getProfileIndexByName(profileName);
     }
   }
   defaultProfileIndex = getProfileIndexByName(config.defaultProfileName);

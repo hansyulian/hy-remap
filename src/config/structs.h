@@ -127,7 +127,7 @@ struct Config {
     vector<Action> actions;
     vector<Profile> profiles;
     string defaultProfileName;
-
+    string rootProfileName;
 };
 
 struct KeyAction {

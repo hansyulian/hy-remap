@@ -103,5 +103,10 @@ void from_json(const json& j, Config& var) {
     j.at("triggers").get_to(var.triggers);
     j.at("actions").get_to(var.actions);
     j.at("profiles").get_to(var.profiles);
-    j.at("defaultProfileName").get_to(var.defaultProfileName);
+    if (j.contains("defaultProfileName")){
+        j.at("defaultProfileName").get_to(var.defaultProfileName);
+    }
+    if (j.contains("rootProfileName")){
+        j.at("rootProfileName").get_to(var.rootProfileName);
+    }
 }

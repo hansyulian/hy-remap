@@ -12,6 +12,7 @@ WindowInfo windowInfoCache;
 int profileCacheIndex = NO_PROFILE_FLAG;
 int overrideProfileIndex = NO_PROFILE_FLAG;
 int defaultProfileIndex = NO_PROFILE_FLAG;
+int rootProfileIndex = NO_PROFILE_FLAG;
 int triggerActionIndexMap[256];
 int keyDownActionIndex[256];
 bool profileShiftButtonHold[256];

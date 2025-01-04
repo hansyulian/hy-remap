@@ -24,6 +24,7 @@ extern map<string,int> keyCodeMap;
 
 extern int overrideProfileIndex;
 extern int defaultProfileIndex;
+extern int rootProfileIndex;
 extern WindowInfo windowInfoCache;
 extern int profileCacheIndex;
 extern int triggerActionIndexMap[256];

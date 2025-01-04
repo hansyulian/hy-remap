@@ -170,7 +170,23 @@ void optimizeProfileInheritance()
     {
       optimizedProfileReference = &optimizedProfiles[optimizedProfileReference->parentIndex];
       int *currentActionIdMap = optimizedProfileReference->actionIdMap;
-      for (int i = 0; i < 256; ++i)
+      for (int i = 0; i < 256; i++)
+      {
+        if (profileActionIdMap[i] == TERMINATE_ACTION_FLAG)
+        {
+          continue;
+        }
+        if (profileActionIdMap[i] > NO_ACTION_FLAG)
+        {
+          continue;
+        }
+        profileActionIdMap[i] = currentActionIdMap[i];
+      }
+    }
+    if (rootProfileIndex != NO_PROFILE_FLAG){
+      optimizedProfileReference = &optimizedProfiles[rootProfileIndex];
+      int *currentActionIdMap = optimizedProfileReference->actionIdMap;
+      for (int i = 0; i < 256; i++)
       {
         if (profileActionIdMap[i] == TERMINATE_ACTION_FLAG)
         {
@@ -202,6 +218,7 @@ void optimizeConfig()
     }
   }
   defaultProfileIndex = getProfileIndexByName(config.defaultProfileName);
+  rootProfileIndex = getProfileIndexByName(config.rootProfileName);
   debugOptimizedConfig();
   isMacroActionThreadRunnings.resize(optimizedActions.size());
 }

@@ -7,7 +7,7 @@ void debugOptimizedConfig();
 int getKeyCodeFromString(const string& key);
 string loadConfigString();
 void loadConfig();
-void calculateOptimizedConfig();
+void optimizeConfig();
 
 
 void from_json(const json& j, Trigger& t);

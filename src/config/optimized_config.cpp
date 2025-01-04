@@ -1,7 +1,7 @@
 #include "config.h"
 #include "../utils/utils.h"
 
-void calculateOptimizedConfig(){
+void optimizeTriggers(){
   cout << "Optimizing Triggers" << endl;
   for (auto& trigger: config.triggers){
     OptimizedTrigger optimizedTrigger;
@@ -12,6 +12,10 @@ void calculateOptimizedConfig(){
     optimizedTriggers.push_back(optimizedTrigger);
     cout << "Trigger: "<< optimizedTrigger.index << " " << optimizedTrigger.name << endl;
   }
+}
+
+void optimizeActions(){
+  
   cout << "Optimizing Actions" << endl;
   for (auto& action:config.actions){
     OptimizedAction optimizedAction;
@@ -53,7 +57,10 @@ void calculateOptimizedConfig(){
     cout << "Trigger: "<< optimizedAction.index << " " << optimizedAction.name << endl;
   }
   macroActionThreads.resize(optimizedActions.size());
-  isMacroActionThreadRunnings.resize(optimizedActions.size());
+}
+
+void optimizeProfiles(){
+  
   cout << "Optimizing Profiles" << endl;
   for (auto& profile:config.profiles){
     OptimizedProfile optimizedProfile;
@@ -81,6 +88,12 @@ void calculateOptimizedConfig(){
     optimizedProfiles.push_back(optimizedProfile);
     cout << "Profile: "<< optimizedProfile.index << " " << optimizedProfile.name << endl;
   }
+}
+
+void optimizeConfig(){
+  optimizeTriggers();
+  optimizeActions();
+  optimizeProfiles();  
   for (auto& optimizedAction:optimizedActions){
     if (!optimizedAction.profileName.empty()){
       optimizedAction.profileIndex = getProfileIndexByName(optimizedAction.profileName);
@@ -88,4 +101,6 @@ void calculateOptimizedConfig(){
   }
   defaultProfileIndex = getProfileIndexByName(config.defaultProfileName);
   debugOptimizedConfig();
+  isMacroActionThreadRunnings.resize(optimizedActions.size());
+  
 }

@@ -26,7 +26,7 @@ int main() {
     cout << "Loading Config" << endl;
     loadConfig();
     cout << "Optimizing Config" << endl;
-    calculateOptimizedConfig();
+    optimizeConfig();
 
     cout << "Key remapper is running..." << endl;
     cout << "Build Date: " << __DATE__ << endl;

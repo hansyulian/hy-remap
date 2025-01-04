@@ -33,7 +33,7 @@ void macroThreadExecution(const OptimizedAction& action){
   auto index = action.index;
   auto processId = windowInfoCache.processId; // use this to ensure later that if the window name change, then we cancel execution
   auto hwnd = windowInfoCache.hwnd;
-  // cout << "macro repeat mode " << action.macroRepeatMode << endl;
+  // cout << "macro repeat mode " << action.repeatMode << endl;
   if (action.macroRepeatMode == MacroRepeatMode::NONE){
 
     // cout << "non repeating macro" << endl;

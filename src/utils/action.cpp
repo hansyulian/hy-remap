@@ -10,7 +10,7 @@ OptimizedAction* getActionByName(const string& name) {
 
 int getActionIndexByName(const string& name){
   for (int i = 0; i < optimizedActions.size(); i++){
-    if (optimizedActions[i].name == name){
+    if (optimizedActions[i].action->name == name){
       return i;
     }
   }

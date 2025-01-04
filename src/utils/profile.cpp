@@ -10,7 +10,7 @@ OptimizedProfile* getProfileByName(const string& name) {
 
 int getProfileIndexByName(const string& name){
   for (int i = 0; i < optimizedProfiles.size(); i++){
-    if (optimizedProfiles[i].name == name){
+    if (optimizedProfiles[i].profile->name == name){
       return i;
     }
   }

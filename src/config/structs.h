@@ -32,49 +32,54 @@ struct Trigger {
 
 struct OptimizedTrigger{
     int index;
-    string name;
-    string key;
     int keyCode;
+    Trigger* trigger;
+};
+
+struct SimpleAction{
+    vector<string> keys;    
+};
+
+struct ProfileShiftAction{
+    string profileName;
+};
+
+struct MacroAction{
+    vector<MacroItem> items;
+    MacroRepeatMode repeatMode;
+    int repeatDelayMs;
+};
+
+struct RunProgramAction{
+    string path;
 };
 
 struct Action {
     string name;
     ActionType type;
-    // for simple
-    vector<string> keys;
-
-    // for profile shift
-    string profileName;
-
-    // for macro
-    vector<MacroItem> macroItems;
-    MacroRepeatMode macroRepeatMode;
-    int macroRepeatDelayMs;
-    
+    SimpleAction simple;
+    ProfileShiftAction profileShift;
+    MacroAction macro;
+    RunProgramAction runProgram;
     // for run program
-    string programPath;
 };
 
 struct OptimizedAction{
     int index;
-    string name;
     ActionType type;
-    
+    Action* action;
     // for simple
-    vector<string> *keys;
     vector<int> keyCodes;
 
     // for profile shift
-    string profileName;
     int profileIndex;
 
     // for macro
-    vector<MacroItem> *macroItems;
     vector<OptimizedMacroItem> optimizedMacroItems;
     MacroRepeatMode macroRepeatMode;
     int macroRepeatDelayMs;
     // for run program
-    string programPath;
+    string* runProgramPath;
 };
 
 struct Mapping {
@@ -85,10 +90,9 @@ struct Mapping {
 
 struct OptimizedMapping{
     int index;
-    string triggerName;
-    string actionName;
     int triggerIndex;
     int actionIndex;
+    Mapping* mapping;
 };
 
 struct Profile {
@@ -99,12 +103,10 @@ struct Profile {
 
 struct OptimizedProfile {
     int index;
-    string name;
-    vector<string> *programNames;
     vector<string> lowerCaseProgramNames;
-    vector<Mapping> *mapping;
     vector<OptimizedMapping> optimizedMapping;
     int actionIdMap[256];
+    Profile* profile;
 };
 
 struct Config {

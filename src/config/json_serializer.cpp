@@ -1,89 +1,104 @@
 #include "config.h"
 
 // Define how to deserialize the JSON into the Trigger struct
-void from_json(const json& j, Trigger& t) {
+void from_json(const json& j, Trigger& var) {
     
-    j.at("name").get_to(t.name);
-    j.at("key").get_to(t.key);
+    j.at("name").get_to(var.name);
+    j.at("key").get_to(var.key);
 }
 
-void from_json(const json& j, MacroItem& m){
+void from_json(const json& j, MacroItem& var){
     if (j.contains("key")){
-        j.at("key").get_to(m.key);
+        j.at("key").get_to(var.key);
     }
     if (j.contains("up")){
-        j.at("up").get_to(m.up);
+        j.at("up").get_to(var.up);
     }
     if (j.contains("delayMs")){
-        j.at("delayMs").get_to(m.delayMs);
+        j.at("delayMs").get_to(var.delayMs);
     }
 }
+
+void from_json(const json& j, SimpleAction& var){
+    j.at("keys").get_to(var.keys);  // Assuming 'keys' is a list of strings
+
+}
+void from_json(const json& j, MacroAction& var){
+    j.at("items").get_to(var.items);
+    j.at("repeatDelayMs").get_to(var.repeatDelayMs);
+    string repeatMode = j.at("repeatMode").get<string>();
+    if (repeatMode == "none"){
+        var.repeatMode = MacroRepeatMode::NONE;
+    }
+    if (repeatMode == "hold"){
+        var.repeatMode = MacroRepeatMode::HOLD;
+    }
+    if (repeatMode == "toggle"){
+        var.repeatMode = MacroRepeatMode::TOGGLE;
+    }
+}
+void from_json(const json& j, ProfileShiftAction& var){    
+    j.at("profileName").get_to(var.profileName);
+}
+void from_json(const json& j, RunProgramAction& var){
+        j.at("path").get_to(var.path);
+}
+
 // Define how to deserialize the JSON into the Action struct
-void from_json(const json& j, Action& a) {
+void from_json(const json& j, Action& var) {
     
-    j.at("name").get_to(a.name);
+    j.at("name").get_to(var.name);
     
-    a.type = ActionType::SIMPLE;
+    var.type = ActionType::SIMPLE;
     string typeValue = j.at("type").get<string>();
     if (typeValue == "simple"){        
-        a.type = ActionType::SIMPLE;
-        j.at("keys").get_to(a.keys);  // Assuming 'keys' is a list of strings
+        var.type = ActionType::SIMPLE;
+        j.at("simple").get_to(var.simple); 
     }
     if (typeValue == "profileShift"){
-        a.type = ActionType::PROFILE_SHIFT;
-        j.at("profileName").get_to(a.profileName);
+        var.type = ActionType::PROFILE_SHIFT;
+        j.at("profileShift").get_to(var.profileShift);
     }
     if (typeValue == "macro"){
-        a.type = ActionType::MACRO;
-        j.at("macroItems").get_to(a.macroItems);
-        j.at("macroRepeatDelayMs").get_to(a.macroRepeatDelayMs);
-        string repeatMode = j.at("macroRepeatMode").get<string>();
-        if (repeatMode == "none"){
-            a.macroRepeatMode = MacroRepeatMode::NONE;
-        }
-        if (repeatMode == "hold"){
-            a.macroRepeatMode = MacroRepeatMode::HOLD;
-        }
-        if (repeatMode == "toggle"){
-            a.macroRepeatMode = MacroRepeatMode::TOGGLE;
-        }
+        var.type = ActionType::MACRO;
+        j.at("macro").get_to(var.macro);
     }
     if (typeValue == "runProgram"){
-        a.type = ActionType::RUN_PROGRAM;
-        j.at("programPath").get_to(a.programPath);
+        var.type = ActionType::RUN_PROGRAM;
+        j.at("runProgram").get_to(var.runProgram);
     }
 }
 
 // Define how to deserialize the JSON into the Mapping struct
-void from_json(const json& j, Mapping& m) {
-    j.at("triggerName").get_to(m.triggerName);
-    j.at("actionName").get_to(m.actionName);
+void from_json(const json& j, Mapping& var) {
+    j.at("triggerName").get_to(var.triggerName);
+    j.at("actionName").get_to(var.actionName);
 }
 
 // Define how to deserialize the JSON into the Profile struct
-void from_json(const json& j, Profile& p) {
+void from_json(const json& j, Profile& var) {
     
-    j.at("name").get_to(p.name);
+    j.at("name").get_to(var.name);
 
     // Set programNames to an empty vector if not defined
     if (j.contains("programNames")) {
-        j.at("programNames").get_to(p.programNames);
+        j.at("programNames").get_to(var.programNames);
     } else {
-        p.programNames = {}; // Assign an empty vector
+        var.programNames = {}; // Assign an empty vector
     }
 
     // Set mapping to an empty vector if not defined
     if (j.contains("mapping")) {
-        j.at("mapping").get_to(p.mapping);
+        j.at("mapping").get_to(var.mapping);
     } else {
-        p.mapping = {}; // Assign an empty vector
+        var.mapping = {}; // Assign an empty vector
     }
 }
 
 // Define how to deserialize the JSON into the Config struct
-void from_json(const json& j, Config& c) {
-    j.at("triggers").get_to(c.triggers);
-    j.at("actions").get_to(c.actions);
-    j.at("profiles").get_to(c.profiles);
-    j.at("defaultProfileName").get_to(c.defaultProfileName);
+void from_json(const json& j, Config& var) {
+    j.at("triggers").get_to(var.triggers);
+    j.at("actions").get_to(var.actions);
+    j.at("profiles").get_to(var.profiles);
+    j.at("defaultProfileName").get_to(var.defaultProfileName);
 }

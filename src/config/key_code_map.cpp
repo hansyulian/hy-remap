@@ -110,6 +110,8 @@ map<string, int> keyCodeMap = {
     {"LEFTBRACKET", VK_OEM_4},     // {0xDB}    {219}   {[}
     {"RIGHTBRACKET", VK_OEM_6},    // {0xDD}    {221}   {]}
     {"BACKSLASH", VK_OEM_5},       // {0xDC}    {220}   {\}
+    {"MINUS", VK_OEM_MINUS},     // {0xBD}   {189}   {-}
+    {"EQUAL", VK_OEM_PLUS},      // {0xBB}   {187}   {=}
 
     // Other common keys
     {"NUMLOCK", VK_NUMLOCK},        // {0x90}   {144}  {NUMLOCK}

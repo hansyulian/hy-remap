@@ -25,12 +25,12 @@ While the software provides many features, there are some current limitations du
 - **Run Program**: Set macros to launch programs or applications.
 - **Scroll Remapping**: Remap the scroll wheel to any action, enhancing its functionality.
 - **Active Window Detection**: Automatically adjust macros based on the active window.
+- **Profile Stacking**: Create a child profile from an existing profile, allowing for selective remapping while maintaining the rest of the actions.
 
 ### Backlog Features:
 
 - **Toggle Hold Keypress**: A toggle feature to hold key presses, useful for walking in FPS games, and applicable to various applications.
 - **MIDI Input Remap**: Remap MIDI inputs, which can be helpful for musicians or sound designers.
-- **Profile Stacking**: Create a child profile from an existing profile, allowing for selective remapping while maintaining the rest of the actions.
 - **Profile Switching**: Switch between profiles based on certain triggers or conditions.
 
 ### Workaround:

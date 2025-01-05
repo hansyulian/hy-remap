@@ -9,9 +9,9 @@
 #include <optional>
 #include <nlohmann/json.hpp>
 #include <thread>
-#include "config/structs.h"
-#include "config/enums.h"
-#include "config/const.h"
+#include "structs.h"
+#include "enums.h"
+#include "const.h"
 
 using json = nlohmann::json;
 using namespace std;

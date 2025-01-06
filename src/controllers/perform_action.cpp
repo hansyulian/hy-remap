@@ -1,4 +1,4 @@
-#include "modules.h"
+#include "controllers.h"
 #include "iostream"
 #include "../actions/actions.h"
 
@@ -14,7 +14,10 @@ void performAction(const OptimizedAction& action, const KeyAction& inputTrigger)
             performMacroAction(action, inputTrigger);
             break;
         case ActionType::RUN_PROGRAM:
-            performRunProgram(action, inputTrigger);
+            performRunProgramAction(action, inputTrigger);
+            break;
+        case ActionType::AUDIO_MIXER:
+            performAudioMixerAction(action,inputTrigger);
             break;
     }
 }

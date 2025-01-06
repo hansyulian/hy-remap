@@ -53,6 +53,12 @@ struct MacroAction{
     int repeatDelayMs;
 };
 
+struct AudioMixerAction{
+    string processName;
+    float value;
+    AudioMixerControlType type;
+};
+
 struct RunProgramAction{
     string path;
 };
@@ -64,6 +70,7 @@ struct Action {
     ProfileShiftAction profileShift;
     MacroAction macro;
     RunProgramAction runProgram;
+    AudioMixerAction audioMixer;
     // for run program
 };
 
@@ -82,7 +89,6 @@ struct OptimizedAction{
     MacroRepeatMode macroRepeatMode;
     int macroRepeatDelayMs;
     // for run program
-    string* runProgramPath;
 
     OptimizedAction(): profileIndex(NO_PROFILE_FLAG), macroRepeatDelayMs(NO_DELAY_FLAG) {};
 };

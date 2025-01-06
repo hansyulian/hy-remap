@@ -15,41 +15,40 @@ OptimizedAction *registerOptimizedAction(Action *action)
 {
   auto optimizedAction = new OptimizedAction;
   optimizedAction->action = action;
-  optimizedAction->runProgramPath = &action->runProgram.path;
   optimizedAction->type = action->type;
   optimizedAction->index = optimizedActions.size();
   switch (optimizedAction->type)
   {
-  case ActionType::SIMPLE:
-    for (auto &key : action->simple.keys)
-    {
-      auto keyCode = getKeyCodeFromString(key);
-      optimizedAction->keyCodes.push_back(keyCode);
-    }
-    break;
-  case ActionType::PROFILE_SHIFT:
-    break;
-  case ActionType::MACRO:
-    auto macro = action->macro;
-    optimizedAction->macroRepeatDelayMs = macro.repeatDelayMs;
-    optimizedAction->macroRepeatMode = macro.repeatMode;
+    case ActionType::SIMPLE:
+      for (auto &key : action->simple.keys)
+      {
+        auto keyCode = getKeyCodeFromString(key);
+        optimizedAction->keyCodes.push_back(keyCode);
+      }
+      break;
+    case ActionType::PROFILE_SHIFT:
+      break;
+    case ActionType::MACRO:
+      auto macro = action->macro;
+      optimizedAction->macroRepeatDelayMs = macro.repeatDelayMs;
+      optimizedAction->macroRepeatMode = macro.repeatMode;
 
-    for (auto &macroItem : macro.items)
-    {
-      auto optimizedMacroItem = new OptimizedMacroItem;
-      optimizedMacroItem->key = macroItem.key;
-      optimizedMacroItem->up = macroItem.up;
-      optimizedMacroItem->delayMs = macroItem.delayMs;
-      optimizedMacroItem->keyCode = getKeyCodeFromString(macroItem.key);
-      optimizedAction->optimizedMacroItems.push_back(*optimizedMacroItem);
-    }
-    if (optimizedAction->macroRepeatMode != MacroRepeatMode::NONE && optimizedAction->macroRepeatDelayMs > 0)
-    {
-      auto optimizedMacroItem = new OptimizedMacroItem;
-      optimizedMacroItem->delayMs = optimizedAction->macroRepeatDelayMs;
-      optimizedAction->optimizedMacroItems.push_back(*optimizedMacroItem);
-    }
-    break;
+      for (auto &macroItem : macro.items)
+      {
+        auto optimizedMacroItem = new OptimizedMacroItem;
+        optimizedMacroItem->key = macroItem.key;
+        optimizedMacroItem->up = macroItem.up;
+        optimizedMacroItem->delayMs = macroItem.delayMs;
+        optimizedMacroItem->keyCode = getKeyCodeFromString(macroItem.key);
+        optimizedAction->optimizedMacroItems.push_back(*optimizedMacroItem);
+      }
+      if (optimizedAction->macroRepeatMode != MacroRepeatMode::NONE && optimizedAction->macroRepeatDelayMs > 0)
+      {
+        auto optimizedMacroItem = new OptimizedMacroItem;
+        optimizedMacroItem->delayMs = optimizedAction->macroRepeatDelayMs;
+        optimizedAction->optimizedMacroItems.push_back(*optimizedMacroItem);
+      }
+      break;
   }
   optimizedActions.push_back(*optimizedAction);
   return optimizedAction;

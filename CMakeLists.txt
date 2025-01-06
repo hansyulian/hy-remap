@@ -17,10 +17,10 @@ endif()
 # Set additional flags for different build types
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
     # Enable optimizations
-    set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
+    set(CMAKE_CXX_FLAGS_RELEASE "-lole32 -loleaut32 -lpsapi -O3 -DNDEBUG  -mwindows")
 elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
     # Enable debugging symbols
-    set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
+    set(CMAKE_CXX_FLAGS_DEBUG "-lole32 -loleaut32 -lpsapi -g -O0")
 endif()
 
 # Add source files
@@ -35,13 +35,15 @@ set(SOURCES
     src/actions/profile_shift.cpp
     src/actions/simple.cpp
     src/actions/run_program.cpp
-    src/modules/input_remapping.cpp
-    src/modules/hook_manager.cpp
-    src/modules/keyboard_hook.cpp
-    src/modules/mouse_hook.cpp
-    src/modules/perform_action.cpp
-    src/modules/profile_management.cpp
-    src/modules/release_action.cpp
+    src/actions/audio_mixer.cpp
+    src/controllers/input_remapping.cpp
+    src/controllers/hook_manager.cpp
+    src/controllers/keyboard_hook.cpp
+    src/controllers/mouse_hook.cpp
+    src/controllers/perform_action.cpp
+    src/controllers/profile_management.cpp
+    src/controllers/release_action.cpp
+    src/modules/audio_mixer_control.cpp
     src/utils/action.cpp
     src/utils/input.cpp
     src/utils/profile.cpp
@@ -71,3 +73,10 @@ endif()
 
 # Optionally, set up installation targets for cross-platform deployment (uncomment if needed)
 # install(TARGETS HyRemap DESTINATION bin)
+
+# Add preprocessor definitions after the target is created
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    target_compile_definitions(HyRemap PRIVATE DEBUG_BUILD=1)
+elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+    target_compile_definitions(HyRemap PRIVATE RELEASE_BUILD=1)
+endif()

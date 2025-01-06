@@ -41,7 +41,31 @@ void from_json(const json& j, ProfileShiftAction& var){
     j.at("profileName").get_to(var.profileName);
 }
 void from_json(const json& j, RunProgramAction& var){
-        j.at("path").get_to(var.path);
+    j.at("path").get_to(var.path);
+}
+void from_json(const json& j, AudioMixerAction& var){
+    if (j.contains("processName")){
+        j.at("processName").get_to(var.processName);
+    }
+    if (j.contains("value")){
+        j.at("value").get_to(var.value);
+    }
+    string type = j.at("type").get<string>();
+    if (type == "set"){
+        var.type = AudioMixerControlType::SET;
+    }
+    if (type == "add"){
+        var.type = AudioMixerControlType::ADD;
+    }
+    if (type == "toggle"){
+        var.type = AudioMixerControlType::TOGGLE_MUTE;
+    }
+    if (type == "mute"){
+        var.type = AudioMixerControlType::MUTE;
+    }
+    if (type == "unmute"){
+        var.type = AudioMixerControlType::UNMUTE;
+    }
 }
 
 // Define how to deserialize the JSON into the Action struct
@@ -66,6 +90,10 @@ void from_json(const json& j, Action& var) {
     if (typeValue == "runProgram"){
         var.type = ActionType::RUN_PROGRAM;
         j.at("runProgram").get_to(var.runProgram);
+    }
+    if (typeValue == "audioMixer"){
+        var.type = ActionType::AUDIO_MIXER;
+        j.at("audioMixer").get_to(var.audioMixer);
     }
 }
 

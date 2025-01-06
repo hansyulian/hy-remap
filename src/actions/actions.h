@@ -14,7 +14,7 @@ void releaseProfileShiftAction(const OptimizedAction& action, int keyCode);
 void performMacroAction(const OptimizedAction& action, const KeyAction& inputTrigger);
 void releaseMacroAction(const OptimizedAction& action, bool force);
 // macro run program
-void performRunProgram(const OptimizedAction& action, const KeyAction& inputTrigger);
-
+void performRunProgramAction(const OptimizedAction& action, const KeyAction& inputTrigger);
+void performAudioMixerAction(const OptimizedAction& action, const KeyAction& inputTrigger);
 
 #endif

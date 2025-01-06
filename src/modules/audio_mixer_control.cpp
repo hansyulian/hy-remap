@@ -184,3 +184,93 @@ void setMixerVolumeByPID(DWORD pid, float value) {
 }
 
 
+// Function to mute the audio session for a process by PID
+void muteMixerByPID(DWORD pid, bool mute) {
+    CoInitialize(nullptr);
+
+    ISimpleAudioVolume* audioVolume = GetAudioSessionByPID(pid);
+    if (!audioVolume) {
+        CoUninitialize();
+        std::wcerr << L"Could not find audio session for PID: " << pid << std::endl;
+        return;
+    }
+
+    audioVolume->SetMute(mute, nullptr); // Mute or unmute the session
+    audioVolume->Release();
+
+    CoUninitialize();
+}
+
+// Function to mute the audio session for a process by name
+void muteMixerByName(const std::wstring& processName, bool mute) {
+    DWORD pid = GetPIDByProcessName(processName);
+    if (pid == 0) {
+        std::wcerr << L"Could not find process: " << processName << std::endl;
+        return;
+    }
+
+    muteMixerByPID(pid, mute);
+}
+
+// Function to get the mute state for a process by PID
+bool isMixerMutedByPID(DWORD pid) {
+    CoInitialize(nullptr);
+
+    ISimpleAudioVolume* audioVolume = GetAudioSessionByPID(pid);
+    if (!audioVolume) {
+        CoUninitialize();
+        std::wcerr << L"Could not find audio session for PID: " << pid << std::endl;
+        return false;
+    }
+
+    BOOL isMuted = FALSE;
+    audioVolume->GetMute(&isMuted); // Get the current mute state
+    audioVolume->Release();
+
+    CoUninitialize();
+    return isMuted;
+}
+// Function to toggle mute for a process by PID
+void toggleMuteMixerByPID(DWORD pid) {
+    CoInitialize(nullptr);
+
+    ISimpleAudioVolume* audioVolume = GetAudioSessionByPID(pid);
+    if (!audioVolume) {
+        CoUninitialize();
+        std::wcerr << L"Could not find audio session for PID: " << pid << std::endl;
+        return;
+    }
+
+    BOOL isMuted = FALSE;
+    audioVolume->GetMute(&isMuted); // Get the current mute state
+
+    audioVolume->SetMute(!isMuted, nullptr); // Toggle the mute state
+    audioVolume->Release();
+
+    CoUninitialize();
+
+    std::wcout << L"Audio session for PID " << pid 
+               << (isMuted ? L" unmuted." : L" muted.") << std::endl;
+}
+
+// Function to toggle mute for a process by name
+void toggleMuteMixerByName(const std::wstring& processName) {
+    DWORD pid = GetPIDByProcessName(processName);
+    if (pid == 0) {
+        std::wcerr << L"Could not find process: " << processName << std::endl;
+        return;
+    }
+
+    toggleMuteMixerByPID(pid);
+}
+
+// Function to get the mute state for a process by name
+bool isMixerMutedByName(const std::wstring& processName) {
+    DWORD pid = GetPIDByProcessName(processName);
+    if (pid == 0) {
+        std::wcerr << L"Could not find process: " << processName << std::endl;
+        return false;
+    }
+
+    return isMixerMutedByPID(pid);
+}

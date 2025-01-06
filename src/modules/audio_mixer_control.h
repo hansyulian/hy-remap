@@ -9,7 +9,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
+void initializeAudioControl();
 // Retrieves the audio session by process ID
 ISimpleAudioVolume* getAudioSessionByPID(DWORD pid);
 

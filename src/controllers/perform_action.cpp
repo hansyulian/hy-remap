@@ -17,7 +17,8 @@ void performAction(const OptimizedAction& action, const KeyAction& inputTrigger)
             performRunProgramAction(action, inputTrigger);
             break;
         case ActionType::AUDIO_MIXER:
-            performRunProgramAction(action,inputTrigger);
+            performAudioMixerAction(action,inputTrigger);
+            break;
     }
 }
 

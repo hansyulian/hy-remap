@@ -1,8 +1,10 @@
 #include "audio_mixer_control.h"
+#include <codecvt>
+#include <locale>
 
 wstring stringToWstring(const string& str) {
-    wstring wstr(str.begin(), str.end());
-    return wstring(wstr.begin(), wstr.end());
+    wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
+    return converter.from_bytes(str);
 }
 // Function to get the audio session by process ID
 ISimpleAudioVolume* getAudioSessionByPID(DWORD pid) {
@@ -71,7 +73,7 @@ DWORD getPIDByProcessName(const string& processName) {
             HANDLE processHandle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, processes[i]);
             if (processHandle) {
                 WCHAR processNameBuffer[MAX_PATH];
-                if (GetModuleBaseName(processHandle, nullptr, processNameBuffer, MAX_PATH)) {
+                if (GetModuleBaseNameW(processHandle, nullptr, processNameBuffer, MAX_PATH)) {
                     if (_wcsicmp(processNameBuffer, wProcessName.c_str()) == 0) {
                         CloseHandle(processHandle);
                         return processes[i]; // Return the PID if the name matches
@@ -92,7 +94,7 @@ float getMixerVolumeByPID(DWORD pid) {
     ISimpleAudioVolume* audioVolume = getAudioSessionByPID(pid);
     if (!audioVolume) {
         CoUninitialize();
-        cout << L"Could not find audio session for PID: " << pid << endl;
+        cout << "Could not find audio session for PID: " << pid << endl;
         return -1.0f; // Return -1 to indicate an error
     }
 
@@ -110,20 +112,20 @@ void mixerVolumeAddByPID(DWORD pid, float value){
     ISimpleAudioVolume* audioVolume = getAudioSessionByPID(pid);
     if (!audioVolume) {
         CoUninitialize();
-        cout << L"Could not find audio session for PID: " << pid << endl;
+        cout << "Could not find audio session for PID: " << pid << endl;
         return;
     }
 
     float volume = 0.0f;
     audioVolume->GetMasterVolume(&volume); // Retrieve the current volume
     volume += value;
-    if (value > 1.0){
-      value = 1.0;
+    if (volume > 1.0){
+      volume = 1.0;
     }
-    if (value < 0.0){
-      value = 0.0;
+    if (volume < 0.0){
+      volume = 0.0;
     }
-    audioVolume->SetMasterVolume(value, nullptr); // Set the volume
+    audioVolume->SetMasterVolume(volume, nullptr); // Set the volume
     audioVolume->Release();
 
     CoUninitialize();
@@ -134,10 +136,9 @@ void mixerVolumeAddByPID(DWORD pid, float value){
 float getMixerVolumeByName(const string& processName) {
     DWORD pid = getPIDByProcessName(processName);
     if (pid == 0) {
-        cout << L"Could not find process: " << processName << endl;
-        return;
+        cout << "Could not find process: " << processName << endl;
+        return -1;
     }
-
     return getMixerVolumeByPID(pid);
 }
 
@@ -145,7 +146,7 @@ float getMixerVolumeByName(const string& processName) {
 void mixerVolumeAddByName(const string& processName, float value) {
     DWORD pid = getPIDByProcessName(processName);
     if (pid == 0) {
-        cout << L"Could not find process: " << processName << endl;
+        cout << "Could not find process: " << processName << endl;
         return;
     }
 
@@ -156,7 +157,7 @@ void mixerVolumeAddByName(const string& processName, float value) {
 void setMixerVolumeByName(const string& processName, float value) {
     DWORD pid = getPIDByProcessName(processName);
     if (pid == 0) {
-        cout << L"Could not find process: " << processName << endl;
+        cout << "Could not find process: " << processName << endl;
         return;
     }
 
@@ -177,7 +178,7 @@ void setMixerVolumeByPID(DWORD pid, float value) {
     ISimpleAudioVolume* audioVolume = getAudioSessionByPID(pid);
     if (!audioVolume) {
         CoUninitialize();
-        cout << L"Could not find audio session for PID: " << pid << endl;
+        cout << "Could not find audio session for PID: " << pid << endl;
         return;
     }
 
@@ -195,7 +196,7 @@ void muteMixerByPID(DWORD pid, bool mute) {
     ISimpleAudioVolume* audioVolume = getAudioSessionByPID(pid);
     if (!audioVolume) {
         CoUninitialize();
-        cout << L"Could not find audio session for PID: " << pid << endl;
+        cout << "Could not find audio session for PID: " << pid << endl;
         return;
     }
 
@@ -209,7 +210,7 @@ void muteMixerByPID(DWORD pid, bool mute) {
 void muteMixerByName(const string& processName, bool mute) {
     DWORD pid = getPIDByProcessName(processName);
     if (pid == 0) {
-        cout << L"Could not find process: " << processName << endl;
+        cout << "Could not find process: " << processName << endl;
         return;
     }
 
@@ -223,7 +224,7 @@ bool isMixerMutedByPID(DWORD pid) {
     ISimpleAudioVolume* audioVolume = getAudioSessionByPID(pid);
     if (!audioVolume) {
         CoUninitialize();
-        cout << L"Could not find audio session for PID: " << pid << endl;
+        cout << "Could not find audio session for PID: " << pid << endl;
         return false;
     }
 
@@ -241,27 +242,27 @@ void toggleMuteMixerByPID(DWORD pid) {
     ISimpleAudioVolume* audioVolume = getAudioSessionByPID(pid);
     if (!audioVolume) {
         CoUninitialize();
-        cout << L"Could not find audio session for PID: " << pid << endl;
+        cout << "Could not find audio session for PID: " << pid << endl;
         return;
     }
 
     BOOL isMuted = FALSE;
     audioVolume->GetMute(&isMuted); // Get the current mute state
-
+    
     audioVolume->SetMute(!isMuted, nullptr); // Toggle the mute state
     audioVolume->Release();
 
     CoUninitialize();
 
-    wcout << L"Audio session for PID " << pid 
-               << (isMuted ? L" unmuted." : L" muted.") << endl;
+    cout << "Audio session for PID " << pid 
+               << (isMuted ? " unmuted." : " muted.") << endl;
 }
 
 // Function to toggle mute for a process by name
 void toggleMuteMixerByName(const string& processName) {
     DWORD pid = getPIDByProcessName(processName);
     if (pid == 0) {
-        cout << L"Could not find process: " << processName << endl;
+        cout << "Could not find process: " << processName << endl;
         return;
     }
 
@@ -272,7 +273,7 @@ void toggleMuteMixerByName(const string& processName) {
 bool isMixerMutedByName(const string& processName) {
     DWORD pid = getPIDByProcessName(processName);
     if (pid == 0) {
-        cout << L"Could not find process: " << processName << endl;
+        cout << "Could not find process: " << processName << endl;
         return false;
     }
 

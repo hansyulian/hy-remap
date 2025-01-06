@@ -18,7 +18,7 @@ enum MacroRepeatMode{
 enum AudioMixerControlType{
     SET,
     ADD,
-    TOGGLE,
+    TOGGLE_MUTE,
     MUTE,
     UNMUTE
 };

@@ -8,8 +8,6 @@
 #include <psapi.h>
 #include <iostream>
 #include <string>
-#include <vector>
-#include <cstdlib>
 using namespace std;
 
 // Retrieves the audio session by process ID

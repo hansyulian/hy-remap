@@ -58,7 +58,7 @@ void from_json(const json& j, AudioMixerAction& var){
         var.type = AudioMixerControlType::ADD;
     }
     if (type == "toggle"){
-        var.type = AudioMixerControlType::TOGGLE;
+        var.type = AudioMixerControlType::TOGGLE_MUTE;
     }
     if (type == "mute"){
         var.type = AudioMixerControlType::MUTE;

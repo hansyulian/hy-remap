@@ -35,6 +35,7 @@ set(SOURCES
     src/actions/profile_shift.cpp
     src/actions/simple.cpp
     src/actions/run_program.cpp
+    src/actions/audio_mixer.cpp
     src/controllers/input_remapping.cpp
     src/controllers/hook_manager.cpp
     src/controllers/keyboard_hook.cpp

@@ -26,7 +26,7 @@ void performAudioMixerAction(const OptimizedAction& optimizedAction, const KeyAc
       case AudioMixerControlType::SET:
         setMixerVolumeByPID(pid, value);
         break;
-      case AudioMixerControlType::TOGGLE:
+      case AudioMixerControlType::TOGGLE_MUTE:
         toggleMuteMixerByPID(pid);
         break;
       

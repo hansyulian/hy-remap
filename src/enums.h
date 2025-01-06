@@ -6,12 +6,21 @@ enum ActionType {
     PROFILE_SHIFT,
     MACRO,
     RUN_PROGRAM,
+    AUDIO_MIXER,
 };
 
 enum MacroRepeatMode{
     NONE,
     HOLD,
     TOGGLE,
+};
+
+enum AudioMixerControlType{
+    SET,
+    ADD,
+    TOGGLE,
+    MUTE,
+    UNMUTE
 };
 
 #endif // ENUMS_H

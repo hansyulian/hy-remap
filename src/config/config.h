@@ -19,6 +19,7 @@ void from_json(const json& j, SimpleAction& var);
 void from_json(const json& j, MacroAction& var);
 void from_json(const json& j, ProfileShiftAction& var);
 void from_json(const json& j, RunProgramAction& var);
+void from_json(const json& j, AudioMixerAction& var);
 
 
 #endif

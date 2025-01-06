@@ -4,5 +4,5 @@ void performRunProgram(const OptimizedAction& optimizedAction, const KeyAction& 
     if (inputTrigger.up){
         return;
     }
-    runProgram(*optimizedAction.runProgramPath);
+    runProgram(optimizedAction.action->runProgram.path);
 }

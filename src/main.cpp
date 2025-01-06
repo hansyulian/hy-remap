@@ -1,6 +1,7 @@
 #include "main.h"
 #include "config/config.h"
 #include "controllers/controllers.h"
+#include "modules/audio_mixer_control.h"
 
 Config config;
 vector<OptimizedAction> optimizedActions;
@@ -35,6 +36,7 @@ int main() {
     for (int i = 0; i < 256; i++) {
         keyDownActionIndex[i] = NO_ACTION_FLAG;
     }
+    initializeAudioControl();
     // Start listening for keyboard input
     startKeyboardAndMouseHook();  // Pass the config here
 

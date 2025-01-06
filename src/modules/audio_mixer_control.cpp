@@ -2,6 +2,10 @@
 #include <codecvt>
 #include <locale>
 
+void initializeAudioControl(){
+    CoInitialize(nullptr);
+}
+
 wstring stringToWstring(const string& str) {
     wstring_convert<codecvt_utf8_utf16<wchar_t>> converter;
     return converter.from_bytes(str);
@@ -89,11 +93,11 @@ DWORD getPIDByProcessName(const string& processName) {
 
 // Function to get the mixer volume for a process
 float getMixerVolumeByPID(DWORD pid) {
-    CoInitialize(nullptr);
+    
 
     ISimpleAudioVolume* audioVolume = getAudioSessionByPID(pid);
     if (!audioVolume) {
-        CoUninitialize();
+        
         cout << "Could not find audio session for PID: " << pid << endl;
         return -1.0f; // Return -1 to indicate an error
     }
@@ -102,16 +106,16 @@ float getMixerVolumeByPID(DWORD pid) {
     audioVolume->GetMasterVolume(&volume); // Retrieve the current volume
     audioVolume->Release();
 
-    CoUninitialize();
+    
     return volume;
 }
 
 void mixerVolumeAddByPID(DWORD pid, float value){
-    CoInitialize(nullptr);
+    
 
     ISimpleAudioVolume* audioVolume = getAudioSessionByPID(pid);
     if (!audioVolume) {
-        CoUninitialize();
+        
         cout << "Could not find audio session for PID: " << pid << endl;
         return;
     }
@@ -128,7 +132,7 @@ void mixerVolumeAddByPID(DWORD pid, float value){
     audioVolume->SetMasterVolume(volume, nullptr); // Set the volume
     audioVolume->Release();
 
-    CoUninitialize();
+    
 }
 
 
@@ -167,7 +171,7 @@ void setMixerVolumeByName(const string& processName, float value) {
 
 // Function to set the mixer volume for a process
 void setMixerVolumeByPID(DWORD pid, float value) {
-    CoInitialize(nullptr);
+    
     if (value > 1.0){
       value = 1.0;
     }
@@ -177,7 +181,7 @@ void setMixerVolumeByPID(DWORD pid, float value) {
 
     ISimpleAudioVolume* audioVolume = getAudioSessionByPID(pid);
     if (!audioVolume) {
-        CoUninitialize();
+        
         cout << "Could not find audio session for PID: " << pid << endl;
         return;
     }
@@ -185,17 +189,17 @@ void setMixerVolumeByPID(DWORD pid, float value) {
     audioVolume->SetMasterVolume(value, nullptr); // Set the volume
     audioVolume->Release();
 
-    CoUninitialize();
+    
 }
 
 
 // Function to mute the audio session for a process by PID
 void muteMixerByPID(DWORD pid, bool mute) {
-    CoInitialize(nullptr);
+    
 
     ISimpleAudioVolume* audioVolume = getAudioSessionByPID(pid);
     if (!audioVolume) {
-        CoUninitialize();
+        
         cout << "Could not find audio session for PID: " << pid << endl;
         return;
     }
@@ -203,7 +207,7 @@ void muteMixerByPID(DWORD pid, bool mute) {
     audioVolume->SetMute(mute, nullptr); // Mute or unmute the session
     audioVolume->Release();
 
-    CoUninitialize();
+    
 }
 
 // Function to mute the audio session for a process by name
@@ -219,11 +223,11 @@ void muteMixerByName(const string& processName, bool mute) {
 
 // Function to get the mute state for a process by PID
 bool isMixerMutedByPID(DWORD pid) {
-    CoInitialize(nullptr);
+    
 
     ISimpleAudioVolume* audioVolume = getAudioSessionByPID(pid);
     if (!audioVolume) {
-        CoUninitialize();
+        
         cout << "Could not find audio session for PID: " << pid << endl;
         return false;
     }
@@ -232,16 +236,16 @@ bool isMixerMutedByPID(DWORD pid) {
     audioVolume->GetMute(&isMuted); // Get the current mute state
     audioVolume->Release();
 
-    CoUninitialize();
+    
     return isMuted;
 }
 // Function to toggle mute for a process by PID
 void toggleMuteMixerByPID(DWORD pid) {
-    CoInitialize(nullptr);
+    
 
     ISimpleAudioVolume* audioVolume = getAudioSessionByPID(pid);
     if (!audioVolume) {
-        CoUninitialize();
+        
         cout << "Could not find audio session for PID: " << pid << endl;
         return;
     }
@@ -252,7 +256,7 @@ void toggleMuteMixerByPID(DWORD pid) {
     audioVolume->SetMute(!isMuted, nullptr); // Toggle the mute state
     audioVolume->Release();
 
-    CoUninitialize();
+    
 
     cout << "Audio session for PID " << pid 
                << (isMuted ? " unmuted." : " muted.") << endl;

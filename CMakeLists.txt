@@ -17,10 +17,10 @@ endif()
 # Set additional flags for different build types
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
     # Enable optimizations
-    set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
+    set(CMAKE_CXX_FLAGS_RELEASE "-lole32 -loleaut32 -lpsapi -O3 -DNDEBUG")
 elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
     # Enable debugging symbols
-    set(CMAKE_CXX_FLAGS_DEBUG "-g -O0")
+    set(CMAKE_CXX_FLAGS_DEBUG "-lole32 -loleaut32 -lpsapi -g -O0")
 endif()
 
 # Add source files
@@ -50,6 +50,7 @@ set(SOURCES
     src/utils/string.cpp
     src/utils/run_program.cpp
     src/utils/key_code.cpp
+    src/utils/mixer_control.cpp
 )
 
 # Add include directories (if any)

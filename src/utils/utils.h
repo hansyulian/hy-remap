@@ -15,4 +15,7 @@ OptimizedProfile* getProfileByName(const string& name);
 int getProfileIndexByName(const string& name);
 
 void handleMappedInput(int keyCode, bool up);
+
+float getMixerVolume(DWORD pid);
+void setMixerVolume(DWORD pid, float value);
 #endif

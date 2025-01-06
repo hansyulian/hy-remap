@@ -26,6 +26,7 @@ While the software provides many features, there are some current limitations du
 - **Scroll Remapping**: Remap the scroll wheel to any action, enhancing its functionality.
 - **Active Window Detection**: Automatically adjust macros based on the active window.
 - **Profile Stacking**: Create a child profile from an existing profile, allowing for selective remapping while maintaining the rest of the actions.
+- **Audio Mixer Control**: Control the audio mixer of an app.
 
 ### Backlog Features:
 

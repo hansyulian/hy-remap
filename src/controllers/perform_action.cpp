@@ -14,8 +14,10 @@ void performAction(const OptimizedAction& action, const KeyAction& inputTrigger)
             performMacroAction(action, inputTrigger);
             break;
         case ActionType::RUN_PROGRAM:
-            performRunProgram(action, inputTrigger);
+            performRunProgramAction(action, inputTrigger);
             break;
+        case ActionType::AUDIO_MIXER:
+            performRunProgramAction(action,inputTrigger);
     }
 }
 

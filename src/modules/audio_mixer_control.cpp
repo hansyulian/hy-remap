@@ -1,8 +1,4 @@
-#include <windows.h>
-#include <mmdeviceapi.h>
-#include <audiopolicy.h>
-#include <psapi.h>
-#include <iostream>
+#include "audio_mixer_control.h"
 
 // Function to get the audio session by process ID
 ISimpleAudioVolume* GetAudioSessionByPID(DWORD pid) {
@@ -57,8 +53,36 @@ ISimpleAudioVolume* GetAudioSessionByPID(DWORD pid) {
     return nullptr; // Return null if no session is found for the PID
 }
 
+// Function to get the process ID by process name
+DWORD GetPIDByProcessName(const std::wstring& processName) {
+    DWORD processes[1024], processCount;
+    if (!EnumProcesses(processes, sizeof(processes), &processCount)) {
+        return 0; // Failed to enumerate processes
+    }
+
+    processCount /= sizeof(DWORD); // Get the number of processes
+
+    for (unsigned int i = 0; i < processCount; ++i) {
+        if (processes[i] != 0) {
+            HANDLE processHandle = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, processes[i]);
+            if (processHandle) {
+                WCHAR processNameBuffer[MAX_PATH];
+                if (GetModuleBaseName(processHandle, nullptr, processNameBuffer, MAX_PATH)) {
+                    if (_wcsicmp(processNameBuffer, processName.c_str()) == 0) {
+                        CloseHandle(processHandle);
+                        return processes[i]; // Return the PID if the name matches
+                    }
+                }
+                CloseHandle(processHandle);
+            }
+        }
+    }
+
+    return 0; // Return 0 if the process is not found
+}
+
 // Function to get the mixer volume for a process
-float getMixerVolume(DWORD pid) {
+float getMixerVolumeByPID(DWORD pid) {
     CoInitialize(nullptr);
 
     ISimpleAudioVolume* audioVolume = GetAudioSessionByPID(pid);
@@ -76,8 +100,68 @@ float getMixerVolume(DWORD pid) {
     return volume;
 }
 
+void mixerVolumeAddByPID(DWORD pid, float value){
+    CoInitialize(nullptr);
+
+    ISimpleAudioVolume* audioVolume = GetAudioSessionByPID(pid);
+    if (!audioVolume) {
+        CoUninitialize();
+        std::wcerr << L"Could not find audio session for PID: " << pid << std::endl;
+        return;
+    }
+
+    float volume = 0.0f;
+    audioVolume->GetMasterVolume(&volume); // Retrieve the current volume
+    volume += value;
+    if (value > 1.0){
+      value = 1.0;
+    }
+    if (value < 0.0){
+      value = 0.0;
+    }
+    audioVolume->SetMasterVolume(value, nullptr); // Set the volume
+    audioVolume->Release();
+
+    CoUninitialize();
+}
+
+
+// Function to get the mixer volume for a process
+float getMixerVolumeByName(const std::wstring& processName) {
+    DWORD pid = GetPIDByProcessName(processName);
+    if (pid == 0) {
+        std::wcerr << L"Could not find process: " << processName << std::endl;
+        return;
+    }
+
+    return getMixerVolumeByPID(pid);
+}
+
+// Function to add to the mixer volume for a process by name
+void mixerVolumeAddByName(const std::wstring& processName, float value) {
+    DWORD pid = GetPIDByProcessName(processName);
+    if (pid == 0) {
+        std::wcerr << L"Could not find process: " << processName << std::endl;
+        return;
+    }
+
+    mixerVolumeAddByPID(pid, value);
+}
+
+// Function to set the mixer volume for a process by name
+void setMixerVolumeByName(const std::wstring& processName, float value) {
+    DWORD pid = GetPIDByProcessName(processName);
+    if (pid == 0) {
+        std::wcerr << L"Could not find process: " << processName << std::endl;
+        return;
+    }
+
+    setMixerVolumeByPID(pid, value);
+}
+
+
 // Function to set the mixer volume for a process
-void setMixerVolume(DWORD pid, float value) {
+void setMixerVolumeByPID(DWORD pid, float value) {
     CoInitialize(nullptr);
     if (value > 1.0){
       value = 1.0;
@@ -98,3 +182,5 @@ void setMixerVolume(DWORD pid, float value) {
 
     CoUninitialize();
 }
+
+

@@ -16,6 +16,6 @@ int getProfileIndexByName(const string& name);
 
 void handleMappedInput(int keyCode, bool up);
 
-float getMixerVolume(DWORD pid);
+float getMixerVolumeByPID(DWORD pid);
 void setMixerVolume(DWORD pid, float value);
 #endif

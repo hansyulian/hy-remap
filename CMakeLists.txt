@@ -35,13 +35,14 @@ set(SOURCES
     src/actions/profile_shift.cpp
     src/actions/simple.cpp
     src/actions/run_program.cpp
-    src/modules/input_remapping.cpp
-    src/modules/hook_manager.cpp
-    src/modules/keyboard_hook.cpp
-    src/modules/mouse_hook.cpp
-    src/modules/perform_action.cpp
-    src/modules/profile_management.cpp
-    src/modules/release_action.cpp
+    src/controllers/input_remapping.cpp
+    src/controllers/hook_manager.cpp
+    src/controllers/keyboard_hook.cpp
+    src/controllers/mouse_hook.cpp
+    src/controllers/perform_action.cpp
+    src/controllers/profile_management.cpp
+    src/controllers/release_action.cpp
+    src/modules/audio_mixer_control.cpp
     src/utils/action.cpp
     src/utils/input.cpp
     src/utils/profile.cpp
@@ -50,7 +51,6 @@ set(SOURCES
     src/utils/string.cpp
     src/utils/run_program.cpp
     src/utils/key_code.cpp
-    src/utils/mixer_control.cpp
 )
 
 # Add include directories (if any)

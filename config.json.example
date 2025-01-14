@@ -1,482 +1,385 @@
 {
+  "debug": "info",
   "triggers": [
-    {
-      "name": "Keyboard G1",
-      "key": "F14"
-    },
-    {
-      "name": "Keyboard G2",
-      "key": "F15"
-    },
-    {
-      "name": "Keyboard G3",
-      "key": "F16"
-    },
-    {
-      "name": "Keyboard G4",
-      "key": "F17"
-    },
-    {
-      "name": "Keyboard G5",
-      "key": "F18"
-    },
-    {
-      "name": "Keyboard G6",
-      "key": "F19"
-    },
-    {
-      "name": "Mouse Shift",
-      "key": "F20"
-    },
-    {
-      "name": "Mouse DPI Up",
-      "key": "F21"
-    },
-    {
-      "name": "Mouse DPI Down",
-      "key": "F22"
-    },
-    {
-      "name": "Mouse Tilt Left",
-      "key": "F23"
-    },
-    {
-      "name": "Mouse Tilt Right",
-      "key": "F24"
-    },
-    {
-      "name": "Mouse Scroll Up",
-      "key": "WHEEL_UP"
-    },
-    {
-      "name": "Mouse Scroll Down",
-      "key": "WHEEL_DOWN"
-    },
-    {
-      "name": "Mouse Forward",
-      "key": "MFORWARD"
-    },
-    {
-      "name": "Mouse Back",
-      "key": "MBACK"
-    },
-    {
-      "name": "Mouse Left",
-      "key": "LEFT_CLICK"
-    },
-    {
-      "name": "Mouse Right",
-      "key": "RIGHT_CLICK"
-    }
+    { "name": "Keyboard G1", "key": "F14" },
+    { "name": "Keyboard G2", "key": "F15" },
+    { "name": "Keyboard G3", "key": "F16" },
+    { "name": "Keyboard G4", "key": "F17" },
+    { "name": "Keyboard G5", "key": "F18" },
+    { "name": "Keyboard G6", "key": "F19" },
+    { "name": "Mouse Shift", "key": "F20" },
+    { "name": "Mouse DPI Up", "key": "F21" },
+    { "name": "Mouse DPI Down", "key": "F22" },
+    { "name": "Mouse Tilt Left", "key": "F23" },
+    { "name": "Mouse Tilt Right", "key": "F24" },
+    { "name": "Mouse Forward", "key": "MFORWARD" },
+    { "name": "Mouse Back", "key": "MBACK" }
   ],
   "actions": [
     {
       "name": "Window Snap Right",
       "type": "simple",
-      "keys": [
-        "LWIN",
-        "RIGHT"
-      ]
+      "simple": {
+        "keys": ["LWIN", "RIGHT"]
+      }
     },
     {
       "name": "Window Snap Left",
       "type": "simple",
-      "keys": [
-        "LWIN",
-        "LEFT"
-      ]
+      "simple": {
+        "keys": ["LWIN", "LEFT"]
+      }
     },
     {
-      "name": "F5",
+      "name": "Window Up",
       "type": "simple",
-      "keys": [
-        "F5"
-      ]
+      "simple": {
+        "keys": ["LWIN", "UP"]
+      }
     },
     {
-      "name": "F7",
+      "name": "Window Down",
       "type": "simple",
-      "keys": [
-        "F7"
-      ]
-    },
-    {
-      "name": "F12",
-      "type": "simple",
-      "keys": [
-        "F12"
-      ]
+      "simple": {
+        "keys": ["LWIN", "DOWN"]
+      }
     },
     {
       "name": "Close Tab",
       "type": "simple",
-      "keys": [
-        "LCTRL",
-        "F4"
-      ]
+      "simple": {
+        "keys": ["LCTRL", "F4"]
+      }
     },
     {
       "name": "Next Tab",
       "type": "simple",
-      "keys": [
-        "LCTRL",
-        "TAB"
-      ]
+      "simple": {
+        "keys": ["LCTRL", "TAB"]
+      }
     },
     {
       "name": "Previous Tab",
       "type": "simple",
-      "keys": [
-        "LCTRL",
-        "LSHIFT",
-        "TAB"
-      ]
+      "simple": {
+        "keys": ["LCTRL", "LSHIFT", "TAB"]
+      }
     },
     {
-      "name": "Next Track",
-      "type": "simple",
-      "keys": [
-        "NEXT_TRACK"
-      ]
-    },
-    {
-      "name": "Previous Track",
-      "type": "simple",
-      "keys": [
-        "NEXT_TRACK"
-      ]
-    },
-    {
-      "name": "Play/Pause",
-      "type": "simple",
-      "keys": [
-        "PLAY_PAUSE"
-      ]
-    },
-    {
-      "name": "Volume Up",
-      "type": "simple",
-      "keys": [
-        "VOLUME_UP"
-      ]
-    },
-    {
-      "name": "Volume Down",
-      "type": "simple",
-      "keys": [
-        "VOLUME_DOWN"
-      ]
-    },
-    {
-      "name": "]",
-      "type": "simple",
-      "keys": [
-        "RIGHTBRACKET"
-      ]
-    },
-    {
-      "name": "[",
-      "type": "simple",
-      "keys": [
-        "LEFTBRACKET"
-      ]
-    },
-    {
-      "name": ";",
-      "type": "simple",
-      "keys": [
-        "SEMICOLON"
-      ]
-    },
-    {
-      "name": ".",
-      "type": "simple",
-      "keys": [
-        "PERIOD"
-      ]
-    },
-    {
-      "name": "M",
-      "type": "simple",
-      "keys": [
-        "M"
-      ]
-    },
-    {
-      "name": "/",
-      "type": "simple",
-      "keys": [
-        "SEMICOLON"
-      ]
+      "name": "Gaming Base Shift",
+      "type": "profileShift",
+      "profileShift": {
+        "profileName": "Gaming Base Shift"
+      }
     },
     {
       "name": "MMORPG Shift",
       "type": "profileShift",
-      "profileName": "MMORPG Shift"
+      "profileShift": {
+        "profileName": "MMORPG Shift"
+      }
+    },
+    {
+      "name": "FPS Shift",
+      "type": "profileShift",
+      "profileShift": {
+        "profileName": "FPS Shift"
+      }
     },
     {
       "name": "Default Shift",
       "type": "profileShift",
-      "profileName": "Default Shift"
+      "profileShift": {
+        "profileName": "Default Shift"
+      }
     },
     {
       "name": "Hold Left Click",
       "type": "macro",
-      "macroRepeatDelayMs": 250,
-      "macroRepeatMode": "hold",
-      "macroItems": [
-        {
-          "key": "LEFT_CLICK",
-          "delayMs": 5
-        },
-        {
-          "key": "LEFT_CLICK",
-          "up": true
-        }
-      ]
+      "macro": {
+        "repeatDelayMs": 50,
+        "repeatMode": "hold",
+        "items": [
+          { "key": "LEFT_CLICK", "delayMs": 10 },
+          { "key": "LEFT_CLICK", "up": true }
+        ]
+      }
+    },
+    {
+      "name": "Hold Right Click",
+      "type": "macro",
+      "macro": {
+        "repeatDelayMs": 50,
+        "repeatMode": "hold",
+        "items": [
+          { "key": "RIGHT_CLICK", "delayMs": 10 },
+          { "key": "RIGHT_CLICK", "up": true }
+        ]
+      }
+    },
+    {
+      "name": "Hold Left Click Precision",
+      "type": "macro",
+      "macro": {
+        "repeatDelayMs": 150,
+        "repeatMode": "hold",
+        "items": [
+          { "key": "LEFT_CLICK", "delayMs": 10 },
+          { "key": "LEFT_CLICK", "up": true }
+        ]
+      }
+    },
+    {
+      "name": "Hold Space",
+      "type": "macro",
+      "macro": {
+        "repeatDelayMs": 50,
+        "repeatMode": "hold",
+        "items": [
+          { "key": "SPACE", "delayMs": 5 },
+          { "key": "SPACE", "up": true }
+        ]
+      }
     },
     {
       "name": "Hold 1",
       "type": "macro",
-      "macroRepeatDelayMs": 250,
-      "macroRepeatMode": "hold",
-      "macroItems": [
-        {
-          "key": "1",
-          "delayMs": 5
-        },
-        {
-          "key": "1",
-          "up": true
-        }
-      ]
+      "macro": {
+        "repeatDelayMs": 250,
+        "repeatMode": "hold",
+        "items": [
+          { "key": "1", "delayMs": 5 },
+          { "key": "1", "up": true }
+        ]
+      }
     },
     {
       "name": "Hold 2",
       "type": "macro",
-      "macroRepeatDelayMs": 250,
-      "macroRepeatMode": "hold",
-      "macroItems": [
-        {
-          "key": "2",
-          "delayMs": 5
-        },
-        {
-          "key": "2",
-          "up": true
-        }
-      ]
+      "macro": {
+        "repeatDelayMs": 250,
+        "repeatMode": "hold",
+        "items": [
+          { "key": "2", "delayMs": 5 },
+          { "key": "2", "up": true }
+        ]
+      }
     },
     {
       "name": "Hold 3",
       "type": "macro",
-      "macroRepeatDelayMs": 250,
-      "macroRepeatMode": "hold",
-      "macroItems": [
-        {
-          "key": "3",
-          "delayMs": 5
-        },
-        {
-          "key": "3",
-          "up": true
-        }
-      ]
+      "macro": {
+        "repeatDelayMs": 250,
+        "repeatMode": "hold",
+        "items": [
+          { "key": "3", "delayMs": 5 },
+          { "key": "3", "up": true }
+        ]
+      }
     },
     {
       "name": "Hold 4",
       "type": "macro",
-      "macroRepeatDelayMs": 250,
-      "macroRepeatMode": "hold",
-      "macroItems": [
-        {
-          "key": "4",
-          "delayMs": 5
-        },
-        {
-          "key": "4",
-          "up": true
-        }
-      ]
+      "macro": {
+        "repeatDelayMs": 250,
+        "repeatMode": "hold",
+        "items": [
+          { "key": "4", "delayMs": 5 },
+          { "key": "4", "up": true }
+        ]
+      }
     },
     {
       "name": "Hold 5",
       "type": "macro",
-      "macroRepeatDelayMs": 250,
-      "macroRepeatMode": "hold",
-      "macroItems": [
-        {
-          "key": "5",
-          "delayMs": 5
-        },
-        {
-          "key": "5",
-          "up": true
-        }
-      ]
+      "macro": {
+        "repeatDelayMs": 250,
+        "repeatMode": "hold",
+        "items": [
+          { "key": "5", "delayMs": 5 },
+          { "key": "5", "up": true }
+        ]
+      }
     },
     {
       "name": "Hold 6",
       "type": "macro",
-      "macroRepeatDelayMs": 250,
-      "macroRepeatMode": "hold",
-      "macroItems": [
-        {
-          "key": "6",
-          "delayMs": 5
-        },
-        {
-          "key": "6",
-          "up": true
-        }
-      ]
+      "macro": {
+        "repeatDelayMs": 250,
+        "repeatMode": "hold",
+        "items": [
+          { "key": "6", "delayMs": 5 },
+          { "key": "6", "up": true }
+        ]
+      }
+    },
+    {
+      "name": "Open GW2 Launcher",
+      "type": "runProgram",
+      "runProgram": {
+        "path": "E:/Game Tools/Guild wars 2 Launcher/Gw2Launcher.exe"
+      }
+    },
+    {
+      "name": "Active Window Mixer Up",
+      "type": "audioMixer",
+      "audioMixer": {
+        "value": 0.1,
+        "type": "add"
+      }
+    },
+    {
+      "name": "Active Window Mixer Down",
+      "type": "audioMixer",
+      "audioMixer": {
+        "value": -0.1,
+        "type": "add"
+      }
+    },
+    {
+      "name": "Active Window Mixer Toggle",
+      "type": "audioMixer",
+      "audioMixer": {
+        "type": "toggle"
+      }
     }
   ],
   "profiles": [
     {
       "name": "Default",
       "mapping": [
-        {
-          "triggerName": "Mouse DPI Up",
-          "actionName": "F12"
-        },
-        {
-          "triggerName": "Mouse DPI Down",
-          "actionName": "F5"
-        },
-        {
-          "triggerName": "Mouse Shift",
-          "actionName": "Default Shift"
-        },
-        {
-          "triggerName": "Mouse Tilt Left",
-          "actionName": "Previous Tab"
-        },
-        {
-          "triggerName": "Mouse Tilt Right",
-          "actionName": "Next Tab"
-        }
+        { "triggerName": "Mouse DPI Up", "actionName": "F12" },
+        { "triggerName": "Mouse DPI Down", "actionName": "F5" },
+        { "triggerName": "Mouse Shift", "actionName": "Default Shift" },
+        { "triggerName": "Mouse Tilt Left", "actionName": "Previous Tab" },
+        { "triggerName": "Mouse Tilt Right", "actionName": "Next Tab" },
+        { "triggerName": "Keyboard G2", "actionName": "Open GW2 Launcher" },
+        { "triggerName": "Keyboard G6", "actionName": "Window Up" }
       ]
     },
     {
       "name": "Default Shift",
+      "parentName": "Default",
       "mapping": [
-        {
-          "triggerName": "Mouse Left",
-          "actionName": "Close Tab"
-        },
-        {
-          "triggerName": "Mouse Right",
-          "actionName": "F7"
-        },
-        {
-          "triggerName": "Mouse DPI Up",
-          "actionName": "Next Track"
-        },
-        {
-          "triggerName": "Mouse DPI Down",
-          "actionName": "Previous Track"
-        },
-        {
-          "triggerName": "Mouse Forward",
-          "actionName": "Play/Pause"
-        },
-        {
-          "triggerName": "Mouse Tilt Left",
-          "actionName": "Window Snap Left"
-        },
+        { "triggerName": "LEFT_CLICK", "actionName": "Close Tab" },
+        { "triggerName": "RIGHT_CLICK", "actionName": "F7" },
+        { "triggerName": "Mouse DPI Up", "actionName": "NEXT_TRACK" },
+        { "triggerName": "Mouse DPI Down", "actionName": "PREV_TRACK" },
+        { "triggerName": "Mouse Forward", "actionName": "PLAY_PAUSE" },
+        { "triggerName": "Mouse Tilt Left", "actionName": "Window Snap Left" },
         {
           "triggerName": "Mouse Tilt Right",
           "actionName": "Window Snap Right"
         },
+        { "triggerName": "WHEEL_UP", "actionName": "VOLUME_UP" },
+        { "triggerName": "WHEEL_DOWN", "actionName": "VOLUME_DOWN" },
+        { "triggerName": "Keyboard G6", "actionName": "Window Down" }
+      ]
+    },
+    {
+      "name": "Code",
+      "parentName": "Default",
+      "programNames": ["Code.exe"],
+      "mapping": [
+        { "triggerName": "F13", "actionName": "F10" },
+        { "triggerName": "F14", "actionName": "F11" },
+        { "triggerName": "Keyboard G3", "actionName": "F10" },
+        { "triggerName": "Keyboard G2", "actionName": "F11" },
+        { "triggerName": "Keyboard G4", "actionName": "F5" }
+      ]
+    },
+    {
+      "name": "Gaming Base",
+      "mapping": [
+        { "triggerName": "Mouse Tilt Left", "actionName": "LEFTBRACKET" },
+        { "triggerName": "Mouse Tilt Right", "actionName": "RIGHTBRACKET" },
+        { "triggerName": "Mouse Shift", "actionName": "Gaming Base Shift" },
+        { "triggerName": "Mouse Forward", "actionName": "SEMICOLON" },
+        { "triggerName": "MBACK", "actionName": "QUOTE" },
+        { "triggerName": "Mouse DPI Up", "actionName": "MINUS" },
+        { "triggerName": "Mouse DPI Down", "actionName": "EQUAL" },
+        { "triggerName": "Keyboard G1", "actionName": "ESC" },
         {
-          "triggerName": "Mouse Scroll Up",
-          "actionName": "Volume Up"
+          "triggerName": "Keyboard G3",
+          "actionName": "Active Window Mixer Toggle"
         },
         {
-          "triggerName": "Mouse Scroll Down",
-          "actionName": "Volume Down"
+          "triggerName": "Keyboard G1",
+          "actionName": "ESC"
+        }
+      ]
+    },
+    {
+      "name": "Gaming Base Shift",
+      "mapping": [
+        { "triggerName": "Mouse Tilt Left", "actionName": "BACKSLASH" },
+        { "triggerName": "Mouse Tilt Right", "actionName": "NUMPAD_MULTIPLY" },
+        { "triggerName": "Mouse Forward", "actionName": "M" },
+        { "triggerName": "Mouse DPI Up", "actionName": "PERIOD" },
+        { "triggerName": "Mouse DPI Down", "actionName": "SLASH" },
+        { "triggerName": "Keyboard G6", "actionName": "ESC" },
+        { "triggerName": "LEFT_CLICK", "actionName": "F11" },
+        { "triggerName": "RIGHT_CLICK", "actionName": "F12" },
+        { "triggerName": "WHEEL_UP", "actionName": "Active Window Mixer Up" },
+        {
+          "triggerName": "WHEEL_DOWN",
+          "actionName": "Active Window Mixer Down"
         }
       ]
     },
     {
       "name": "MMORPG",
-      "programNames": [
-        "Guild Wars 2"
-      ],
+      "parentName": "Gaming Base",
+      "programNames": ["Gw2-64.exe"],
       "mapping": [
-        {
-          "triggerName": "Mouse DPI Up",
-          "actionName": "Hold 1"
-        },
-        {
-          "triggerName": "Mouse DPI Down",
-          "actionName": "Hold 2"
-        },
-        {
-          "triggerName": "Mouse Forward",
-          "actionName": "Hold 3"
-        },
-        {
-          "triggerName": "Mouse Back",
-          "actionName": "Hold 4"
-        },
-        {
-          "triggerName": "Mouse Shift",
-          "actionName": "MMORPG Shift"
-        },
-        {
-          "triggerName": "Mouse Tilt Left",
-          "actionName": "["
-        },
-        {
-          "triggerName": "Mouse Tilt Right",
-          "actionName": "]"
-        }
+        { "triggerName": "Mouse DPI Up", "actionName": "Hold 1" },
+        { "triggerName": "Mouse DPI Down", "actionName": "Hold 2" },
+        { "triggerName": "Mouse Forward", "actionName": "Hold 3" },
+        { "triggerName": "MBACK", "actionName": "Hold 4" },
+        { "triggerName": "Mouse Shift", "actionName": "MMORPG Shift" }
       ]
     },
     {
       "name": "MMORPG Shift",
+      "parentName": "Gaming Base Shift",
       "mapping": [
+        { "triggerName": "Mouse DPI Up", "actionName": "SEMICOLON" },
+        { "triggerName": "Mouse DPI Down", "actionName": "Hold Left Click" },
+        { "triggerName": "LEFT_CLICK", "actionName": "Hold 5" },
+        { "triggerName": "RIGHT_CLICK", "actionName": "Hold 6" },
+        { "triggerName": "WHEEL_UP", "actionName": "Active Window Mixer Up" },
         {
-          "triggerName": "Mouse DPI Up",
-          "actionName": ";"
+          "triggerName": "WHEEL_DOWN",
+          "actionName": "Active Window Mixer Down"
         },
+        { "triggerName": "SPACE", "actionName": "Hold Space" }
+      ]
+    },
+    {
+      "name": "FPS",
+      "programNames": ["BF2042.exe", "DeltaForceClient-Win64-Shipping.exe"],
+      "parentName": "Gaming Base",
+      "mapping": [
+        { "triggerName": "Mouse DPI Up", "actionName": "Hold Left Click" },
         {
           "triggerName": "Mouse DPI Down",
-          "actionName": "Hold Left Click"
+          "actionName": "Hold Left Click Precision"
+        }
+      ]
+    },
+    {
+      "name": "FPS RPG",
+      "parentName": "Gaming Base",
+      "programNames": ["Palworld-Win64-Shipping.exe"],
+      "mapping": [
+        { "triggerName": "Mouse DPI Up", "actionName": "Hold Left Click" },
+        {
+          "triggerName": "Mouse DPI Down",
+          "actionName": "Hold Right Click"
         },
         {
-          "triggerName": "Mouse Forward",
-          "actionName": "M"
-        },
-        {
-          "triggerName": "Mouse Back",
-          "actionName": "Hold 4"
-        },
-        {
-          "triggerName": "Mouse Tilt Left",
-          "actionName": "["
-        },
-        {
-          "triggerName": "Mouse Tilt Right",
-          "actionName": "]"
-        },
-        {
-          "triggerName": "Mouse Left",
-          "actionName": "Hold 5"
-        },
-        {
-          "triggerName": "Mouse Right",
-          "actionName": "Hold 6"
-        },
-        {
-          "triggerName": "Mouse Scroll Up",
-          "actionName": "Volume Up"
-        },
-        {
-          "triggerName": "Mouse Scroll Down",
-          "actionName": "Volume Down"
+          "triggerName": "MBACK",
+          "actionName": "ESC"
         }
       ]
     }

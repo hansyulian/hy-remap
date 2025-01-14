@@ -1,6 +1,7 @@
-mkdir "build\release"
-xcopy "config.json" "build\release\config.json" /F /Y
+mkdir -p build/release
+xcopy /-I /Y "config.json" "build\release\config.json" 
 cd build/release
-cmake ../.. -DCMAKE_BUILD_TYPE=Release -G "MinGW Makefiles"
-mingw32-make.exe
+conan install ../.. --output-folder=. --build=missing -s compiler="gcc" -s compiler.libcxx=libstdc++11  -s build_type=Release
+cmake ../.. -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE="conan_toolchain.cmake"
+cmake --build .
 cd ../..

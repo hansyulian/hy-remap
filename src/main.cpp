@@ -23,6 +23,7 @@ HHOOK keyboardHook = NULL;  // Define the keyboardHook variable (this is where m
 HHOOK mouseHook = NULL;     // Define the mouseHook variable
 
 int main() {
+    killOtherInstances();
     // Load configuration from a JSON file
     
     cout << "Loading Config" << endl;

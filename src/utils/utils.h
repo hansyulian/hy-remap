@@ -18,4 +18,6 @@ void handleMappedInput(int keyCode, bool up);
 
 float getMixerVolumeByPID(DWORD pid);
 void setMixerVolume(DWORD pid, float value);
+
+void killOtherInstances();
 #endif

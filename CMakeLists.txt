@@ -1,29 +1,10 @@
-# Specify the minimum CMake version required
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.15)
+project(HyRemap)
 
-# Project name and version
-project(HyRemap VERSION 1.0)
-set(CMAKE_CXX_COMPILER "g++.exe")
-set(CMAKE_C_COMPILER "gcc.exe")
-# Set the C++ standard
+# Specify C++ standard
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Default to Release build if no build type is specified
-if(NOT CMAKE_BUILD_TYPE)
-    set(CMAKE_BUILD_TYPE Release)
-endif()
-
-# Set additional flags for different build types
-if(CMAKE_BUILD_TYPE STREQUAL "Release")
-    # Enable optimizations
-    set(CMAKE_CXX_FLAGS_RELEASE "-lole32 -loleaut32 -lpsapi -O3 -DNDEBUG  -mwindows")
-elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    # Enable debugging symbols
-    set(CMAKE_CXX_FLAGS_DEBUG "-lole32 -loleaut32 -lpsapi -g -O0")
-endif()
-
-# Add source files
 set(SOURCES
     src/main.cpp
     src/config/config_loader.cpp
@@ -53,28 +34,22 @@ set(SOURCES
     src/utils/run_program.cpp
     src/utils/key_code.cpp
 )
+# Add your executable (replace main.cpp with your source file)
+add_executable(${PROJECT_NAME} ${SOURCES})
 
-# Add include directories (if any)
-include_directories(
-    ${PROJECT_SOURCE_DIR}/include  # Include the headers directory if needed
-)
+# Link nlohmann_json to your target
+# Find and include Conan-generated configuration
+find_package(nlohmann_json CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json) 
 
-# Add the executable
-add_executable(HyRemap ${SOURCES})
-
-# Set platform-specific configurations if necessary
-if(MINGW)
-    # If we're using MinGW, you can set specific flags or configurations here
-    message(STATUS "Building for MinGW")
-elseif(WIN32)
-    # Handle other Windows-specific configurations
-    message(STATUS "Building for Windows")
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
+    # Enable optimizations
+    set(CMAKE_CXX_FLAGS_RELEASE "-lole32 -loleaut32 -lpsapi -O3 -DNDEBUG  -mwindows")
+elseif(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    # Enable debugging symbols
+    set(CMAKE_CXX_FLAGS_DEBUG "-lole32 -loleaut32 -lpsapi -g -O0")
 endif()
 
-# Optionally, set up installation targets for cross-platform deployment (uncomment if needed)
-# install(TARGETS HyRemap DESTINATION bin)
-
-# Add preprocessor definitions after the target is created
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     target_compile_definitions(HyRemap PRIVATE DEBUG_BUILD=1)
 elseif(CMAKE_BUILD_TYPE STREQUAL "Release")

@@ -6,7 +6,6 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(SOURCES
-    src/main.cpp
     src/config/config_loader.cpp
     src/config/debug_config.cpp
     src/config/optimized_config.cpp
@@ -33,6 +32,8 @@ set(SOURCES
     src/utils/string.cpp
     src/utils/run_program.cpp
     src/utils/key_code.cpp
+    src/utils/instance.cpp
+    src/main.cpp
 )
 # Add your executable (replace main.cpp with your source file)
 add_executable(${PROJECT_NAME} ${SOURCES})
@@ -40,7 +41,7 @@ add_executable(${PROJECT_NAME} ${SOURCES})
 # Link nlohmann_json to your target
 # Find and include Conan-generated configuration
 find_package(nlohmann_json CONFIG REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json) 
+target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json psapi) 
 
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
     # Enable optimizations

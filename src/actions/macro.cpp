@@ -46,7 +46,7 @@ void macroThreadExecution(const OptimizedAction& action){
   // cout << "executing repeating macro" << endl;
   int macroItemsLength = action.optimizedMacroItems.size();
   int macroItemIndex = 0;
-  bool localMacroKeyDownStateIndex[256];
+  bool localMacroKeyDownStateIndex[256] = {false}; // Initialize the array
   while(isValidMacroExecutionCondition(action,processId)){
     auto macroItem = &(action.optimizedMacroItems)[macroItemIndex];
     if (macroItem -> keyCode > 0){
@@ -57,16 +57,13 @@ void macroThreadExecution(const OptimizedAction& action){
     macroItemIndex = (macroItemIndex + 1) % macroItemsLength;
   }
   isMacroActionThreadRunnings[action.index] = false;
-  vector<INPUT> inputClearance;
   for (int i = 0; i < 256; i++){
     if (localMacroKeyDownStateIndex[i]){
       // cout << "        key release by macro " << i << endl;
       handleMappedInput(i, true);
     }
   }
-  
 }
-
 
 void stopMacroThread(const OptimizedAction& action){
   // cout << "stopping macro thread " << action.index;
@@ -76,7 +73,6 @@ void stopMacroThread(const OptimizedAction& action){
   // }
   // cout << "macro stopping done " << action.index << endl;
 }
-
 
 void startMacroThread(const OptimizedAction& action){
   if (isMacroActionThreadRunnings[action.index]){

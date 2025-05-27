@@ -12,12 +12,20 @@ void startKeyboardAndMouseHook() {
     mouseHook = SetWindowsHookEx(WH_MOUSE_LL, mouseProc, NULL, 0);
     if (mouseHook == NULL) {
         cerr << "Failed to install mouse hook!" << endl;
+        if (keyboardHook != NULL) {
+            UnhookWindowsHookEx(keyboardHook);
+            keyboardHook = NULL;
+        }
     }
 }
 
 void stopKeyboardAndMouseHook() {
-    UnhookWindowsHookEx(keyboardHook);
-    UnhookWindowsHookEx(mouseHook);
-    keyboardHook = NULL; // It's good practice to reset the hook after cleaning up
-    mouseHook = NULL;
+    if (keyboardHook != NULL) {
+        UnhookWindowsHookEx(keyboardHook);
+        keyboardHook = NULL; // It's good practice to reset the hook after cleaning up
+    }
+    if (mouseHook != NULL) {
+        UnhookWindowsHookEx(mouseHook);
+        mouseHook = NULL;
+    }
 }

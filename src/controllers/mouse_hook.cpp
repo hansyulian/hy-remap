@@ -76,7 +76,7 @@ LRESULT CALLBACK mouseProc(int nCode, WPARAM wParam, LPARAM lParam)
         // Check if the dwExtraInfo doesn't contain the flag and the key code is valid
         if (mouse->dwExtraInfo != HY_BYPASS_EXECUTION_FLAG && inputTrigger.keyCode != NO_KEYCODE_FLAG && processInputRemapping(inputTrigger))
         {
-            cout << "mouse " << inputTrigger.keyCode << " return 1" << endl;
+            // cout << "mouse " << inputTrigger.keyCode << " return 1" << endl;
             return 1; // Return 1 to prevent further processing of the event
         }
     }
